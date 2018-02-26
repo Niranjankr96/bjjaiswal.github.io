@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <atom:link href="http://bjjaiswal.github.i/feed.xml" rel="self" type="application/rss+xml"/>
+    <link>http://bjjaiswal.github.i/</link>
+    <description></description>
+    <pubDate>Tue, 27 Feb 2018 00:38:03 +0530</pubDate>
+    
+      <item>
+        <title>Machine Learning Notes from standford via coursera</title>
+        <link>http://bjjaiswal.github.i/2018/02/26/Machine-Learning-Notes-From-Coursera.html</link>
+        <guid isPermaLink="true">http://bjjaiswal.github.i/2018/02/26/Machine-Learning-Notes-From-Coursera.html</guid>
+        <description>&lt;p&gt;Recently I completed online Machine learning course taught by Andrew Ng on coursera. I am glad that I completed this course with certification. This course has given me great intuition toward Machine Learning. This course not only provided concepts of different learning models but somewhat made me capable of understanding mathematics  behind those learning models.&lt;/p&gt;
+
+&lt;h2 id=&quot;content-of-machine-learning&quot;&gt;Content of Machine Learning&lt;/h2&gt;
+
+&lt;h3 id=&quot;contains&quot;&gt;Contains:&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;What is Machine Learning?
+    &lt;ol&gt;
+      &lt;li&gt;Supervised Learning.&lt;/li&gt;
+      &lt;li&gt;Unsupervised Learning.&lt;/li&gt;
+      &lt;li&gt;Learning Model and Cost Functions.&lt;/li&gt;
+      &lt;li&gt;Linear Regression with one variable&lt;/li&gt;
+      &lt;li&gt;Implementation of Linear Regression&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Linear Regression with Multiple variables&lt;/li&gt;
+  &lt;li&gt;Logistic Regession in classification
+    &lt;ol&gt;
+      &lt;li&gt;Classification and Representations&lt;/li&gt;
+      &lt;li&gt;Logistic Regession Model&lt;/li&gt;
+      &lt;li&gt;Multiclass Classification&lt;/li&gt;
+      &lt;li&gt;Regulazization: Solving the Problem of Overfitting&lt;/li&gt;
+      &lt;li&gt;Implementation of Logistic Regession.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Classifications using Neural Network
+    &lt;ol&gt;
+      &lt;li&gt;Neural Networks and its Representations&lt;/li&gt;
+      &lt;li&gt;Applications of Neural Networks&lt;/li&gt;
+      &lt;li&gt;Deep Learning and Its Type&lt;/li&gt;
+      &lt;li&gt;Implementation of neural-nets&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Advice for Applying Machine Learning by Andrew Ng
+    &lt;ol&gt;
+      &lt;li&gt;Evaluating a Learning algorithm&lt;/li&gt;
+      &lt;li&gt;Bias vs.Variance&lt;/li&gt;
+      &lt;li&gt;Machine Learning System Design&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Support Vector Machine
+    &lt;ol&gt;
+      &lt;li&gt;Large Margin Classification&lt;/li&gt;
+      &lt;li&gt;Kernels&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Unsupervisd: Clustering
+    &lt;ol&gt;
+      &lt;li&gt;Dimensionality Reduction:PCA&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Anomaly Detection and its applications&lt;/li&gt;
+  &lt;li&gt;Large Scale Machine Learning
+    &lt;ol&gt;
+      &lt;li&gt;Gradient Descent with Large datasets
+        &lt;ol&gt;
+          &lt;li&gt;Learning with Large datasets&lt;/li&gt;
+          &lt;li&gt;Stochastic Gradient Descent&lt;/li&gt;
+          &lt;li&gt;Mini-Batch Gradient Descent&lt;/li&gt;
+          &lt;li&gt;Stochastic Gradient Descent&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Advance Topics
+    &lt;ol&gt;
+      &lt;li&gt;Active Learning&lt;/li&gt;
+      &lt;li&gt;Online Learning&lt;/li&gt;
+      &lt;li&gt;Map Reduce and Data Parallelism.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Mon, 26 Feb 2018 00:00:00 +0530</pubDate>
+      </item>
+    
+  </channel>
+</rss>
