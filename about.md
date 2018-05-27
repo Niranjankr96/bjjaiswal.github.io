@@ -20,8 +20,8 @@ You can contact me at
 &nbsp; &nbsp; &nbsp;
 <a href="https://twitter.com/bjjaiswal"><i class="fa fa-twitter" aria-hidden="true" style="font-size:40px;color:#2980b9"></i></a>
 &nbsp; &nbsp; &nbsp;
-<a href="https://www.linkedin.com/in/bjjaiswal/"><i class="fa fa-linkedin" aria-hidden="true" style="font-size:40px;color:#2980b9"></i></a>
+<a href="https://www.linkedin.com/in/bikashjaiswal"><i class="fa fa-linkedin" aria-hidden="true" style="font-size:40px;color:#2980b9"></i></a>
 &nbsp; &nbsp; &nbsp;
-<a href="https://www.quora.com/profile/bikash-jaiswal"><i class="fa fa-quora" aria-hidden="true" style="font-size:40px;color:#2980b9"></i></a>
+<a href="https://www.quora.com/profile/bikashjaiswal"><i class="fa fa-quora" aria-hidden="true" style="font-size:40px;color:#2980b9"></i></a>
 </p>
 </div>
