@@ -4,7 +4,6 @@ title: Archive
 permalink: /archive/
 ---
 
-
 <ul>
   {% for post in site.posts %}
     {% unless post.next %}
