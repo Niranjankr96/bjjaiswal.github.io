@@ -9,7 +9,7 @@ We all are familiar with word `Artificial Intelligence` form movies like "The Te
 ### History
 During 1900s, when researcher discovered that digital computers can simulate any process of formal reasoning a.k.a Church–Turing thesis- an idea was embroiled among the researchers. The idea to accumulate understanding from `Neurobiology`,`Information Theory`, `Cybernetics` and many other branches for Natural science and engineering to build a `electronic brain` or `artificial brain`.
 
-![Artificial-brain](2018-06-30/Artificial-Brain.png)
+![Artificial-brain](/img/2018-06-30/Artificial-Brain.png)
 
 ```
 An artificial brain (or artificial mind) is software and hardware with cognitive
