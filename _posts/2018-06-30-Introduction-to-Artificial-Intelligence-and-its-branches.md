@@ -46,7 +46,7 @@ We feted IBM's Deep chess-playing system when it defeated world champion Garry K
     <figcaption>Tree based search system for GO. Courtesy Google's Deepmind </figcaption>
   </div>
 </figure>
-
+&nbsp;
 The __problem__ with the classical AI or simply AI is it's inability to learn from environment or to extract and acquire their own knowledge from patterns of raw data provided to them. As they are bolstered by hand-coded knowledge.
 
 The __solution__ is provided by Machine Learning.
