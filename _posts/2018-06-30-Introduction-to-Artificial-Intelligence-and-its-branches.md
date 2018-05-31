@@ -40,6 +40,7 @@ We feted IBM's Deep chess-playing system when it defeated world champion Garry K
   </div>
 </figure>
 </br>
+
 <figure>
   <div style="text-align:center">
     <img src="/img/2018-06-30/tree-based.png" alt="my alt text"/>
