@@ -29,7 +29,7 @@ Earlier AI system were built on a list of formal, logistic and mathematical rule
     <figcaption>Contains of Knowledge based Systems. </figcaption>
   </div>
 </figure>
-</br>
+<br\>
 We feted IBM's Deep chess-playing system when it defeated world champion Garry Kasparov. But the system was completely rules and logic based system. A system for defeating games like chess, tic-tac-toe, AlphaGO, etc can be built by programmer ahead of competition from a list of complete formal rules and logics. This is known as __Knowledge based Intelligent System__.
 
 <figure>
@@ -39,11 +39,17 @@ We feted IBM's Deep chess-playing system when it defeated world champion Garry K
  </figcaption>
   </div>
 </figure>
-</br>
-
+<br\>
 <figure>
   <div style="text-align:center">
     <img src="/img/2018-06-30/tree-based.png" alt="my alt text"/>
     <figcaption>Tree based search system for GO. Courtesy Google's Deepmind </figcaption>
   </div>
 </figure>
+
+The __problem__ with the classical AI or simply AI is it's inability to learn from environment or to extract and acquire their own knowledge from patterns of raw data provided to them. As they are bolstered by hand-coded knowledge.
+
+The __solution__ is provided by Machine Learning.
+
+
+## Machine Learning.
