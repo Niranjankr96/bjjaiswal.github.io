@@ -19,11 +19,9 @@ During 1900s, when researcher discovered that digital computers can simulate any
 abilities similar to those of the animal or human brain. -
 > BBC News,2009
 For simple games such as tic-tac-toe, it is possible to represent all possible game states (the complete game tree) visually
+
 ## Classical AI
-
 Earlier AI system were built on a list of formal, logistic and mathematical rules. Some such rules were Informed/Uninformed search strategies, Propositional Logic, First Order Logic, Planning, Heuristics functions, etc,.
-
-
 
 <figure>
   <div style="text-align:center">
@@ -31,9 +29,7 @@ Earlier AI system were built on a list of formal, logistic and mathematical rule
     <figcaption>Contains of Knowledge based Systems. </figcaption>
   </div>
 </figure>
-
-
-
+</br>
 We feted IBM's Deep chess-playing system when it defeated world champion Garry Kasparov. But the system was completely rules and logic based system. A system for defeating games like chess, tic-tac-toe, AlphaGO, etc can be built by programmer ahead of competition from a list of complete formal rules and logics. This is known as __Knowledge based Intelligent System__.
 
 <figure>
@@ -43,10 +39,10 @@ We feted IBM's Deep chess-playing system when it defeated world champion Garry K
  </figcaption>
   </div>
 </figure>
-
+</br>
 <figure>
   <div style="text-align:center">
     <img src="/img/2018-06-30/tree-based.png" alt="my alt text"/>
-    <figcaption>Tree based search system for GO. courtesy Google's Deepmind </figcaption>
+    <figcaption>Tree based search system for GO. Courtesy Google's Deepmind </figcaption>
   </div>
 </figure>
