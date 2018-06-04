@@ -1,11 +1,12 @@
-Today, we can no more state that we are living in __Information Technology__ era. We have come far beyond the IT. We are living in __Artificial Intelligence__ age. AI is affecting diverse industries ranging from __healthcare to an automobile__, __video games to military__, __finance and economics to audit__, and many more.
+ We have come far beyond Information Technology age. We are living in __Intelligent__ era. We are surrounded by ubiquitous intelligent device like smart-phones, smart-watch,etc,. Intelligent has become banal not only in regular life style but also affecting the industries too. Devices which have __Artificial Intelligence__ has started changing the world drastically. As Andrew Ng stated *"Like electricity changed the world a century ago, similarly AI will change the world like never before"*.  Nowadays we look for intelligent software to automate banal labor, understand speech, or images, make diagnosis in medicine and support basic scientific research.
+
 
  > "Artificial intelligence": When a machine mimics "cognitive" functions that humans associate with other human minds, such as "learning" and "problem solving" - Russell & Norvig, 2009
 
 We all are familiar with word Artificial Intelligence form movies like "The Terminator", "The Matrix", "A Space Odyssey", etc and best classic novels like "Frankenstein", "The Hitchhiker guide to the Galaxy", and many more. But it's an arduous task to explain Artificial Intelligence to novice and distinguish it for its branches like __Machine Learning__ and __Deep Learning__, __Reinforcement learning__. In this post, I will try to explain in a laconic way despite being cogent: How AI, Machine Learning and Deep learning are different from each other nevertheless, shelter under the same umbrella.
 
 
-During 1900s, when researcher discovered that digital computers can simulate any process of formal reasoning a.k.a Church–Turing thesis- an idea was embroiled among the researchers. The idea to accumulate understanding from __Neurobiology__, __Information Theory__, __Cybernetics__ and many other branches for Natural science and engineering to build a __electronic brain__ or __artificial brain__. Then the perennial movement of Artificial Intelligence begun.
+During 1900s, when researcher discovered that digital computers can simulate any process of formal reasoning a.k.a Church–Turing thesis- an idea was embroiled among the researchers. The idea to accumulate understanding from __Neurobiology__, __Information Theory__, __Cybernetics__ and many other branches of Natural science and engineering to build a __electronic brain__ or __artificial brain__. Then, the perennial movement of Artificial Intelligence begun.
 
 
 <figure>
@@ -18,10 +19,9 @@ During 1900s, when researcher discovered that digital computers can simulate any
 >An artificial brain (or artificial mind) is software and hardware with cognitive
 abilities similar to those of the animal or human brain. -
 > BBC News,2009
-For simple games such as tic-tac-toe, it is possible to represent all possible game states (the complete game tree) visually
 
 ## Classical AI
-Earlier AI system were built on a list of formal, logistic and mathematical rules. Some such rules were Informed/Uninformed search strategies, Propositional Logic, First Order Logic, Planning, Heuristics functions, etc,.
+Earlier/classical AI system are built on a list of formal, logistic and mathematical rules. Some such rules were Informed/Uninformed search strategies, Propositional Logic, First Order Logic, Planning, Heuristics functions, etc,.
 
 <figure>
   <div style="text-align:center">
@@ -51,6 +51,12 @@ We feted IBM's Deep chess-playing system when it defeated world champion Garry K
 
 The __problem__ with the classical AI or simply AI is it's inability to learn from environment or to extract and acquire their own knowledge from patterns of raw data provided to them. As they are bolstered by hand-coded knowledge.
 
+The list of Instance where classical AI fails:
+
+* Unable to extract information from camera images, typically in the form of a pixel array, and map them onto internal representations of the world
+
+* Classical AI models do not take the real world sufficiently into account. so, problem of generalization occurs.
+
 The __solution__ is provided by Machine Learning.
 ## Machine Learning.
 Machine Learning is the field of study that gives computers the ability to learn without being explicitly programmed. Let me give you formal Book definition:
@@ -60,16 +66,15 @@ Machine Learning is the field of study that gives computers the ability to learn
 A bit scary definition right? So, let me delineate it simply:
 Let us say a machine is playing checker game.
 The T, P, and E can be well defined by
-   * E = the experience of playing many games of checkers
+   - E = the experience of playing many games of checkers
 
-   * T = the task of playing checkers.
+   - T = the task of playing checkers.
 
-   * P = the probability that the program will win the next game.
+   - P = the probability that the program will win the next game.
 
-With every experience ( E ) collected from environment or dataset or game, what decisions or tasks ( T ) the player has to take, so probability ( P ) of win is maximum.
+With every experience ( E ) collected from environment or dataset or game, what decisions or tasks ( T ) the player has to take, so probability ( P ) of win is maximized.
 
-The performance of every machine learning algorithms depends on the __representation__ aka __features__ of the data they are given. This features helps AI to retain knowledge of patterns from raw data provided to them.
-The machine learning algorithm learns from data by correlating each features of data with various output.
+The performance of every machine learning algorithms depends on the __representation__ aka __features__ of the data they are given. This features helps AI to retain knowledge of patterns from raw data provided to them. The machine learning algorithm learns from data by correlating each features of data with various output.
 
 <figure>
   <div style="text-align:center">
@@ -83,5 +88,14 @@ It is not surprising that the choice of features has an colossal effect on the p
 
 Hence, the __problem__ with machine learning- it's little bleak to use ML algorithm when we have difficult to extract a representation or best features to solve problem.
 
-For the __solution__ of above problem, practitioner use Deep learning.
+The list of instance where machine Learning algorithm fails:
+
+* ML algorithms fails to give better result when datasets or representation of datasets is unstructured like images, audio, video.
+
+* It fails when there is no more data for learning purpose.
+
+* ML fail when, among the training examples, there are often similar inputs that are associated to different outputs.
+
+* Ml algorithms are designed to deal with noise in datasets at certain level but as more noise increase more difficult learning process becomes, which leads to bad accuracy.
+
 ## Deep Learning.
