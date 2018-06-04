@@ -31,7 +31,7 @@ Earlier/classical AI system are built on a list of formal, logistic and mathemat
 </figure>
 &nbsp;
 
-We feted IBM's Deep chess-playing system when it defeated world champion Garry Kasparov. But the system was completely rules and logic based system. A system for defeating games like chess, tic-tac-toe, AlphaGO, etc can be built by programmer ahead of competition from a list of complete formal rules and logics. This is known as __Knowledge based Intelligent System__.
+We feted IBM's Deep chess-playing system when it defeated world champion Garry Kasparov. But the system was completely rules and logic based system. If you know the board position, it is possible to know all you need to know to play the game, because given a certain board position, the possible moves are precisely defined and finite in number. Even though you may not know the particular move your opponent will make, you know that he will make a legal move. A system for defeating games like chess, tic-tac-toe, AlphaGO, etc can be built by programmer ahead of competition from a list of complete formal rules and logics. Thus classic AI is known as __Knowledge based Intelligent System__.
 
 <figure>
   <div style="text-align:center">
@@ -49,16 +49,17 @@ We feted IBM's Deep chess-playing system when it defeated world champion Garry K
 </figure>
 &nbsp;
 
-The __problem__ with the classical AI or simply AI is it's inability to learn from environment or to extract and acquire their own knowledge from patterns of raw data provided to them. As they are bolstered by hand-coded knowledge.
+The __problem__ with the classical AI is: it's inability to learn from environment or to extract and acquire their own knowledge from patterns of raw data provided to them. As they are bolstered by hand-coded knowledge.
 
 The list of Instance where classical AI fails:
 
-* Unable to extract information from camera images, typically in the form of a pixel array, and map them onto internal representations of the world
+* Unable to extract information from real world for ex: camera images, typically in the form of a pixel array, and map them onto internal representations of the world
 
 * Classical AI models do not take the real world sufficiently into account. so, problem of generalization occurs.
 
-The __solution__ is provided by Machine Learning.
 ## Machine Learning.
+Machine Learning solves the problems classical AI by providing systems the ability to acquire their own knowledge by extracting information from real world data.
+
 Machine Learning is the field of study that gives computers the ability to learn without being explicitly programmed. Let me give you formal Book definition:
 
 > "A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E." - Tom Mitchell's Machine Learning Book
