@@ -52,9 +52,7 @@ We feted IBM's Deep chess-playing system when it defeated world champion Garry K
 The __problem__ with the classical AI is: it's inability to learn from environment or to extract and acquire their own knowledge from patterns of raw data provided to them. As they are bolstered by hand-coded knowledge.
 
 The list of Instance where classical AI fails:
-
 * Unable to extract information from real world for ex: camera images, typically in the form of a pixel array, and map them onto internal representations of the world
-
 * Classical AI models do not take the real world sufficiently into account. so, problem of generalization occurs.
 
 ## Machine Learning.
@@ -68,9 +66,7 @@ A bit scary definition right? So, let me delineate it simply:
 Let us say a machine is playing checker game.
 The T, P, and E can be well defined by
    - E = the experience of playing many games of checkers
-
    - T = the task of playing checkers.
-
    - P = the probability that the program will win the next game.
 
 With every experience ( E ) collected from environment or dataset or game, what decisions or tasks ( T ) the player has to take, so probability ( P ) of win is maximized.
@@ -90,13 +86,9 @@ It is not surprising that the choice of features has an colossal effect on the p
 Hence, the __problem__ with machine learning- it's little bleak to use ML algorithm when we have difficult to extract a representation or best features to solve problem.
 
 The list of instance where machine Learning algorithm fails:
-
 * ML algorithms fails to give better result when datasets or representation of datasets is unstructured like images, audio, video.
-
 * It fails when there is no more data for learning purpose.
-
 * ML fail when, among the training examples, there are often similar inputs that are associated to different outputs.
-
 * Ml algorithms are designed to deal with noise in datasets at certain level but as more noise increase more difficult learning process becomes, which leads to bad accuracy.
 
 ## Deep Learning.
