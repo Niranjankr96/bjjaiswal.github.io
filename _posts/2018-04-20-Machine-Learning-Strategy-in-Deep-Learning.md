@@ -1,4 +1,3 @@
-## How to Structure Machine Learning Projects
 
 
 Even after developing a model, We find that prediction accuracy is 90% but that isn't good enough for production purpose because there are whole 10% error in prediction. So, we apply some technique to improve it like:
@@ -7,6 +6,7 @@ Even after developing a model, We find that prediction accuracy is 90% but that 
   - Trying different network from smaller to bigger
   - also trying different regularization and dropout or changing the activation functions and number of hidden units.
 
+## How to Structure Machine Learning Projects
 Applying above technique may not give always give desired result despite spending months on collecting data. Therefore, Some strategies is necessary which helps us in improving the accuracy of models.
 
 ### Orthogonalization
