@@ -49,7 +49,7 @@ When a supervised learning system is design, these are the 4 assumptions that ne
  **Precision** : Of all the images we predicted y=1, what fraction of it have cats?
  <figure>
    <div style="text-align:center">
-     <img src="/img/ml-strategies/Precision.png" alt="my alt text"/>
+     <img src="/img/ml-strategies/precision.png" alt="my alt text"/>
    </div>
  </figure>
 
@@ -130,7 +130,6 @@ A cat classifier tries to find a great amount of cat images to show to cat lovin
     <figcaption> Strategy of distribution in machine learning </figcaption>
   </div>
 </figure>
-
 It seems that `Algorithm A is better than Algorithm B` since there is only a 3% error, however for some reason, Algorithm A is letting through a lot of the pornographic images. Algorithm B has 5% error thus it classifies fewer images but it doesn't have pornographic images. From a company's point of view, as well as from a user acceptance point of view, `Algorithm B is actually a better
 algorithm`. The evaluation metric fails to correctly rank order preferences between algorithms. The evaluation metric or the development set or test set should be changed.
 
@@ -157,7 +156,7 @@ The function becomes:
 
 **Reminder**:
 
-> - Define correctly an evaluation metric that helps better rank order classifiers
+- Define correctly an evaluation metric that helps better rank order classifiers
 - Optimize the evaluation metric
 
 #### Summary of orthogonalization
