@@ -1,0 +1,185 @@
+<p>Even after developing a model, We find that prediction accuracy is 90% but that isn’t good enough for production purpose because there are whole 10% error in prediction. So, we apply some technique to improve it like:</p>
+<ul>
+  <li>Collecting more diverse positive and negative training data</li>
+  <li>train the algorithm with gradient descent or use advance optimization algorithm like Adam.</li>
+  <li>Trying different network from smaller to bigger</li>
+  <li>also trying different regularization and dropout or changing the activation functions and number of hidden units.</li>
+</ul>
+
+<h2 id="how-to-structure-machine-learning-projects">How to Structure Machine Learning Projects</h2>
+<p>Applying above technique may not give always give desired result despite spending months on collecting data. Therefore, Some strategies is necessary which helps us in improving the accuracy of models.</p>
+
+<h3 id="orthogonalization">Orthogonalization</h3>
+<p>There are hundreds of parameters and hyperparameters to tune to increase the prediction accuracy but it’s cumbersome and tedious task to do. Here comes the role orthogonalization or orthogonality.</p>
+
+<p>The word orthogonal means “Statistically independent”. So,<code class="highlighter-rouge">Orthogonalization or orthogonality can be stated as a system design property that assures that modifying an instruction or a component of an algorithm will not create or propagate side effects  to  other components of the system.</code> It becomes easier to verify the algorithms independently from one another, it reduces testing and development time.</p>
+
+<p>Let’s take to metaphorical example of old television and car steering.</p>
+
+<figure>
+  <div style="text-align:center">
+    <img src="/img/ml-strategies/tv-car.jpg" alt="my alt text" />
+    <figcaption> Metaphor for orthogonality </figcaption>
+  </div>
+</figure>
+
+<p>We can tune the picture on tv by varying the properties of knob of tv. Similarly, changing the steering of car can makes change in different direction to go.</p>
+
+<p>When a supervised learning system is design, these are the 4 assumptions that needs to be true and orthogonal.</p>
+<ol>
+  <li>Fit training set well in cost function
+    <ul>
+      <li>If it doesn’t fit well then use of a bigger neural network or use a better optimization algorithm.</li>
+    </ul>
+  </li>
+  <li>Fit development set well on cost function
+    <ul>
+      <li>If it doesn’t fit well then use regularization or use bigger training set and use bigger training set.</li>
+    </ul>
+  </li>
+  <li>Fit test set well on cost function
+    <ul>
+      <li>If it doesn’t fit well then use bigger Development set</li>
+    </ul>
+  </li>
+  <li>Performs well in real world
+    <ul>
+      <li>If it doesn’t fit well then change development set  or cost function.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="different-tuning-method-or-method-for-improving-our-model">Different tuning method or method for improving our model.</h3>
+<h4 id="using-a-single-number-evaluations-metric-ief1-score">Using a single number evaluations metric. i.e.F1 score</h4>
+
+<figure>
+  <div style="text-align:center">
+    <img src="/img/ml-strategies/decision.png" alt="my alt text" />
+    <figcaption> Confusion Matrix </figcaption>
+  </div>
+</figure>
+
+<p><strong>Precision</strong> : Of all the images we predicted y=1, what fraction of it have cats?</p>
+<figure>
+   <div style="text-align:center">
+     <img src="/img/ml-strategies/precision.png" alt="my alt text" />
+   </div>
+ </figure>
+
+<p><strong>Recall</strong> : Of all the images that actually have cats, what fraction of it did we correctly identifying have cats?</p>
+<figure>
+   <div style="text-align:center">
+     <img src="/img/ml-strategies/recall.png" alt="my alt text" />
+   </div>
+ </figure>
+
+<p>Let’s compare 2 classifiers A and B used to evaluate if there are cat images:</p>
+<figure>
+  <div style="text-align:center">
+    <img src="/img/ml-strategies/evaluation-matrix.png" alt="my alt text" />
+  </div>
+</figure>
+
+<p>In this case the evaluation metrics are precision and recall.</p>
+
+<p>For classifier A, there is a 95% chance that there is a cat in the image and a 90% chance that it has correctly detected a cat. Whereas for classifier B there is a 98% chance that there is a cat in the image and a 85% chance that it has correctly detected a cat.</p>
+
+<p>The problem with using precision/recall as the evaluation metric is that you are not sure which one is better since in this case, both of them have a good precision et recall. F1-score, a harmonic mean, combine both precision and recall.</p>
+<figure>
+  <div style="text-align:center">
+    <img src="/img/ml-strategies/F1-score.png" alt="my alt text" />
+  </div>
+</figure>
+
+<p>Classifier A is a better choice. F1-Score is not the only evaluation metric that can be use, the average, for
+example, could also be an indicator of which classifier to use.</p>
+
+<h4 id="satisficing-and-optimizing-metrics">Satisficing and optimizing metrics.</h4>
+<p>There are different metrics to evaluate the performance of a classifier, they are called <code class="highlighter-rouge">evaluation matrices</code>.
+They can be categorized as <code class="highlighter-rouge">satisficing</code> and <code class="highlighter-rouge">optimizing</code> matrices. It is important to note that these evaluation matrices must be evaluated on a training set, a development set or on the test set.</p>
+
+<blockquote>
+
+  <ul>
+    <li>optimizing —&gt; best accuracy</li>
+    <li>satisficing —&gt; running &lt;= X ms.</li>
+  </ul>
+</blockquote>
+
+<figure>
+  <div style="text-align:center">
+    <img src="/img/ml-strategies/3table.png" alt="my alt text" />
+  </div>
+</figure>
+
+<p>In this case, accuracy and running time are the evaluation matrices. Accuracy is the optimizing metric,
+because you want the classifier to correctly detect a cat image as accurately as possible. The running time
+which is set to be under 100 ms in this example, is the satisficing metric which mean that the metric has
+to meet expectation set.</p>
+
+<h4 id="traindevtest-set-distributions">Train/dev/test set distributions</h4>
+<p>Setting up the training, development and test sets have a huge impact on productivity. It is important to
+choose the development and test sets from the same distribution and it must be taken randomly from all
+the data. <code class="highlighter-rouge">Test set should be big enough to give high confidence in the overall performance of your system.</code></p>
+
+<p>In dataset where data instances are few like below 100,000, researcher has used 80-20 rule.</p>
+<figure>
+  <div style="text-align:center">
+    <img src="/img/ml-strategies/old-dist.png" alt="my alt text" />
+    <figcaption> Strategy of distribution in machine learning </figcaption>
+  </div>
+</figure>
+<p>but because of generation Big Data, they have changed the rule to 98-1-1.</p>
+<figure>
+  <div style="text-align:center">
+    <img src="/img/ml-strategies/new-dist.png" alt="my alt text" />
+    <figcaption> Strategy of distribution in Deep Learning </figcaption>
+  </div>
+</figure>
+
+<h4 id="when-to-change-devtest-sets-and-metrics">When to change dev/test sets and metrics</h4>
+<p>A cat classifier tries to find a great amount of cat images to show to cat loving users. The evaluation metric used is a classification error.</p>
+
+<figure>
+  <div style="text-align:center">
+    <img src="/img/ml-strategies/error.png" alt="my alt text" />
+    <figcaption> Strategy of distribution in machine learning </figcaption>
+  </div>
+</figure>
+<p>It seems that <code class="highlighter-rouge">Algorithm A is better than Algorithm B</code> since there is only a 3% error, however for some reason, Algorithm A is letting through a lot of the pornographic images. Algorithm B has 5% error thus it classifies fewer images but it doesn’t have pornographic images. From a company’s point of view, as well as from a user acceptance point of view, <code class="highlighter-rouge">Algorithm B is actually a better
+algorithm</code>. The evaluation metric fails to correctly rank order preferences between algorithms. The evaluation metric or the development set or test set should be changed.</p>
+
+<p>The misclassification error metric can be written as a function as follow:</p>
+<figure>
+  <div style="text-align:center">
+    <img src="/img/ml-strategies/misclass.png" alt="misclassification" />
+  </div>
+</figure>
+
+<p>This function counts up the number of misclassified examples.
+The problem with this evaluation metric is that it treats pornographic vs non-pornographic images equally. On way to change this evaluation metric is to add the weight term 𝑤<sup>(𝑖)</sup>.</p>
+<figure>
+  <div style="text-align:center">
+    <img src="/img/ml-strategies/more-weight.png" alt="misclassification" />
+  </div>
+</figure>
+<p>The function becomes:</p>
+<figure>
+  <div style="text-align:center">
+    <img src="/img/ml-strategies/changed-equation.png" alt="misclassification" />
+  </div>
+</figure>
+
+<p><strong>Reminder</strong>:</p>
+
+<ul>
+  <li>Define correctly an evaluation metric that helps better rank order classifiers</li>
+  <li>Optimize the evaluation metric</li>
+</ul>
+
+<h4 id="summary-of-orthogonalization">Summary of orthogonalization</h4>
+<ul>
+  <li>[x] Define a metric to evaluate a classifier</li>
+  <li>[x] Separately improve the metric to improve accuracy</li>
+  <li>[x] Change metric and/or dev/test set, if previous choosen  metric + dev/test fails.</li>
+</ul>

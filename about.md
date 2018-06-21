@@ -6,8 +6,7 @@ permalink: /about/
 
 <figure>
   <div style="text-align:center">
-    <img src="/img/about-me/me.jpeg" width="50%" height="50%" alt="my  pics "/>
-   </figcaption>
+    <img src="/img/about-me/me.jpeg" width="50%" height="50%" alt="my pics "/>
   </div>
 </figure>
 
