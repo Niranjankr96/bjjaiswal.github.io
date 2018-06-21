@@ -4,6 +4,15 @@ title: About
 permalink: /about/
 ---
 
+<figure>
+  <div style="text-align:center">
+    <img src="/img/about-me/me.jpeg" width="50%" height="50%" alt="my  pics "/>
+   </figcaption>
+  </div>
+</figure>
+
+
+
 Hello, I am "Bikash Jaiswal". I am working as Research Assistant at Department of [Computer Science and Engineering](http://www.tezu.ernet.in/dcompsc/), [Tezpur University](http://www.tezu.ernet.in). Currently, My works are focused for Center of Excellence project entitled **Machine Learing Research and Big Data Analytics** underwritten by Ministry of Human, Resource and Development (MHRD), Government of India.
 
 During my Undergraduate, I have worked on Bioinformatics, concentrating on Breast-cancer microarrays  datasets. A parallel method for module extraction was proposed and implemented by harnessing the power of GPU on heyday of B-tech program. The method was able to predict 5 unprecedented genes as causal genes for Breast-cancer.
