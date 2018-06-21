@@ -1,5 +1,3 @@
-
-
 Even after developing a model, We find that prediction accuracy is 90% but that isn't good enough for production purpose because there are whole 10% error in prediction. So, we apply some technique to improve it like:
   - Collecting more diverse positive and negative training data
   - train the algorithm with gradient descent or use advance optimization algorithm like Adam.
