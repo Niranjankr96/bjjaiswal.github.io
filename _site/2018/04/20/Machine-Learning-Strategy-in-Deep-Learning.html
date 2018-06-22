@@ -1,4 +1,141 @@
-<p>Even after developing a model, We find that prediction accuracy is 90% but that isn’t good enough for production purpose because there are whole 10% error in prediction. So, we apply some technique to improve it like:</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Structure Machine Learning Projects - Bikash-Jaiswal Blog</title>
+    <meta name="author"  content="bikash">
+    <meta name="description" content="How to Structure Machine Learning Projects">
+    <meta name="keywords"  content="Deep-Learning">
+    <!-- Open Graph -->
+    <meta property="og:title" content="How to Structure Machine Learning Projects - Bikash-Jaiswal Blog">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://bikash-jaiswal.github.io/2018/04/20/Machine-Learning-Strategy-in-Deep-Learning.html">
+    <meta property="og:description" content="You have the capacity to learn from your mistakes, and you will learn a lot today.">
+    <meta property="og:site_name" content="Bikash-Jaiswal Blog">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+	
+	<!--
+Author: Ray-Eldath
+refer to:
+ - http://docs.mathjax.org/en/latest/options/index.html
+-->
+
+	<script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+		jax: ["input/TeX", "output/HTML-CSS"],
+		tex2jax: {
+			inlineMath: [ ["$", "$"] ],
+			displayMath: [ ["$$", "$$"] ],
+			skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+		},
+		"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+      });
+    </script>
+
+	
+    <!--
+Author: Ray-Eldath
+-->
+<style>
+    .markdown-body .anchor{
+        float: left;
+        margin-top: -8px;
+        margin-left: -20px;
+        padding-right: 4px;
+        line-height: 1;
+        opacity: 0;
+    }
+    
+    .markdown-body .anchor .anchor-icon{
+        font-size: 15px
+    }
+</style>
+<script>
+    $(document).ready(function() {
+        let nodes = document.querySelector(".markdown-body").querySelectorAll("h1,h2,h3")
+        for(let node of nodes) {
+            var anchor = document.createElement("a")
+            var anchorIcon = document.createElement("i")
+            anchorIcon.setAttribute("class", "fa fa-anchor fa-lg anchor-icon")
+            anchorIcon.setAttribute("aria-hidden", true)
+            anchor.setAttribute("class", "anchor")
+            anchor.setAttribute("href", "#" + node.getAttribute("id"))
+            
+            anchor.onmouseover = function() {
+                this.style.opacity = "0.4"
+            }
+            
+            anchor.onmouseout = function() {
+                this.style.opacity = "0"
+            }
+            
+            anchor.appendChild(anchorIcon)
+            node.appendChild(anchor)
+        }
+    })
+</script>
+</head>
+
+
+<body>
+  <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+  <input id="nm-switch" type="hidden" value="true"> <header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">home</a></li>
+            
+            <li><a href="/about.html">about</a></li>
+            
+            <li><a href="/tags.html">tags</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+  <header class="g-banner post-header post-pattern-circuitBoard bgcolor-default " data-theme="default">
+    <div class="post-wrapper">
+      <div class="post-tags">
+        
+          
+            <a href="tags#Deep-Learning" class="post-tag">Deep-Learning</a>
+          
+        
+      </div>
+      <h1>How to Structure Machine Learning Projects</h1>
+      <div class="post-meta">
+        <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="http://bikash-jaiswal.github.io" target="_blank" rel="author">bikash</a></></span>
+        <time class="post-meta-item" datetime="18-04-20"><i class="iconfont icon-date"></i>20 Apr 2018</time>
+      </div>
+    </div>
+    
+    <div class="filter"></div>
+      <div class="post-cover" style="background: url('https://i2.wp.com/philosophyofbrains.com/wp-content/uploads/2016/05/Problem-Mental-Causation-Pic.jpg?resize=1280%2C585') center no-repeat; background-size: cover;"></div>
+    
+  </header>
+
+  <div class="post-content visible">
+    
+
+    <article class="markdown-body">
+      <p>Even after developing a model, We find that prediction accuracy is 90% but that isn’t good enough for production purpose because there are whole 10% error in prediction. So, we apply some technique to improve it like:</p>
 <ul>
   <li>Collecting more diverse positive and negative training data</li>
   <li>train the algorithm with gradient descent or use advance optimization algorithm like Adam.</li>
@@ -18,7 +155,7 @@
 
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/tv-car.jpg" alt="my alt text" />
+    <img src="/assets/img/ml-strategies/tv-car.jpg" alt="my alt text" />
     <figcaption> Metaphor for orthogonality </figcaption>
   </div>
 </figure>
@@ -62,21 +199,21 @@
 <p><strong>Precision</strong> : Of all the images we predicted y=1, what fraction of it have cats?</p>
 <figure>
    <div style="text-align:center">
-     <img src="/img/ml-strategies/precision.png" alt="my alt text" />
+     <img src="/assets/img/ml-strategies/precision.png" alt="my alt text" />
    </div>
  </figure>
 
 <p><strong>Recall</strong> : Of all the images that actually have cats, what fraction of it did we correctly identifying have cats?</p>
 <figure>
    <div style="text-align:center">
-     <img src="/img/ml-strategies/recall.png" alt="my alt text" />
+     <img src="/assets/img/ml-strategies/recall.png" alt="my alt text" />
    </div>
  </figure>
 
 <p>Let’s compare 2 classifiers A and B used to evaluate if there are cat images:</p>
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/evaluation-matrix.png" alt="my alt text" />
+    <img src="/assets/img/ml-strategies/evaluation-matrix.png" alt="my alt text" />
   </div>
 </figure>
 
@@ -87,7 +224,7 @@
 <p>The problem with using precision/recall as the evaluation metric is that you are not sure which one is better since in this case, both of them have a good precision et recall. F1-score, a harmonic mean, combine both precision and recall.</p>
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/F1-score.png" alt="my alt text" />
+    <img src="/assets/img/ml-strategies/F1-score.png" alt="my alt text" />
   </div>
 </figure>
 
@@ -108,7 +245,7 @@ They can be categorized as <code class="highlighter-rouge">satisficing</code> an
 
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/3table.png" alt="my alt text" />
+    <img src="/assets/img/ml-strategies/3table.png" alt="my alt text" />
   </div>
 </figure>
 
@@ -125,14 +262,14 @@ the data. <code class="highlighter-rouge">Test set should be big enough to give 
 <p>In dataset where data instances are few like below 100,000, researcher has used 80-20 rule.</p>
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/old-dist.png" alt="my alt text" />
+    <img src="/assets/img/ml-strategies/old-dist.png" alt="my alt text" />
     <figcaption> Strategy of distribution in machine learning </figcaption>
   </div>
 </figure>
 <p>but because of generation Big Data, they have changed the rule to 98-1-1.</p>
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/new-dist.png" alt="my alt text" />
+    <img src="/assets/img/ml-strategies/new-dist.png" alt="my alt text" />
     <figcaption> Strategy of distribution in Deep Learning </figcaption>
   </div>
 </figure>
@@ -142,7 +279,7 @@ the data. <code class="highlighter-rouge">Test set should be big enough to give 
 
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/error.png" alt="my alt text" />
+    <img src="/assets/img/ml-strategies/error.png" alt="my alt text" />
     <figcaption> Strategy of distribution in machine learning </figcaption>
   </div>
 </figure>
@@ -152,7 +289,7 @@ algorithm</code>. The evaluation metric fails to correctly rank order preference
 <p>The misclassification error metric can be written as a function as follow:</p>
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/misclass.png" alt="misclassification" />
+    <img src="/assets/img/ml-strategies/misclass.png" alt="misclassification" />
   </div>
 </figure>
 
@@ -160,13 +297,13 @@ algorithm</code>. The evaluation metric fails to correctly rank order preference
 The problem with this evaluation metric is that it treats pornographic vs non-pornographic images equally. On way to change this evaluation metric is to add the weight term 𝑤<sup>(𝑖)</sup>.</p>
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/more-weight.png" alt="misclassification" />
+    <img src="/assets/img/ml-strategies/more-weight.png" alt="misclassification" />
   </div>
 </figure>
 <p>The function becomes:</p>
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/changed-equation.png" alt="misclassification" />
+    <img src="/assets/img/ml-strategies/changed-equation.png" alt="misclassification" />
   </div>
 </figure>
 
@@ -183,3 +320,109 @@ The problem with this evaluation metric is that it treats pornographic vs non-po
   <li>[x] Separately improve the metric to improve accuracy</li>
   <li>[x] Change metric and/or dev/test set, if previous choosen  metric + dev/test fails.</li>
 </ul>
+
+    </article>
+
+    
+    <div class="social-share-wrapper">
+      <div class="social-share"></div>
+    </div>
+    
+  </div>
+
+  <section class="author-detail">
+    <section class="post-footer-item author-card">
+      <div class="avatar">
+        <img src="/assets/img/profile.png" alt="">
+      </div>
+      <div class="author-name" rel="author">bikash</div>
+      <div class="bio">
+        <p></p>
+      </div>
+      
+      <ul class="sns-links">
+        
+        <li>
+          <a href="https://www.linkedin.com/in/bikashjaiswal" target="_blank">
+                    <i class="iconfont icon-linkedin"></i>
+                </a>
+        </li>
+        
+        <li>
+          <a href="https://www.github.com/bikash-jaiswal" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+        </li>
+        
+        <li>
+          <a href="bjjaiswal@gmail.com" target="_blank">
+                    <i class="iconfont icon-email"></i>
+                </a>
+        </li>
+        
+      </ul>
+      
+    </section>
+    <section class="post-footer-item read-next">
+      
+      <div class="read-next-item">
+        <a href="/2018/05/30/Introduction-to-Artificial-Intelligence-and-its-branches.html" class="read-next-link"></a>
+        <section>
+          <span>How they differ? Artificial Intelligence vs machine Learning vs Deep Learning</span>
+          <p>We have come far beyond Information Technology age. We ar...</p>
+        </section>
+        
+        <div class="filter"></div>
+        <img src="https://analyticsindiamag.com/wp-content/uploads/2017/08/handwriting-human-head-shape-imagination-technology-innovation-artificial-intelligence-at-chalkboard_h7plpruc_thumbnail-full11.png" alt="">
+        
+     </div>
+      
+
+      
+    </section>
+    <section class="post-footer-item comment">
+      <div id="disqus_thread"></div>
+    </section>
+  </section>
+
+  <footer class="g-footer">
+  <section>Bikash-Jaiswal Blog ©
+  
+  
+    2017
+    -
+  
+  2018
+  </section>
+  <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+
+
+  
+  <script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document,
+        s = d.createElement('script');
+      s.src = 'https://bikash-jaiswal.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  
+
+  <script src="/assets/js/prism.js"></script>
+  <script src="/assets/js/index.min.js"></script>
+</body>
+
+</html>

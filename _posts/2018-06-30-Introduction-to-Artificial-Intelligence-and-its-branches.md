@@ -1,7 +1,16 @@
- We have come far beyond Information Technology age. We are living in __Intelligent__ era. We are surrounded by ubiquitous intelligent device like smart-phones, smart-watch,etc,. Intelligent has become banal not only in regular life style but also affecting the industries too. Devices which have __Artificial Intelligence__ has started changing the world drastically. As Andrew Ng stated *"Like electricity changed the world a century ago, similarly AI will change the world like never before"*.  Nowadays we look for intelligent software to automate banal labor, understand speech, or images, make diagnosis in medicine and support basic scientific research.
+---
+layout: post
+title: How they differ? Artificial Intelligence vs machine Learning vs Deep Learning
+date: 2018-05-30
+categories: Machine Learning, Deep Learning
+tags: Artificial-Intelligence
+cover: 'https://analyticsindiamag.com/wp-content/uploads/2017/08/handwriting-human-head-shape-imagination-technology-innovation-artificial-intelligence-at-chalkboard_h7plpruc_thumbnail-full11.png'
+---
+
+We have come far beyond Information Technology age. We are living in __Intelligent__ era. We are surrounded by ubiquitous intelligent device like smart-phones, smart-watch,etc,. Intelligent has become banal not only in regular life style but also affecting the industries too. Devices which have __Artificial Intelligence__ has started changing the world drastically. As Andrew Ng stated *"Like electricity changed the world a century ago, similarly AI will change the world like never before"*.  Nowadays we look for intelligent software to automate banal labor, understand speech, or images, make diagnosis in medicine and support basic scientific research.
 
 
- > "Artificial intelligence": When a machine mimics "cognitive" functions that humans associate with other human minds, such as "learning" and "problem solving" - Russell & Norvig, 2009
+> "Artificial intelligence": When a machine mimics "cognitive" functions that humans associate with other human minds, such as "learning" and "problem solving" - Russell & Norvig, 2009
 
 We all are familiar with word Artificial Intelligence form movies like "The Terminator", "The Matrix", "A Space Odyssey", etc and best classic novels like "Frankenstein", "The Hitchhiker guide to the Galaxy", and many more. But it's an arduous task to explain Artificial Intelligence to novice and distinguish it for its branches like __Machine Learning__ and __Deep Learning__, __Reinforcement learning__. In this post, I will try to explain in a laconic way despite being cogent: How AI, Machine Learning and Deep learning are different from each other nevertheless, shelter under the same umbrella.
 
@@ -11,8 +20,8 @@ During 1900s, when researcher discovered that digital computers can simulate any
 
 <figure>
   <div style="text-align:center">
-    <img src="/img/2018-06-30/Artificial-Brain.png" alt="my alt text"/>
-    <figcaption> Artificial brain.  </figcaption>
+    <img src="/assets/img/2018-05-30/Artificial-Brain.png" alt="my alt text"/>
+    <figcaption> Artificial brain. </figcaption>
   </div>
 </figure>
 
@@ -25,7 +34,7 @@ Earlier/classical AI system are built on a list of formal, logistic and mathemat
 
 <figure>
   <div style="text-align:center">
-    <img src="/img/2018-06-30/knowledge-based-systems.jpg" alt="my alt text"/>
+    <img src="/assets/img/2018-05-30/knowledge-based-systems.jpg" alt="kNR"/>
     <figcaption>Contains of Knowledge based Systems. </figcaption>
   </div>
 </figure>
@@ -35,7 +44,7 @@ We feted IBM's Deep chess-playing system when it defeated world champion Garry K
 
 <figure>
   <div style="text-align:center">
-    <img src="/img/2018-06-30/tic-toc-toe.png" alt="my alt text"/>
+    <img src="/assets/img/2018-05-30/tic-toc-toe.png" alt="tic-tac-toe"/>
     <figcaption> Game tree of tic-tac-toe. Courtesy: Google DeepMind's AlphaGo: How it works
  </figcaption>
   </div>
@@ -43,7 +52,7 @@ We feted IBM's Deep chess-playing system when it defeated world champion Garry K
 &nbsp;
 <figure>
   <div style="text-align:center">
-    <img src="/img/2018-06-30/tree-based.png" alt="my alt text"/>
+    <img src="/assets/img/2018-05-30/tree-based.png" alt="tree-based"/>
     <figcaption>Tree based search system for GO. Courtesy Google's Deepmind </figcaption>
   </div>
 </figure>
@@ -76,7 +85,7 @@ The performance of every machine learning algorithms depends on the __representa
 
 <figure>
   <div style="text-align:center">
-    <img src="/img/2018-06-30/ml-algorithm.png" alt="my alt text"/>
+    <img src="/assets/img/2018-05-30/ml-algorithm.png" alt="ml-algorithm"/>
     <figcaption>Different types of Machine Learning Algorithm. </figcaption>
   </div>
 </figure>

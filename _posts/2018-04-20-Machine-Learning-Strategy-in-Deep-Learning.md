@@ -1,3 +1,13 @@
+---
+layout: post
+title: How to Structure Machine Learning Projects
+date: 2018-04-20
+categories: Machine Learning, Deep Learning
+cover: 'https://i2.wp.com/philosophyofbrains.com/wp-content/uploads/2016/05/Problem-Mental-Causation-Pic.jpg?resize=1280%2C585'
+tags: Deep-Learning
+---
+
+
 Even after developing a model, We find that prediction accuracy is 90% but that isn't good enough for production purpose because there are whole 10% error in prediction. So, we apply some technique to improve it like:
   - Collecting more diverse positive and negative training data
   - train the algorithm with gradient descent or use advance optimization algorithm like Adam.
@@ -16,7 +26,7 @@ Let's take to metaphorical example of old television and car steering.
 
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/tv-car.jpg" alt="my alt text"/>
+    <img src="/assets/img/ml-strategies/tv-car.jpg" alt="my alt text"/>
     <figcaption> Metaphor for orthogonality </figcaption>
   </div>
 </figure>
@@ -47,21 +57,21 @@ When a supervised learning system is design, these are the 4 assumptions that ne
  **Precision** : Of all the images we predicted y=1, what fraction of it have cats?
  <figure>
    <div style="text-align:center">
-     <img src="/img/ml-strategies/precision.png" alt="my alt text"/>
+     <img src="/assets/img/ml-strategies/precision.png" alt="my alt text"/>
    </div>
  </figure>
 
  **Recall** : Of all the images that actually have cats, what fraction of it did we correctly identifying have cats?
  <figure>
    <div style="text-align:center">
-     <img src="/img/ml-strategies/recall.png" alt="my alt text"/>
+     <img src="/assets/img/ml-strategies/recall.png" alt="my alt text"/>
    </div>
  </figure>
 
 Let’s compare 2 classifiers A and B used to evaluate if there are cat images:
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/evaluation-matrix.png" alt="my alt text"/>
+    <img src="/assets/img/ml-strategies/evaluation-matrix.png" alt="my alt text"/>
   </div>
 </figure>
 
@@ -72,7 +82,7 @@ For classifier A, there is a 95% chance that there is a cat in the image and a 9
 The problem with using precision/recall as the evaluation metric is that you are not sure which one is better since in this case, both of them have a good precision et recall. F1-score, a harmonic mean, combine both precision and recall.
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/F1-score.png" alt="my alt text"/>
+    <img src="/assets/img/ml-strategies/F1-score.png" alt="my alt text"/>
   </div>
 </figure>
 
@@ -90,7 +100,7 @@ They can be categorized as `satisficing` and `optimizing` matrices. It is import
 
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/3table.png" alt="my alt text"/>
+    <img src="/assets/img/ml-strategies/3table.png" alt="my alt text"/>
   </div>
 </figure>
 
@@ -107,14 +117,14 @@ the data. `Test set should be big enough to give high confidence in the overall 
 In dataset where data instances are few like below 100,000, researcher has used 80-20 rule.
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/old-dist.png" alt="my alt text"/>
+    <img src="/assets/img/ml-strategies/old-dist.png" alt="my alt text"/>
     <figcaption> Strategy of distribution in machine learning </figcaption>
   </div>
 </figure>
 but because of generation Big Data, they have changed the rule to 98-1-1.
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/new-dist.png" alt="my alt text"/>
+    <img src="/assets/img/ml-strategies/new-dist.png" alt="my alt text"/>
     <figcaption> Strategy of distribution in Deep Learning </figcaption>
   </div>
 </figure>
@@ -124,7 +134,7 @@ A cat classifier tries to find a great amount of cat images to show to cat lovin
 
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/error.png" alt="my alt text"/>
+    <img src="/assets/img/ml-strategies/error.png" alt="my alt text"/>
     <figcaption> Strategy of distribution in machine learning </figcaption>
   </div>
 </figure>
@@ -134,7 +144,7 @@ algorithm`. The evaluation metric fails to correctly rank order preferences betw
 The misclassification error metric can be written as a function as follow:
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/misclass.png" alt="misclassification"/>
+    <img src="/assets/img/ml-strategies/misclass.png" alt="misclassification"/>
   </div>
 </figure>
 
@@ -142,13 +152,13 @@ This function counts up the number of misclassified examples.
 The problem with this evaluation metric is that it treats pornographic vs non-pornographic images equally. On way to change this evaluation metric is to add the weight term 𝑤<sup>(𝑖)</sup>.
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/more-weight.png" alt="misclassification"/>
+    <img src="/assets/img/ml-strategies/more-weight.png" alt="misclassification"/>
   </div>
 </figure>
 The function becomes:
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/changed-equation.png" alt="misclassification"/>
+    <img src="/assets/img/ml-strategies/changed-equation.png" alt="misclassification"/>
   </div>
 </figure>
 

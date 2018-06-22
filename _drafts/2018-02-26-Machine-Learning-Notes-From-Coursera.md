@@ -1,6 +1,4 @@
 ---
-layout: post
-title: Machine Learning Notes from standford via coursera
 ---
 Recently I completed online Machine learning course taught by Andrew Ng on coursera. I am glad that I completed this course with certification. This course has given me great intuition toward Machine Learning. This course not only provided concepts of different learning models but somewhat made me capable of understanding mathematics  behind those learning models.
 
