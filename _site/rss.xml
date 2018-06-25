@@ -5,8 +5,8 @@
     <description>You have the capacity to learn from your mistakes, and you will learn a lot today.</description>
     <link>http://bikash-jaiswal.github.io/</link>
     <atom:link href="http://bikash-jaiswal.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 25 Jun 2018 19:57:48 +0530</pubDate>
-    <lastBuildDate>Mon, 25 Jun 2018 19:57:48 +0530</lastBuildDate>
+    <pubDate>Mon, 25 Jun 2018 20:45:13 +0530</pubDate>
+    <lastBuildDate>Mon, 25 Jun 2018 20:45:13 +0530</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -340,7 +340,7 @@ The problem with this evaluation metric is that it treats pornographic vs non-po
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;practical-aspects-of-deep-learning&quot;&gt;Practical aspects of Deep Learning&lt;/h2&gt;
-&lt;p&gt;When we start to solve a new problem in using deep learning, we can never decide earlier what to choose like what learning rate? how many hidden layers? which activation functions to choose and for which layers? To find the answer we have to follow iterative process of &lt;code class=&quot;highlighter-rouge&quot;&gt;Idea ---&amp;gt; code ---&amp;gt; Experiment&lt;/code&gt; Even season deep learning expert find it almost impossible to correctly guess the best choice of hyperparameters the very first time.&lt;/p&gt;
+&lt;p&gt;When we start to solve a new problem in using deep learning, we can never decide earlier what to choose like - what learning rate? how many hidden layers? which activation functions to choose and for which layers? To find the answer we have to follow iterative process of &lt;code class=&quot;highlighter-rouge&quot;&gt;Idea ---&amp;gt; code ---&amp;gt; Experiment&lt;/code&gt;. Even seasoned deep learning expert find it almost impossible to correctly guess the best choice of hyperparameters the very first time.&lt;/p&gt;
 
 &lt;h3 id=&quot;setting-up-your-machine-learning-application&quot;&gt;Setting up your Machine Learning Application&lt;/h3&gt;
 &lt;h5 id=&quot;train--dev--test-sets&quot;&gt;1. Train / Dev / Test sets&lt;/h5&gt;
@@ -359,7 +359,7 @@ The problem with this evaluation metric is that it treats pornographic vs non-po
   &lt;/figure&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Generally we have give just Training set and Test set in real life and also in Kaggle competitions. To construct the development set use following technique:&lt;/p&gt;
+  &lt;p&gt;Generally, we have give just Training set and Test set in real life and also in Kaggle competitions. To construct the development set use following technique:&lt;/p&gt;
   &lt;ul&gt;
     &lt;li&gt;Test set size = 10,000,000, then split like below&lt;/li&gt;
     &lt;li&gt;Test set size = index from 1 - 9,900,000 i.e. 98% of original test set&lt;/li&gt;
@@ -369,15 +369,15 @@ The problem with this evaluation metric is that it treats pornographic vs non-po
 
 &lt;p&gt;&lt;strong&gt;You will try to build a model upon training set then try to optimize hyperparameters on dev set as much as possible. Then after your model is ready you try and evaluate the testing set.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Make sure the dev and test set are coming from the same distribution&lt;/code&gt;. suppose training pictures is from the web and the dev/test pictures are from users cell phone they will mismatch. It is better to make sure that dev and test set are from the same distribution.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Make sure the dev and test set are coming from the same distribution&lt;/code&gt;. Suppose training pictures is from the web and the dev/test pictures are from users cell phone they will mismatch. It is better to make sure that dev and test set are from the same distribution.&lt;/p&gt;
 
 &lt;p&gt;For more knowledge on Train/dev/test set distributions topic follow &lt;a href=&quot;https://bikash-jaiswal.github.io/2018/04/20/Machine-Learning-Strategy-in-Deep-Learning.html&quot;&gt;Machine Learning Strategy In Deep Learning&lt;/a&gt; 3rd course in Deep learning specialization.&lt;/p&gt;
 
 &lt;h5 id=&quot;bias---variance&quot;&gt;2. Bias - Variance&lt;/h5&gt;
 
-&lt;p&gt;One of the quick question to evaluate someone technical skill about Machine Learning or Deep Learning is to ask him/her about bias/ Variance and Overfitting and Underfitting.&lt;/p&gt;
+&lt;p&gt;One of the quick question to evaluate someone’s technical skill on Machine Learning or Deep Learning is to ask him/her about bias/ Variance and Overfitting and Underfitting.&lt;/p&gt;
 
-&lt;p&gt;It is simple and vital topic but difficult to master.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;It is simple and vital topic but difficult to master.&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;More information on the problem of overfitting and underfitting can be found on &lt;a href=&quot;https://github.com/bikash-jaiswal/Machine-Learning-Notes/blob/master/3.a.The-problem-of-overfitting.md&quot;&gt;The problem of Underfitting&lt;/a&gt; course for Machine learning taught by Andrew Ng in &lt;a href=&quot;https://www.coursera.org/learn/machine-learning&quot;&gt;coursera&lt;/a&gt;.&lt;/p&gt;
 
@@ -392,7 +392,7 @@ The problem with this evaluation metric is that it treats pornographic vs non-po
 
 &lt;p&gt;&lt;strong&gt;Underfitting&lt;/strong&gt;: models that can neither model the training data nor generalize to new data. It is usually caused by a function that is too simple or uses too few features.&lt;/p&gt;
 
-&lt;p&gt;Analysis Bias and Variance with training error rate and validation error value. For Example: assuming human error = 0%&lt;/p&gt;
+&lt;p&gt;Analysis Bias and Variance with training error rate and validation error value. Assumption made for below comparison: human error = 0%&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;High variance (overfitting):
     &lt;ul&gt;
@@ -424,23 +424,20 @@ The problem with this evaluation metric is that it treats pornographic vs non-po
 
 &lt;h5 id=&quot;basic-recipe-for-machine-learning&quot;&gt;3. Basic Recipe for Machine Learning&lt;/h5&gt;
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;If your algorithm has a high bias:&lt;/p&gt;
-
+  &lt;li&gt;If your algorithm has a high bias:
     &lt;ul&gt;
       &lt;li&gt;Try to make your NN bigger (size of hidden units, number of layers)&lt;/li&gt;
+      &lt;li&gt;Try a different model that is suitable for your data.
+Try to run it longer.
+Different (advanced) optimization algorithms.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Try a different model that is suitable for your data.
- Try to run it longer.
- Different (advanced) optimization algorithms.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;If your algorithm has a high variance:&lt;/li&gt;
-  &lt;li&gt;More data.&lt;/li&gt;
-  &lt;li&gt;Try regularization.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Try a different model that is suitable for your data.&lt;/p&gt;
+  &lt;li&gt;If your algorithm has a high variance:
+    &lt;ul&gt;
+      &lt;li&gt;More data.&lt;/li&gt;
+      &lt;li&gt;Try regularization.&lt;/li&gt;
+      &lt;li&gt;Try a different model that is suitable for your data.&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;You should try the previous two points until you have a low bias and low variance.&lt;/p&gt;
@@ -452,10 +449,10 @@ The problem with this evaluation metric is that it treats pornographic vs non-po
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;regularizing-your-neural-network&quot;&gt;Regularizing your neural network&lt;/h3&gt;
-&lt;p&gt;As of solution listed in case of high variance, getting more data is not always feasible in every case of application nevertheless, trying regularization is always possible.&lt;/p&gt;
+&lt;p&gt;As of solution listed in case of high variance, getting more data is not always feasible in every case of application, nevertheless, trying regularization is always possible.&lt;/p&gt;
 
 &lt;h5 id=&quot;applying-regularization-in-logistic-regression&quot;&gt;Applying regularization in logistic regression&lt;/h5&gt;
-&lt;p&gt;Here, &lt;code class=&quot;highlighter-rouge&quot;&gt;||W|| = sum of absolute values of all w&lt;/code&gt; and the cost function of logistic regression is ` J(w,b) = (1/m) * Sum(L(y(i),y’(i)))&lt;code class=&quot;highlighter-rouge&quot;&gt; and &lt;/code&gt;lambda` is  regularization parameter (another hyperparameter).&lt;/p&gt;
+&lt;p&gt;Here, &lt;code class=&quot;highlighter-rouge&quot;&gt;||W|| = sum of absolute values of all weight&lt;/code&gt; and the cost function of logistic regression is &lt;code class=&quot;highlighter-rouge&quot;&gt;J(w,b) = (1/m) * Sum(L(y(i),y'(i)))&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;lambda&lt;/code&gt; is  regularization parameter (another hyperparameter).&lt;/p&gt;
 &lt;figure&gt;
   &lt;div style=&quot;text-align:center&quot;&gt;
     &lt;img src=&quot;/assets/img/practical-aspect/regularization-LR.png&quot; alt=&quot;regularization in Logistic regression&quot; /&gt;
@@ -490,8 +487,47 @@ The problem with this evaluation metric is that it treats pornographic vs non-po
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;ul&gt;
-  &lt;li&gt;The new term &lt;code class=&quot;highlighter-rouge&quot;&gt;(1 - (learning_rate*lambda)/m) * w[l]&lt;/code&gt; causes the weight to decay in proportion to its size.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The new term &lt;code class=&quot;highlighter-rouge&quot;&gt;(1 - (learning_rate*lambda)/m) * w[l]&lt;/code&gt; causes the weight to decay in proportion to its size.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;(lambda/2m) * Sum((||W[l]||^2)&lt;/code&gt;  penalizes the weight matrices from being too large.&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h5 id=&quot;how-does-regularization-prevent-overfitting&quot;&gt;How does regularization prevent overfitting&lt;/h5&gt;
+&lt;p&gt;Some Intuition that can help us in finding why and how does regularization help with overfitting and reducing variance problems?&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Intuition I&lt;/code&gt;: If regularization parameter &lt;code class=&quot;highlighter-rouge&quot;&gt;lambda&lt;/code&gt; is too big.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;a lot of w’s will be close to zeros which will make the Neural network simpler (you can think of it as it would behave closer to logistic regression with more hidden layers).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure&gt;
+    &lt;div style=&quot;text-align:center&quot;&gt;
+      &lt;img src=&quot;/assets/img/practical-aspect/simpler-nn.png&quot; alt=&quot;simpler-nn&quot; /&gt;
+      &lt;figcaption&gt; NN when lambda is too large &lt;/figcaption&gt;
+    &lt;/div&gt;
+  &lt;/figure&gt;
+&lt;ul&gt;
+  &lt;li&gt;If lambda is good enough: It will just reduce some weights that makes the neural network overfit.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Intuition II with tanh function&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;If lambda is too large, w’s will be small (close to zero) - will use the linear part of the tanh activation function, so we will go from non linear activation to roughly linear which would make the NN a roughly linear classifier.&lt;/li&gt;
+  &lt;li&gt;If lambda good enough it will just make some of tanh activations roughly linear which will prevent overfitting.&lt;/li&gt;
+  &lt;li&gt;If lambda is good enough: It will just reduce some weights that makes the neural network overfit.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Implementation tip&lt;/code&gt;&lt;/strong&gt;: If you implement gradient descent, one of the steps to debug gradient descent is to plot the cost function (J) as a function of the number of iterations of gradient descent and you want to see that the cost function J &lt;strong&gt;decreases monotonically&lt;/strong&gt; after every elevation of gradient descent with regularization. If you plot the old definition of J (no regularization) then you might not see it decrease monotonically.
+monotonically decreassing&lt;/p&gt;
+&lt;figure&gt;
+  &lt;div style=&quot;text-align:center&quot;&gt;
+    &lt;img src=&quot;/assets/img/practical-aspect/monotonically decreassing.png&quot; alt=&quot;monotonically decreassing&quot; /&gt;
+    &lt;figcaption&gt;monotonically decreassing
+ &lt;/figcaption&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
 
 &lt;h3 id=&quot;setting-up-your-optimization-problem&quot;&gt;Setting up your optimization problem&lt;/h3&gt;
 

@@ -143,7 +143,7 @@ Author: Ray-Eldath
 </ol>
 
 <h2 id="practical-aspects-of-deep-learning">Practical aspects of Deep Learning</h2>
-<p>When we start to solve a new problem in using deep learning, we can never decide earlier what to choose like what learning rate? how many hidden layers? which activation functions to choose and for which layers? To find the answer we have to follow iterative process of <code class="highlighter-rouge">Idea ---&gt; code ---&gt; Experiment</code> Even season deep learning expert find it almost impossible to correctly guess the best choice of hyperparameters the very first time.</p>
+<p>When we start to solve a new problem in using deep learning, we can never decide earlier what to choose like - what learning rate? how many hidden layers? which activation functions to choose and for which layers? To find the answer we have to follow iterative process of <code class="highlighter-rouge">Idea ---&gt; code ---&gt; Experiment</code>. Even seasoned deep learning expert find it almost impossible to correctly guess the best choice of hyperparameters the very first time.</p>
 
 <h3 id="setting-up-your-machine-learning-application">Setting up your Machine Learning Application</h3>
 <h5 id="train--dev--test-sets">1. Train / Dev / Test sets</h5>
@@ -162,7 +162,7 @@ Author: Ray-Eldath
   </figure>
 
 <blockquote>
-  <p>Generally we have give just Training set and Test set in real life and also in Kaggle competitions. To construct the development set use following technique:</p>
+  <p>Generally, we have give just Training set and Test set in real life and also in Kaggle competitions. To construct the development set use following technique:</p>
   <ul>
     <li>Test set size = 10,000,000, then split like below</li>
     <li>Test set size = index from 1 - 9,900,000 i.e. 98% of original test set</li>
@@ -172,15 +172,15 @@ Author: Ray-Eldath
 
 <p><strong>You will try to build a model upon training set then try to optimize hyperparameters on dev set as much as possible. Then after your model is ready you try and evaluate the testing set.</strong></p>
 
-<p><code class="highlighter-rouge">Make sure the dev and test set are coming from the same distribution</code>. suppose training pictures is from the web and the dev/test pictures are from users cell phone they will mismatch. It is better to make sure that dev and test set are from the same distribution.</p>
+<p><code class="highlighter-rouge">Make sure the dev and test set are coming from the same distribution</code>. Suppose training pictures is from the web and the dev/test pictures are from users cell phone they will mismatch. It is better to make sure that dev and test set are from the same distribution.</p>
 
 <p>For more knowledge on Train/dev/test set distributions topic follow <a href="https://bikash-jaiswal.github.io/2018/04/20/Machine-Learning-Strategy-in-Deep-Learning.html">Machine Learning Strategy In Deep Learning</a> 3rd course in Deep learning specialization.</p>
 
 <h5 id="bias---variance">2. Bias - Variance</h5>
 
-<p>One of the quick question to evaluate someone technical skill about Machine Learning or Deep Learning is to ask him/her about bias/ Variance and Overfitting and Underfitting.</p>
+<p>One of the quick question to evaluate someone’s technical skill on Machine Learning or Deep Learning is to ask him/her about bias/ Variance and Overfitting and Underfitting.</p>
 
-<p>It is simple and vital topic but difficult to master.</p>
+<p><code class="highlighter-rouge">It is simple and vital topic but difficult to master.</code></p>
 
 <p>More information on the problem of overfitting and underfitting can be found on <a href="https://github.com/bikash-jaiswal/Machine-Learning-Notes/blob/master/3.a.The-problem-of-overfitting.md">The problem of Underfitting</a> course for Machine learning taught by Andrew Ng in <a href="https://www.coursera.org/learn/machine-learning">coursera</a>.</p>
 
@@ -195,7 +195,7 @@ Author: Ray-Eldath
 
 <p><strong>Underfitting</strong>: models that can neither model the training data nor generalize to new data. It is usually caused by a function that is too simple or uses too few features.</p>
 
-<p>Analysis Bias and Variance with training error rate and validation error value. For Example: assuming human error = 0%</p>
+<p>Analysis Bias and Variance with training error rate and validation error value. Assumption made for below comparison: human error = 0%</p>
 <ul>
   <li>High variance (overfitting):
     <ul>
@@ -227,23 +227,20 @@ Author: Ray-Eldath
 
 <h5 id="basic-recipe-for-machine-learning">3. Basic Recipe for Machine Learning</h5>
 <ul>
-  <li>
-    <p>If your algorithm has a high bias:</p>
-
+  <li>If your algorithm has a high bias:
     <ul>
       <li>Try to make your NN bigger (size of hidden units, number of layers)</li>
+      <li>Try a different model that is suitable for your data.
+Try to run it longer.
+Different (advanced) optimization algorithms.</li>
     </ul>
   </li>
-  <li>
-    <p>Try a different model that is suitable for your data.
- Try to run it longer.
- Different (advanced) optimization algorithms.</p>
-  </li>
-  <li>If your algorithm has a high variance:</li>
-  <li>More data.</li>
-  <li>Try regularization.</li>
-  <li>
-    <p>Try a different model that is suitable for your data.</p>
+  <li>If your algorithm has a high variance:
+    <ul>
+      <li>More data.</li>
+      <li>Try regularization.</li>
+      <li>Try a different model that is suitable for your data.</li>
+    </ul>
   </li>
   <li>
     <p>You should try the previous two points until you have a low bias and low variance.</p>
@@ -255,10 +252,10 @@ Author: Ray-Eldath
 </ul>
 
 <h3 id="regularizing-your-neural-network">Regularizing your neural network</h3>
-<p>As of solution listed in case of high variance, getting more data is not always feasible in every case of application nevertheless, trying regularization is always possible.</p>
+<p>As of solution listed in case of high variance, getting more data is not always feasible in every case of application, nevertheless, trying regularization is always possible.</p>
 
 <h5 id="applying-regularization-in-logistic-regression">Applying regularization in logistic regression</h5>
-<p>Here, <code class="highlighter-rouge">||W|| = sum of absolute values of all w</code> and the cost function of logistic regression is ` J(w,b) = (1/m) * Sum(L(y(i),y’(i)))<code class="highlighter-rouge"> and </code>lambda` is  regularization parameter (another hyperparameter).</p>
+<p>Here, <code class="highlighter-rouge">||W|| = sum of absolute values of all weight</code> and the cost function of logistic regression is <code class="highlighter-rouge">J(w,b) = (1/m) * Sum(L(y(i),y'(i)))</code> and <code class="highlighter-rouge">lambda</code> is  regularization parameter (another hyperparameter).</p>
 <figure>
   <div style="text-align:center">
     <img src="/assets/img/practical-aspect/regularization-LR.png" alt="regularization in Logistic regression" />
@@ -293,8 +290,47 @@ Author: Ray-Eldath
 </code></pre>
 </div>
 <ul>
-  <li>The new term <code class="highlighter-rouge">(1 - (learning_rate*lambda)/m) * w[l]</code> causes the weight to decay in proportion to its size.</li>
+  <li>
+    <p>The new term <code class="highlighter-rouge">(1 - (learning_rate*lambda)/m) * w[l]</code> causes the weight to decay in proportion to its size.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">(lambda/2m) * Sum((||W[l]||^2)</code>  penalizes the weight matrices from being too large.</p>
+  </li>
 </ul>
+
+<h5 id="how-does-regularization-prevent-overfitting">How does regularization prevent overfitting</h5>
+<p>Some Intuition that can help us in finding why and how does regularization help with overfitting and reducing variance problems?</p>
+
+<p><code class="highlighter-rouge">Intuition I</code>: If regularization parameter <code class="highlighter-rouge">lambda</code> is too big.</p>
+<ul>
+  <li>a lot of w’s will be close to zeros which will make the Neural network simpler (you can think of it as it would behave closer to logistic regression with more hidden layers).</li>
+</ul>
+<figure>
+    <div style="text-align:center">
+      <img src="/assets/img/practical-aspect/simpler-nn.png" alt="simpler-nn" />
+      <figcaption> NN when lambda is too large </figcaption>
+    </div>
+  </figure>
+<ul>
+  <li>If lambda is good enough: It will just reduce some weights that makes the neural network overfit.</li>
+</ul>
+
+<p><code class="highlighter-rouge">Intuition II with tanh function</code>:</p>
+<ul>
+  <li>If lambda is too large, w’s will be small (close to zero) - will use the linear part of the tanh activation function, so we will go from non linear activation to roughly linear which would make the NN a roughly linear classifier.</li>
+  <li>If lambda good enough it will just make some of tanh activations roughly linear which will prevent overfitting.</li>
+  <li>If lambda is good enough: It will just reduce some weights that makes the neural network overfit.</li>
+</ul>
+
+<p><strong><code class="highlighter-rouge">Implementation tip</code></strong>: If you implement gradient descent, one of the steps to debug gradient descent is to plot the cost function (J) as a function of the number of iterations of gradient descent and you want to see that the cost function J <strong>decreases monotonically</strong> after every elevation of gradient descent with regularization. If you plot the old definition of J (no regularization) then you might not see it decrease monotonically.
+monotonically decreassing</p>
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/practical-aspect/monotonically decreassing.png" alt="monotonically decreassing" />
+    <figcaption>monotonically decreassing
+ </figcaption>
+  </div>
+</figure>
 
 <h3 id="setting-up-your-optimization-problem">Setting up your optimization problem</h3>
 
