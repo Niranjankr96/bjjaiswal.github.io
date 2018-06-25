@@ -2,7 +2,7 @@
 layout: post
 title: How they differ? Artificial Intelligence vs machine Learning vs Deep Learning
 date: 2018-05-30
-categories: Machine Learning, Deep Learning
+categories: AI
 tags: Artificial-Intelligence
 cover: 'https://analyticsindiamag.com/wp-content/uploads/2017/08/handwriting-human-head-shape-imagination-technology-innovation-artificial-intelligence-at-chalkboard_h7plpruc_thumbnail-full11.png'
 ---

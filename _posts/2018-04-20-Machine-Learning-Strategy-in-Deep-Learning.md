@@ -2,7 +2,7 @@
 layout: post
 title: How to Structure Machine Learning Projects
 date: 2018-04-20
-categories: Machine Learning, Deep Learning
+categories: Deep Learning Notes
 cover: 'https://i2.wp.com/philosophyofbrains.com/wp-content/uploads/2016/05/Problem-Mental-Causation-Pic.jpg?resize=1280%2C585'
 tags: Deep-Learning
 ---
