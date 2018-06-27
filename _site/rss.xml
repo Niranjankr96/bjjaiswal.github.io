@@ -5,8 +5,8 @@
     <description>You have the capacity to learn from your mistakes, and you will learn a lot today.</description>
     <link>http://bikash-jaiswal.github.io/</link>
     <atom:link href="http://bikash-jaiswal.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 25 Jun 2018 20:45:13 +0530</pubDate>
-    <lastBuildDate>Mon, 25 Jun 2018 20:45:13 +0530</lastBuildDate>
+    <pubDate>Wed, 27 Jun 2018 17:35:43 +0530</pubDate>
+    <lastBuildDate>Wed, 27 Jun 2018 17:35:43 +0530</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -480,10 +480,12 @@ Different (advanced) optimization algorithms.&lt;/li&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;w[l] = w[l] - lr * dw[l]
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+w[l] = w[l] - lr * dw[l]
      = w[l] - lr * ((from back propagation) + lambda/m * w[l])
      = w[l] - (lr*lambda/m) * w[l] - lr * (from back propagation)
      = (1 - (lr*lambda)/m) * w[l] - lr * (from back propagation)
+
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;ul&gt;
@@ -516,7 +518,6 @@ Different (advanced) optimization algorithms.&lt;/li&gt;
 &lt;ul&gt;
   &lt;li&gt;If lambda is too large, w’s will be small (close to zero) - will use the linear part of the tanh activation function, so we will go from non linear activation to roughly linear which would make the NN a roughly linear classifier.&lt;/li&gt;
   &lt;li&gt;If lambda good enough it will just make some of tanh activations roughly linear which will prevent overfitting.&lt;/li&gt;
-  &lt;li&gt;If lambda is good enough: It will just reduce some weights that makes the neural network overfit.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Implementation tip&lt;/code&gt;&lt;/strong&gt;: If you implement gradient descent, one of the steps to debug gradient descent is to plot the cost function (J) as a function of the number of iterations of gradient descent and you want to see that the cost function J &lt;strong&gt;decreases monotonically&lt;/strong&gt; after every elevation of gradient descent with regularization. If you plot the old definition of J (no regularization) then you might not see it decrease monotonically.
@@ -529,7 +530,227 @@ monotonically decreassing&lt;/p&gt;
   &lt;/div&gt;
 &lt;/figure&gt;
 
+&lt;h5 id=&quot;dropout-technique&quot;&gt;Dropout technique&lt;/h5&gt;
+&lt;p&gt;Dropout	is	a	technique	used	to	improve	over-fit	on	neural	networks,	we	should	use	Dropout	along with	other	techniques	like	L2	Regularization.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;div style=&quot;text-align:center&quot;&gt;
+    &lt;img src=&quot;/assets/img/practical-aspect/dropout.png&quot; alt=&quot;Dropout&quot; /&gt;
+    &lt;figcaption&gt;Dropout
+ &lt;/figcaption&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Dropout Intuition:&lt;/code&gt; Go through each of the layers of the network and set some probability for eliminating a node in neural network.  So, we end up with a much smaller, really much diminished network.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Implementation of Dropout aka Inverted dropout&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;keep_prob&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.8&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;# 0 &amp;lt;= keep_prob &amp;lt;=1&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# the generated number that are less than 0.8 will be dropped.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#80% stay, 20% dropped&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# this code is only for layer 3&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;d3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;randn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keep_prob&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;a3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;multiply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;# keep only the values in d3&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# increase a3 to not reduce the expected value of output&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# (ensures that the expected value of a3 remains the same)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# to solve the scaling problem&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;a3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keep_prob&lt;/span&gt;      
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;If there are 50 neuron than 10 neurons will be shut off&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Vector d[l] is used for forward and back propagation and is the same for them, but it is different for each iteration (pass) or training example.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;At test time we don’t use dropout. If you implement dropout at test time - it would add noise to predictions.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;understanding-dropout&quot;&gt;Understanding Dropout&lt;/h5&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Intuition:&lt;/code&gt; Dropout randomly knocks out units in your network. So it’s as if on every iteration you’re working with a smaller NN, and so using a smaller NN seems like it should have a regularizing effect.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Another Intution:&lt;/code&gt; can’t rely on any one feature, so have to spread out weights.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It’s possible to show that dropout has a similar effect to L2 regularization.&lt;/li&gt;
+  &lt;li&gt;Dropout can have different keep_prob per layer.&lt;/li&gt;
+  &lt;li&gt;The input layer dropout has to be near 1 (or 1 - no dropout) because you don’t want to eliminate a lot of features.&lt;/li&gt;
+  &lt;li&gt;If you’re more worried about some layers overfitting than others, you can set a lower keep_prob for some layers than others. The downside is, this gives you even more hyperparameters to search for using cross-validation. One other alternative might be to have some layers where you apply dropout and some layers where you don’t apply dropout and then just have one hyperparameter, which is a keep_prob for the layers for which you do apply dropouts.&lt;/li&gt;
+  &lt;li&gt;A lot of researchers are using dropout with Computer Vision (CV) because they have a very big input size and almost never have enough data, so overfitting is the usual problem. And dropout is a regularization technique to prevent overfitting.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A downside of dropout is that the cost function J is not well defined and it will be hard to debug (plot J by iteration).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;To solve that you’ll need to turn off dropout, set all the &lt;code class=&quot;highlighter-rouge&quot;&gt;keep_probs&lt;/code&gt; to 1, and then run the code and check that it monotonically decreases J and then turn on the dropouts again.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;wheretousedropoutlayers&quot;&gt;Where	to	use	Dropout	layers&lt;/h5&gt;
+&lt;p&gt;Normally	some	deep	learning	models use Dropout on	the	fully	connected	layers,	but	is	also	possible to	use	dropout	after	the	max-pooling	layers,	creating	some	kind	of	image	noise	augmentation.&lt;/p&gt;
+
+&lt;h5 id=&quot;other-regularization-methods&quot;&gt;Other regularization methods&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;Data augmentation:
+    &lt;ul&gt;
+      &lt;li&gt;For example in a computer vision data:
+        &lt;ul&gt;
+          &lt;li&gt;You can flip all your pictures horizontally this will give you m more data instances.&lt;/li&gt;
+          &lt;li&gt;You could also apply a random position and rotation to an image to get more data.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;For example in OCR, you can impose random rotations and distortions to digits/letters.&lt;/li&gt;
+      &lt;li&gt;New data obtained using this technique isn’t as good as the real independent data, but still can be used as a regularization technique.&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;figure&gt;
+  &lt;div style=&quot;text-align:center&quot;&gt;
+    &lt;img src=&quot;/assets/img/practical-aspect/data-augment.png&quot; alt=&quot;data augmentation&quot; /&gt;
+    &lt;figcaption&gt;Data Augmentation
+ &lt;/figcaption&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Early stopping:
+    &lt;ul&gt;
+      &lt;li&gt;In this technique we plot the training set and the dev set cost together for each iteration. At some iteration the dev set cost will stop decreasing and will start increasing.&lt;/li&gt;
+      &lt;li&gt;We will pick the point at which the training set error and dev set error are best (lowest training cost with lowest dev cost).&lt;/li&gt;
+      &lt;li&gt;We will take these parameters as the best parameters.&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;figure&gt;
+  &lt;div style=&quot;text-align:center&quot;&gt;
+    &lt;img src=&quot;/assets/img/practical-aspect/early-stopping.png&quot; alt=&quot;Early stopping&quot; /&gt;
+    &lt;figcaption&gt;Early stopping
+ &lt;/figcaption&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Advantages:&lt;/code&gt; you don’t need to search a hyperparameter like in other regularization approaches (like lambda in L2 regularization).&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Disadvantages:&lt;/code&gt; Early stopping simultaneously tries to minimize the cost function and not to overfit which contradicts the orthogonalization approach (will be discussed further). So, use L2 regularization.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Model Ensembles:
+    &lt;ul&gt;
+      &lt;li&gt;Algorithm:
+        &lt;ul&gt;
+          &lt;li&gt;Train multiple independent models.&lt;/li&gt;
+          &lt;li&gt;At test time average their results.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;It can get you extra 2% performance.&lt;/li&gt;
+      &lt;li&gt;It reduces the generalization error.&lt;/li&gt;
+      &lt;li&gt;You can use some snapshots of your NN at the training ensembles them and take the results.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h3 id=&quot;setting-up-your-optimization-problem&quot;&gt;Setting up your optimization problem&lt;/h3&gt;
+
+&lt;h5 id=&quot;normalizing-input&quot;&gt;Normalizing input&lt;/h5&gt;
+&lt;p&gt;When training a neural network, one of the techniques that will speed up training is if we have normalized our inputs.&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;div style=&quot;text-align:center&quot;&gt;
+    &lt;img src=&quot;/assets/img/practical-aspect/normalizing.png&quot; alt=&quot;Early stopping&quot; /&gt;
+    &lt;figcaption&gt; Normalization of data
+ &lt;/figcaption&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Normalization are going on these steps:
+    &lt;ul&gt;
+      &lt;li&gt;First get the mean of the training set: &lt;code class=&quot;highlighter-rouge&quot;&gt;mean = (1/m) * sum(x(i))&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Then, subtract the mean from each input: &lt;code class=&quot;highlighter-rouge&quot;&gt;X = X - mean&lt;/code&gt; to make your inputs centered around 0.&lt;/li&gt;
+      &lt;li&gt;Atlast, get the variance of the training set: &lt;code class=&quot;highlighter-rouge&quot;&gt;variance = (1/m) * sum(x(i)^2)&lt;/code&gt;and normalize the variance. &lt;code class=&quot;highlighter-rouge&quot;&gt;X /= variance&lt;/code&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Note:&lt;/code&gt; These steps should be applied to all training, dev, and testing sets (but using mean and variance of the train set).&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Why normalize?
+    &lt;ul&gt;
+      &lt;li&gt;If we don’t normalize the inputs our cost function will be deep and its shape will be inconsistent (elongated) then optimizing it will take a long time.&lt;/li&gt;
+      &lt;li&gt;But if we normalize it the opposite will occur. The shape of the cost function will be consistent (look more symmetric like circle in 2D example) and we can use a larger learning rate alpha - the optimization will be faster.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;vanishingexploding-gradients&quot;&gt;vanishing/exploding gradients&lt;/h5&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Vanishing and Exploding gradients —-&amp;gt; During training when gradient becomes either too small or too big respectively.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Consider this 9-layer neural network just after it was initialized.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;div style=&quot;text-align:center&quot;&gt;
+    &lt;img src=&quot;/assets/img/practical-aspect/9-layer.png&quot; alt=&quot;vanishing&quot; /&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;To understand the problem, suppose that we have a deep neural network with number of layers L, and all the activation functions are linear(identity matrix)  i.e. &lt;code class=&quot;highlighter-rouge&quot;&gt;g(z)=z&lt;/code&gt; and each&lt;code class=&quot;highlighter-rouge&quot;&gt;b = 0&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Then the output activation is: Y = W&lt;sup&gt;L&lt;/sup&gt;W&lt;sup&gt;L-1&lt;/sup&gt;W[1]…..W&lt;sup&gt;2&lt;/sup&gt;W&lt;sup&gt;1&lt;/sup&gt;X where L=10 and W&lt;sup&gt;1&lt;/sup&gt;,W&lt;sup&gt;2&lt;/sup&gt;,…,W&lt;sup&gt;L-1&lt;/sup&gt; are all matrices of size (2,2) because layers [1] to [L-1] have 2 neurons and receive 2 inputs.&lt;/p&gt;
+
+&lt;p&gt;Consider the case where every weight is initialized slightly larger than the identity matrix.&lt;/p&gt;
+
+&lt;h6 id=&quot;exploding-gradients&quot;&gt;Exploding Gradients:&lt;/h6&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;W&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.5&lt;/span&gt;   &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;   &lt;span class=&quot;mf&quot;&gt;1.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;This simplifies to y’=W&lt;sup&gt;L&lt;/sup&gt;1.5&lt;sup&gt;L−1&lt;/sup&gt;X and the values of the activation a&lt;sup&gt;l&lt;/sup&gt; increase exponentially with l. When these activations are used in backward propagation, this leads to the exploding gradient problem.&lt;/p&gt;
+
+&lt;h6 id=&quot;vanishing-gradients&quot;&gt;Vanishing gradients&lt;/h6&gt;
+&lt;p&gt;Similarly, consider the case where every weight is initialized slightly smaller than the identity matrix&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;W&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt;   &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;   &lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;This simplifies to y’=W&lt;sup&gt;L&lt;/sup&gt;0.5&lt;sup&gt;L−1&lt;/sup&gt;X and the values of the activation a&lt;sup&gt;l&lt;/sup&gt; decreases exponentially with l. When these activations are used in backward propagation, this leads to the vanishing gradient problem.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Recently Microsoft trained 152 layers (ResNet)! which is a really big number. With such a deep neural network, if your activations or gradients increase or decrease exponentially as a function of L, then these values could get really big or really small. And this makes training difficult, especially if your gradients are exponentially smaller than L, then gradient descent will take tiny little steps. It will take a long time for gradient descent to learn anything.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;weight-initialization&quot;&gt;Weight initialization&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A partial solution to the Vanishing / Exploding gradients in NN is better or more careful choice of the random initialization of weights&lt;/li&gt;
+  &lt;li&gt;In a single neuron (Perceptron model): Z = w&lt;sup&gt;1&lt;/sup&gt;x&lt;sup&gt;1&lt;/sup&gt; + w&lt;sup&gt;2&lt;/sup&gt;x&lt;sup&gt;2&lt;/sup&gt; + … + w&lt;sup&gt;n&lt;/sup&gt;x&lt;sup&gt;n&lt;/sup&gt;
+    &lt;ul&gt;
+      &lt;li&gt;So if &lt;code class=&quot;highlighter-rouge&quot;&gt;n_x&lt;/code&gt; is large we want W’s to be smaller to not explode the cost.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;So it turns out that we need the variance which equals &lt;code class=&quot;highlighter-rouge&quot;&gt;1/n_x&lt;/code&gt; to be the range of W’s
+So lets say when we initialize W’s like this (better to use with tanh activation):&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Maintaining the value of the variance of the input and the output of every layer guarantees no exploding/vanishing gradient(&lt;code class=&quot;highlighter-rouge&quot;&gt;ReLU + Weight Initialization with variance&lt;/code&gt;). The recommended initialization is Xavier initialization (or one of its derived methods), for every layer &lt;code class=&quot;highlighter-rouge&quot;&gt;l&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;or variation of this (Bengio et al.):&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;or Setting initialization part inside sqrt to 2/n[l-1] for ReLU is better&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;h5 id=&quot;numerical-approximation-in-gradients&quot;&gt;Numerical approximation in gradients&lt;/h5&gt;
+&lt;p&gt;$W^{[l]}&lt;/p&gt;
+
+&lt;h5 id=&quot;gradient-checking&quot;&gt;Gradient checking&lt;/h5&gt;
 
 &lt;h3 id=&quot;different-optimization-algorithms&quot;&gt;Different Optimization algorithms&lt;/h3&gt;
 
