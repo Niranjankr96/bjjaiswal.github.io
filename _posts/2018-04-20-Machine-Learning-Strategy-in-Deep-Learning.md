@@ -26,7 +26,7 @@ Let's take to metaphorical example of old television and car steering.
 
 <figure>
   <div style="text-align:center">
-    <img src="/assets/img/ml-strategies/tv-car.jpg" alt="my alt text"/>
+    <img src="/assets/img/ml-strategies/tv-car.jpg" alt="metaphor"/>
     <figcaption> Metaphor for orthogonality </figcaption>
   </div>
 </figure>
@@ -49,7 +49,7 @@ When a supervised learning system is design, these are the 4 assumptions that ne
 
 <figure>
   <div style="text-align:center">
-    <img src="/img/ml-strategies/decision.png" alt="my alt text"/>
+    <img src="/assets/img/ml-strategies/decision.png" alt="decision"/>
     <figcaption> Confusion Matrix </figcaption>
   </div>
 </figure>

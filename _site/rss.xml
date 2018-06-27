@@ -5,8 +5,8 @@
     <description>You have the capacity to learn from your mistakes, and you will learn a lot today.</description>
     <link>http://bikash-jaiswal.github.io/</link>
     <atom:link href="http://bikash-jaiswal.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 27 Jun 2018 17:35:43 +0530</pubDate>
-    <lastBuildDate>Wed, 27 Jun 2018 17:35:43 +0530</lastBuildDate>
+    <pubDate>Wed, 27 Jun 2018 21:44:38 +0530</pubDate>
+    <lastBuildDate>Wed, 27 Jun 2018 21:44:38 +0530</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -149,7 +149,7 @@ The T, P, and E can be well defined by&lt;/p&gt;
 
 &lt;figure&gt;
   &lt;div style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/assets/img/ml-strategies/tv-car.jpg&quot; alt=&quot;my alt text&quot; /&gt;
+    &lt;img src=&quot;/assets/img/ml-strategies/tv-car.jpg&quot; alt=&quot;metaphor&quot; /&gt;
     &lt;figcaption&gt; Metaphor for orthogonality &lt;/figcaption&gt;
   &lt;/div&gt;
 &lt;/figure&gt;
@@ -185,7 +185,7 @@ The T, P, and E can be well defined by&lt;/p&gt;
 
 &lt;figure&gt;
   &lt;div style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/img/ml-strategies/decision.png&quot; alt=&quot;my alt text&quot; /&gt;
+    &lt;img src=&quot;/assets/img/ml-strategies/decision.png&quot; alt=&quot;decision&quot; /&gt;
     &lt;figcaption&gt; Confusion Matrix &lt;/figcaption&gt;
   &lt;/div&gt;
 &lt;/figure&gt;
@@ -681,7 +681,7 @@ monotonically decreassing&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h5 id=&quot;vanishingexploding-gradients&quot;&gt;vanishing/exploding gradients&lt;/h5&gt;
+&lt;h5 id=&quot;vanishingexploding-gradients&quot;&gt;Vanishing/Exploding gradients&lt;/h5&gt;
 &lt;blockquote&gt;
   &lt;p&gt;Vanishing and Exploding gradients —-&amp;gt; During training when gradient becomes either too small or too big respectively.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -748,17 +748,177 @@ So lets say when we initialize W’s like this (better to use with tanh activati
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;h5 id=&quot;numerical-approximation-in-gradients&quot;&gt;Numerical approximation in gradients&lt;/h5&gt;
-&lt;p&gt;$W^{[l]}&lt;/p&gt;
+&lt;p&gt;How to make check the implementation of your Back propagation is correct?&lt;/p&gt;
+&lt;figure&gt;
+  &lt;div style=&quot;text-align:center&quot;&gt;
+    &lt;img src=&quot;/assets/img/practical-aspect/numerical.png&quot; alt=&quot;vanishing&quot; /&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
 
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NOTE:&lt;/code&gt; Gradient checking approximates the gradients and is very helpful for finding the errors in your backpropagation implementation but it’s slower than gradient descent (so use only for debugging).&lt;/p&gt;
 &lt;h5 id=&quot;gradient-checking&quot;&gt;Gradient checking&lt;/h5&gt;
 
+&lt;figure&gt;
+  &lt;div style=&quot;text-align:center&quot;&gt;
+    &lt;img src=&quot;/assets/img/practical-aspect/gradient-check.png&quot; alt=&quot;vanishing&quot; /&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+&lt;ul&gt;
+  &lt;li&gt;First take &lt;code class=&quot;highlighter-rouge&quot;&gt;W[1],b[1],...,W[L],b[L]&lt;/code&gt; and reshape into one big vector (theta)&lt;/li&gt;
+  &lt;li&gt;Then take &lt;code class=&quot;highlighter-rouge&quot;&gt;dW[1],db[1],...,dW[L],db[L]&lt;/code&gt; into one big vector (d_theta&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;eps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;# small number&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;d_theta_approx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;J&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;J&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eps&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;Finally check &lt;code class=&quot;highlighter-rouge&quot;&gt;(||d_theta_approx - d_theta||) / (||d_theta_approx||+||d_theta||)&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;if it is &amp;lt; 10^-7 - great, very likely the backpropagation implementation is correct&lt;/li&gt;
+      &lt;li&gt;if around 10^-5 - can be OK, but need to inspect if there are no particularly big values in &lt;code class=&quot;highlighter-rouge&quot;&gt;d_theta_approx - d_theta vector&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;if it is &amp;gt;= 10^-3 - bad, probably there is a bug in backpropagation implementation&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;gradient-checking-implementation-notes&quot;&gt;Gradient checking implementation notes&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Don’t use the gradient checking algorithm at training time because it’s very slow.&lt;/li&gt;
+  &lt;li&gt;Use gradient checking only for debugging.&lt;/li&gt;
+  &lt;li&gt;If algorithm fails grad check, look at components to try to identify the bug.&lt;/li&gt;
+  &lt;li&gt;Don’t forget to add lamda/(2m) * sum(W[l]) to J if you are using L1 or L2 regularization.&lt;/li&gt;
+  &lt;li&gt;Gradient checking doesn’t work with dropout because J is not consistent.
+    &lt;ul&gt;
+      &lt;li&gt;You can first turn off dropout &lt;code class=&quot;highlighter-rouge&quot;&gt;(set keep_prob = 1.0)&lt;/code&gt;, run gradient checking and then turn on dropout again.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Run gradient checking at random initialization and train the network for a while maybe there’s a bug which can be seen when w’s and b’s become larger (further from 0) and can’t be seen on the first iteration (when w’s and b’s are very small).&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h3 id=&quot;different-optimization-algorithms&quot;&gt;Different Optimization algorithms&lt;/h3&gt;
+&lt;h4 id=&quot;mini-batch-gradient-descent&quot;&gt;Mini-batch gradient descent&lt;/h4&gt;
+&lt;h5 id=&quot;understanding-mini-batch-gradient-descent&quot;&gt;Understanding mini-batch gradient descent&lt;/h5&gt;
+&lt;h4 id=&quot;exponentially-weighted-averages&quot;&gt;Exponentially Weighted averages&lt;/h4&gt;
+&lt;h5 id=&quot;understanding-weighted-averages&quot;&gt;Understanding Weighted averages&lt;/h5&gt;
+&lt;h5 id=&quot;bias-correction-in-exponentially-weighted-averages&quot;&gt;Bias correction in exponentially weighted averages&lt;/h5&gt;
+&lt;h4 id=&quot;gradient-descent-with-momentum&quot;&gt;Gradient Descent with momentum&lt;/h4&gt;
+&lt;h4 id=&quot;rms-prop&quot;&gt;RMS prop&lt;/h4&gt;
+&lt;h4 id=&quot;adam-optimization-algorithm&quot;&gt;Adam optimization algorithm&lt;/h4&gt;
+&lt;p&gt;RMSprop and Adam optimization algorithms are some algorithm which have shown to work well across a wide range of deep learning architectures. Adam optimization simply puts RMSprop and momentum together. Adam stands for &lt;strong&gt;Adaptive Moment Estimation&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Implementation of Adam&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;vdW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vdW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sdW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sdb&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iteration&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+	&lt;span class=&quot;cp&quot;&gt;# can be mini-batch or batch gradient descent
+&lt;/span&gt;	&lt;span class=&quot;n&quot;&gt;compute&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mini&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;batch&lt;/span&gt;                
+
+	&lt;span class=&quot;n&quot;&gt;vdW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beta1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vdW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dW&lt;/span&gt;     &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;momentum&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;vdb&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beta1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;     &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;momentum&lt;/span&gt;
+
+	&lt;span class=&quot;n&quot;&gt;sdW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beta2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sdW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dW&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RMSprop&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;sdb&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beta2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RMSprop&lt;/span&gt;
+
+	&lt;span class=&quot;n&quot;&gt;vdW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vdW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;      &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fixing&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bias&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;vdb&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vdb&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;      &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fixing&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bias&lt;/span&gt;
+
+	&lt;span class=&quot;n&quot;&gt;sdW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sdW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;      &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fixing&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bias&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;sdb&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sdb&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;      &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fixing&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bias&lt;/span&gt;
+
+	&lt;span class=&quot;n&quot;&gt;W&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;W&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;learning_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vdW&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sdW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;epsilon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;learning_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vdb&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;epsilon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;Hyperparameters for Adam:
+    &lt;ul&gt;
+      &lt;li&gt;Learning rate: needed to be tuned.&lt;/li&gt;
+      &lt;li&gt;beta1: parameter of the momentum - &lt;code class=&quot;highlighter-rouge&quot;&gt;0.9&lt;/code&gt; is recommended by default.&lt;/li&gt;
+      &lt;li&gt;beta2: parameter of the RMSprop - &lt;code class=&quot;highlighter-rouge&quot;&gt;0.999&lt;/code&gt; is recommended by default.&lt;/li&gt;
+      &lt;li&gt;epsilon: 10&lt;sup&gt;-8&lt;/sup&gt; is recommended by default.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;learning-rate-decay&quot;&gt;Learning rate decay&lt;/h4&gt;
+&lt;p&gt;we can speed up learning algorithm by slowly reducing the learning rate over time aka &lt;code class=&quot;highlighter-rouge&quot;&gt;learning rate decay&lt;/code&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Batch Size: Total number of training examples present in a single batch&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;For mini-batch gradient decent, if learning rate (alpha) is fixed, then it won’t converge i.e. don’t reach the optimum point instead it will meander around  globlal minima. Like above figure. But by making the learning rate decay (decrease) with iterations it will be much closer to it because the steps (and possible oscillations) near the optimum are smaller.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;EPOCH : One Epoch is when an ENTIRE dataset is passed forward and backward through the neural network only ONCE.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;As mentioned before mini-batch gradient descent won’t reach the optimum point (converge). But by making the learning rate decay with iterations it will be much closer to it because the steps (and possible oscillations) near the optimum are smaller.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Iterations is the number of batches needed to complete one epoch.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;One technique equations is &lt;code class=&quot;highlighter-rouge&quot;&gt;learning_rate = (1 / (1 + decay_rate * epoch_num)) * learning_rate_zero&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;div style=&quot;text-align:center&quot;&gt;
+    &lt;img src=&quot;/assets/img/practical-aspect/lr-decay.png&quot; alt=&quot;lr-decay&quot; /&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;We can divide the dataset of 2000 examples into batches of 500 then it will take 4 iterations to complete 1 epoch.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Some people perform learning rate decay discretely - repeatedly decrease after some number of epochs.&lt;/li&gt;
+  &lt;li&gt;Some people are making changes to the learning rate manually.&lt;/li&gt;
+  &lt;li&gt;Other Learning rate decay methods
+    &lt;ul&gt;
+      &lt;li&gt;exponential decay:  &lt;strong&gt;learning_rate = 0.95&lt;sup&gt;epoch_num&lt;/sup&gt; * learning_rate_zero&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;learning_rate = k/sqrt(epoch_num) * learning_rate_zero&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;decrete staircase method&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;decay_rate&lt;/code&gt; is another &lt;code class=&quot;highlighter-rouge&quot;&gt;hyperparameter&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;the-problem-of-local-optima&quot;&gt;The problem of local optima&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The normal local optima is not likely to appear in a deep neural network because data is usually high dimensional. For point to be a local optima it has to be a local optima for each of the dimensions which is highly unlikely.&lt;/li&gt;
+  &lt;li&gt;It’s unlikely to get stuck in a bad local optima in high dimensions, it is much more likely to get to the saddle point rather to the local optima, which is not a problem.&lt;/li&gt;
+  &lt;li&gt;Plateaus can make learning slow:
+    &lt;ul&gt;
+      &lt;li&gt;Plateau is a region where the derivative is close to zero for a long time.&lt;/li&gt;
+      &lt;li&gt;This is where algorithms like momentum, RMSprop or Adam can help.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&quot;hyperparameter-tuning&quot;&gt;Hyperparameter tuning&lt;/h3&gt;
 
+&lt;h4 id=&quot;tuning-process&quot;&gt;Tuning process&lt;/h4&gt;
+&lt;h4 id=&quot;using-an-appropriate-scale-to-pick-hyperparameter&quot;&gt;Using an appropriate scale to pick hyperparameter&lt;/h4&gt;
+&lt;h4 id=&quot;hyperparameters-tuning-practice-pandas-vs-caviar&quot;&gt;Hyperparameters tuning practice: Pandas vs. Caviar&lt;/h4&gt;
+
 &lt;h3 id=&quot;batch-normalization&quot;&gt;Batch Normalization&lt;/h3&gt;
 
+&lt;h4 id=&quot;normalizing-activations-in-a-network&quot;&gt;Normalizing activations in a network&lt;/h4&gt;
+&lt;h4 id=&quot;fitting-batch-norm-into-neural-network&quot;&gt;Fitting Batch Norm into neural network&lt;/h4&gt;
+&lt;h4 id=&quot;why-does-batch-norm-work&quot;&gt;Why does Batch Norm Work&lt;/h4&gt;
+&lt;h4 id=&quot;batch-norm-at-test-time&quot;&gt;Batch Norm at test time&lt;/h4&gt;
+
 &lt;h3 id=&quot;multiclass-classification&quot;&gt;Multiclass classification&lt;/h3&gt;
+
+&lt;h4 id=&quot;softmax-regression&quot;&gt;Softmax Regression&lt;/h4&gt;
+&lt;h4 id=&quot;training-a-softmax-classifier&quot;&gt;Training a Softmax classifier&lt;/h4&gt;
+
+&lt;h3 id=&quot;introduction-to-programming-frameworks&quot;&gt;Introduction to programming Frameworks&lt;/h3&gt;
 </description>
         <pubDate>Mon, 16 Apr 2018 00:00:00 +0530</pubDate>
         <link>http://bikash-jaiswal.github.io/2018/04/16/Practical-aspects-of-Deep-Learning.html</link>

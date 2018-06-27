@@ -484,7 +484,7 @@ monotonically decreassing</p>
   </li>
 </ul>
 
-<h5 id="vanishingexploding-gradients">vanishing/exploding gradients</h5>
+<h5 id="vanishingexploding-gradients">Vanishing/Exploding gradients</h5>
 <blockquote>
   <p>Vanishing and Exploding gradients —-&gt; During training when gradient becomes either too small or too big respectively.</p>
 </blockquote>
@@ -551,17 +551,177 @@ So lets say when we initialize W’s like this (better to use with tanh activati
 </code></pre>
 </div>
 <h5 id="numerical-approximation-in-gradients">Numerical approximation in gradients</h5>
-<p>$W^{[l]}</p>
+<p>How to make check the implementation of your Back propagation is correct?</p>
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/practical-aspect/numerical.png" alt="vanishing" />
+  </div>
+</figure>
 
+<p><code class="highlighter-rouge">NOTE:</code> Gradient checking approximates the gradients and is very helpful for finding the errors in your backpropagation implementation but it’s slower than gradient descent (so use only for debugging).</p>
 <h5 id="gradient-checking">Gradient checking</h5>
 
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/practical-aspect/gradient-check.png" alt="vanishing" />
+  </div>
+</figure>
+<ul>
+  <li>First take <code class="highlighter-rouge">W[1],b[1],...,W[L],b[L]</code> and reshape into one big vector (theta)</li>
+  <li>Then take <code class="highlighter-rouge">dW[1],db[1],...,dW[L],db[L]</code> into one big vector (d_theta</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">eps</span> <span class="o">=</span> <span class="mi">10</span><span class="o">^-</span><span class="mi">7</span>   <span class="c"># small number</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">len</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+ <span class="n">d_theta_approx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">J</span><span class="p">(</span><span class="n">theta1</span><span class="p">,</span><span class="o">...</span><span class="p">,</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span> <span class="o">-</span> <span class="n">J</span><span class="p">(</span><span class="n">theta1</span><span class="p">,</span><span class="o">...</span><span class="p">,</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">eps</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span><span class="o">*</span><span class="n">eps</span>
+</code></pre>
+</div>
+<ul>
+  <li>Finally check <code class="highlighter-rouge">(||d_theta_approx - d_theta||) / (||d_theta_approx||+||d_theta||)</code>
+    <ul>
+      <li>if it is &lt; 10^-7 - great, very likely the backpropagation implementation is correct</li>
+      <li>if around 10^-5 - can be OK, but need to inspect if there are no particularly big values in <code class="highlighter-rouge">d_theta_approx - d_theta vector</code></li>
+      <li>if it is &gt;= 10^-3 - bad, probably there is a bug in backpropagation implementation</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="gradient-checking-implementation-notes">Gradient checking implementation notes</h5>
+
+<ul>
+  <li>Don’t use the gradient checking algorithm at training time because it’s very slow.</li>
+  <li>Use gradient checking only for debugging.</li>
+  <li>If algorithm fails grad check, look at components to try to identify the bug.</li>
+  <li>Don’t forget to add lamda/(2m) * sum(W[l]) to J if you are using L1 or L2 regularization.</li>
+  <li>Gradient checking doesn’t work with dropout because J is not consistent.
+    <ul>
+      <li>You can first turn off dropout <code class="highlighter-rouge">(set keep_prob = 1.0)</code>, run gradient checking and then turn on dropout again.</li>
+    </ul>
+  </li>
+  <li>Run gradient checking at random initialization and train the network for a while maybe there’s a bug which can be seen when w’s and b’s become larger (further from 0) and can’t be seen on the first iteration (when w’s and b’s are very small).</li>
+</ul>
+
 <h3 id="different-optimization-algorithms">Different Optimization algorithms</h3>
+<h4 id="mini-batch-gradient-descent">Mini-batch gradient descent</h4>
+<h5 id="understanding-mini-batch-gradient-descent">Understanding mini-batch gradient descent</h5>
+<h4 id="exponentially-weighted-averages">Exponentially Weighted averages</h4>
+<h5 id="understanding-weighted-averages">Understanding Weighted averages</h5>
+<h5 id="bias-correction-in-exponentially-weighted-averages">Bias correction in exponentially weighted averages</h5>
+<h4 id="gradient-descent-with-momentum">Gradient Descent with momentum</h4>
+<h4 id="rms-prop">RMS prop</h4>
+<h4 id="adam-optimization-algorithm">Adam optimization algorithm</h4>
+<p>RMSprop and Adam optimization algorithms are some algorithm which have shown to work well across a wide range of deep learning architectures. Adam optimization simply puts RMSprop and momentum together. Adam stands for <strong>Adaptive Moment Estimation</strong>.</p>
+
+<p>Implementation of Adam</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">vdW</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vdW</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">sdW</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sdb</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">on</span> <span class="n">iteration</span> <span class="n">t</span><span class="o">:</span>
+	<span class="cp"># can be mini-batch or batch gradient descent
+</span>	<span class="n">compute</span> <span class="n">dw</span><span class="p">,</span> <span class="n">db</span> <span class="n">on</span> <span class="n">current</span> <span class="n">mini</span><span class="o">-</span><span class="n">batch</span>                
+
+	<span class="n">vdW</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta1</span> <span class="o">*</span> <span class="n">vdW</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta1</span><span class="p">)</span> <span class="o">*</span> <span class="n">dW</span>     <span class="err">#</span> <span class="n">momentum</span>
+	<span class="n">vdb</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta1</span> <span class="o">*</span> <span class="n">vdb</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta1</span><span class="p">)</span> <span class="o">*</span> <span class="n">db</span>     <span class="err">#</span> <span class="n">momentum</span>
+
+	<span class="n">sdW</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta2</span> <span class="o">*</span> <span class="n">sdW</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta2</span><span class="p">)</span> <span class="o">*</span> <span class="n">dW</span><span class="o">^</span><span class="mi">2</span>   <span class="err">#</span> <span class="n">RMSprop</span>
+	<span class="n">sdb</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta2</span> <span class="o">*</span> <span class="n">sdb</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta2</span><span class="p">)</span> <span class="o">*</span> <span class="n">db</span><span class="o">^</span><span class="mi">2</span>   <span class="err">#</span> <span class="n">RMSprop</span>
+
+	<span class="n">vdW</span> <span class="o">=</span> <span class="n">vdW</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta1</span><span class="o">^</span><span class="n">t</span><span class="p">)</span>      <span class="err">#</span> <span class="n">fixing</span> <span class="n">bias</span>
+	<span class="n">vdb</span> <span class="o">=</span> <span class="n">vdb</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta1</span><span class="o">^</span><span class="n">t</span><span class="p">)</span>      <span class="err">#</span> <span class="n">fixing</span> <span class="n">bias</span>
+
+	<span class="n">sdW</span> <span class="o">=</span> <span class="n">sdW</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta2</span><span class="o">^</span><span class="n">t</span><span class="p">)</span>      <span class="err">#</span> <span class="n">fixing</span> <span class="n">bias</span>
+	<span class="n">sdb</span> <span class="o">=</span> <span class="n">sdb</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta2</span><span class="o">^</span><span class="n">t</span><span class="p">)</span>      <span class="err">#</span> <span class="n">fixing</span> <span class="n">bias</span>
+
+	<span class="n">W</span> <span class="o">=</span> <span class="n">W</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">vdW</span> <span class="o">/</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sdW</span><span class="p">)</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">)</span>
+	<span class="n">b</span> <span class="o">=</span> <span class="n">B</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">vdb</span> <span class="o">/</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sdb</span><span class="p">)</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">)</span>
+</code></pre>
+</div>
+<ul>
+  <li>Hyperparameters for Adam:
+    <ul>
+      <li>Learning rate: needed to be tuned.</li>
+      <li>beta1: parameter of the momentum - <code class="highlighter-rouge">0.9</code> is recommended by default.</li>
+      <li>beta2: parameter of the RMSprop - <code class="highlighter-rouge">0.999</code> is recommended by default.</li>
+      <li>epsilon: 10<sup>-8</sup> is recommended by default.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="learning-rate-decay">Learning rate decay</h4>
+<p>we can speed up learning algorithm by slowly reducing the learning rate over time aka <code class="highlighter-rouge">learning rate decay</code>.</p>
+<blockquote>
+  <p>Batch Size: Total number of training examples present in a single batch</p>
+</blockquote>
+
+<p>For mini-batch gradient decent, if learning rate (alpha) is fixed, then it won’t converge i.e. don’t reach the optimum point instead it will meander around  globlal minima. Like above figure. But by making the learning rate decay (decrease) with iterations it will be much closer to it because the steps (and possible oscillations) near the optimum are smaller.</p>
+
+<blockquote>
+  <p>EPOCH : One Epoch is when an ENTIRE dataset is passed forward and backward through the neural network only ONCE.</p>
+</blockquote>
+
+<p>As mentioned before mini-batch gradient descent won’t reach the optimum point (converge). But by making the learning rate decay with iterations it will be much closer to it because the steps (and possible oscillations) near the optimum are smaller.</p>
+
+<blockquote>
+  <p>Iterations is the number of batches needed to complete one epoch.</p>
+</blockquote>
+
+<p>One technique equations is <code class="highlighter-rouge">learning_rate = (1 / (1 + decay_rate * epoch_num)) * learning_rate_zero</code></p>
+
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/practical-aspect/lr-decay.png" alt="lr-decay" />
+  </div>
+</figure>
+
+<blockquote>
+  <p>We can divide the dataset of 2000 examples into batches of 500 then it will take 4 iterations to complete 1 epoch.</p>
+</blockquote>
+
+<ul>
+  <li>Some people perform learning rate decay discretely - repeatedly decrease after some number of epochs.</li>
+  <li>Some people are making changes to the learning rate manually.</li>
+  <li>Other Learning rate decay methods
+    <ul>
+      <li>exponential decay:  <strong>learning_rate = 0.95<sup>epoch_num</sup> * learning_rate_zero</strong></li>
+      <li><strong>learning_rate = k/sqrt(epoch_num) * learning_rate_zero</strong></li>
+      <li>decrete staircase method</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">decay_rate</code> is another <code class="highlighter-rouge">hyperparameter</code>.</li>
+</ul>
+
+<h4 id="the-problem-of-local-optima">The problem of local optima</h4>
+
+<ul>
+  <li>The normal local optima is not likely to appear in a deep neural network because data is usually high dimensional. For point to be a local optima it has to be a local optima for each of the dimensions which is highly unlikely.</li>
+  <li>It’s unlikely to get stuck in a bad local optima in high dimensions, it is much more likely to get to the saddle point rather to the local optima, which is not a problem.</li>
+  <li>Plateaus can make learning slow:
+    <ul>
+      <li>Plateau is a region where the derivative is close to zero for a long time.</li>
+      <li>This is where algorithms like momentum, RMSprop or Adam can help.</li>
+    </ul>
+  </li>
+</ul>
 
 <h3 id="hyperparameter-tuning">Hyperparameter tuning</h3>
 
+<h4 id="tuning-process">Tuning process</h4>
+<h4 id="using-an-appropriate-scale-to-pick-hyperparameter">Using an appropriate scale to pick hyperparameter</h4>
+<h4 id="hyperparameters-tuning-practice-pandas-vs-caviar">Hyperparameters tuning practice: Pandas vs. Caviar</h4>
+
 <h3 id="batch-normalization">Batch Normalization</h3>
 
+<h4 id="normalizing-activations-in-a-network">Normalizing activations in a network</h4>
+<h4 id="fitting-batch-norm-into-neural-network">Fitting Batch Norm into neural network</h4>
+<h4 id="why-does-batch-norm-work">Why does Batch Norm Work</h4>
+<h4 id="batch-norm-at-test-time">Batch Norm at test time</h4>
+
 <h3 id="multiclass-classification">Multiclass classification</h3>
+
+<h4 id="softmax-regression">Softmax Regression</h4>
+<h4 id="training-a-softmax-classifier">Training a Softmax classifier</h4>
+
+<h3 id="introduction-to-programming-frameworks">Introduction to programming Frameworks</h3>
 
     </article>
 

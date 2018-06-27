@@ -276,7 +276,7 @@ When training a neural network, one of the techniques that will speed up trainin
   * If we don't normalize the inputs our cost function will be deep and its shape will be inconsistent (elongated) then optimizing it will take a long time.
   * But if we normalize it the opposite will occur. The shape of the cost function will be consistent (look more symmetric like circle in 2D example) and we can use a larger learning rate alpha - the optimization will be faster.
 
-##### vanishing/exploding gradients
+##### Vanishing/Exploding gradients
 > Vanishing and Exploding gradients ----> During training when gradient becomes either too small or too big respectively.
 
 
@@ -337,15 +337,142 @@ or Setting initialization part inside sqrt to 2/n[l-1] for ReLU is better
 np.random.rand(shape) * np.sqrt(2/n[l-1])
 ```
 ##### Numerical approximation in gradients
-$W^{[l]}
+How to make check the implementation of your Back propagation is correct?
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/practical-aspect/numerical.png" alt="vanishing"/>
+  </div>
+</figure>
 
+`NOTE:` Gradient checking approximates the gradients and is very helpful for finding the errors in your backpropagation implementation but it's slower than gradient descent (so use only for debugging).
 ##### Gradient checking
+
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/practical-aspect/gradient-check.png" alt="vanishing"/>
+  </div>
+</figure>
+* First take `W[1],b[1],...,W[L],b[L]` and reshape into one big vector (theta)
+* Then take `dW[1],db[1],...,dW[L],db[L]` into one big vector (d_theta
+
+```python
+eps = 10^-7   # small number
+for i in len(theta):
+ d_theta_approx[i] = (J(theta1,...,theta[i] + eps) - J(theta1,...,theta[i] - eps)) / 2*eps
+```
+* Finally check `(||d_theta_approx - d_theta||) / (||d_theta_approx||+||d_theta||)`
+  * if it is < 10^-7 - great, very likely the backpropagation implementation is correct
+  * if around 10^-5 - can be OK, but need to inspect if there are no particularly big values in `d_theta_approx - d_theta vector`
+  * if it is >= 10^-3 - bad, probably there is a bug in backpropagation implementation
+
+##### Gradient checking implementation notes
+
+* Don't use the gradient checking algorithm at training time because it's very slow.
+* Use gradient checking only for debugging.
+* If algorithm fails grad check, look at components to try to identify the bug.
+* Don't forget to add lamda/(2m) * sum(W[l]) to J if you are using L1 or L2 regularization.
+* Gradient checking doesn't work with dropout because J is not consistent.
+  * You can first turn off dropout `(set keep_prob = 1.0)`, run gradient checking and then turn on dropout again.
+* Run gradient checking at random initialization and train the network for a while maybe there's a bug which can be seen when w's and b's become larger (further from 0) and can't be seen on the first iteration (when w's and b's are very small).
 
 
 ### Different Optimization algorithms
+#### Mini-batch gradient descent
+##### Understanding mini-batch gradient descent
+#### Exponentially Weighted averages
+##### Understanding Weighted averages
+##### Bias correction in exponentially weighted averages
+#### Gradient Descent with momentum
+#### RMS prop
+#### Adam optimization algorithm
+RMSprop and Adam optimization algorithms are some algorithm which have shown to work well across a wide range of deep learning architectures. Adam optimization simply puts RMSprop and momentum together. Adam stands for **Adaptive Moment Estimation**.
+
+Implementation of Adam
+
+```c
+vdW = 0, vdW = 0
+sdW = 0, sdb = 0
+on iteration t:
+	# can be mini-batch or batch gradient descent
+	compute dw, db on current mini-batch                
+
+	vdW = (beta1 * vdW) + (1 - beta1) * dW     # momentum
+	vdb = (beta1 * vdb) + (1 - beta1) * db     # momentum
+
+	sdW = (beta2 * sdW) + (1 - beta2) * dW^2   # RMSprop
+	sdb = (beta2 * sdb) + (1 - beta2) * db^2   # RMSprop
+
+	vdW = vdW / (1 - beta1^t)      # fixing bias
+	vdb = vdb / (1 - beta1^t)      # fixing bias
+
+	sdW = sdW / (1 - beta2^t)      # fixing bias
+	sdb = sdb / (1 - beta2^t)      # fixing bias
+
+	W = W - learning_rate * vdW / (sqrt(sdW) + epsilon)
+	b = B - learning_rate * vdb / (sqrt(sdb) + epsilon)
+```
+* Hyperparameters for Adam:
+  * Learning rate: needed to be tuned.
+  * beta1: parameter of the momentum - `0.9` is recommended by default.
+  * beta2: parameter of the RMSprop - `0.999` is recommended by default.
+  * epsilon: 10<sup>-8</sup> is recommended by default.
+
+#### Learning rate decay
+we can speed up learning algorithm by slowly reducing the learning rate over time aka `learning rate decay`.
+> Batch Size: Total number of training examples present in a single batch
+
+For mini-batch gradient decent, if learning rate (alpha) is fixed, then it won't converge i.e. don't reach the optimum point instead it will meander around  globlal minima. Like above figure. But by making the learning rate decay (decrease) with iterations it will be much closer to it because the steps (and possible oscillations) near the optimum are smaller.
+
+> EPOCH : One Epoch is when an ENTIRE dataset is passed forward and backward through the neural network only ONCE.
+
+As mentioned before mini-batch gradient descent won't reach the optimum point (converge). But by making the learning rate decay with iterations it will be much closer to it because the steps (and possible oscillations) near the optimum are smaller.
+
+> Iterations is the number of batches needed to complete one epoch.
+
+One technique equations is `learning_rate = (1 / (1 + decay_rate * epoch_num)) * learning_rate_zero`
+
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/practical-aspect/lr-decay.png" alt="lr-decay"/>
+  </div>
+</figure>
+
+> We can divide the dataset of 2000 examples into batches of 500 then it will take 4 iterations to complete 1 epoch.
+
+* Some people perform learning rate decay discretely - repeatedly decrease after some number of epochs.
+* Some people are making changes to the learning rate manually.
+* Other Learning rate decay methods
+  * exponential decay:  **learning_rate = 0.95<sup>epoch_num</sup> * learning_rate_zero**
+  * **learning_rate = k/sqrt(epoch_num) * learning_rate_zero**
+  * decrete staircase method
+* `decay_rate` is another `hyperparameter`.
+
+#### The problem of local optima
+
+* The normal local optima is not likely to appear in a deep neural network because data is usually high dimensional. For point to be a local optima it has to be a local optima for each of the dimensions which is highly unlikely.
+* It's unlikely to get stuck in a bad local optima in high dimensions, it is much more likely to get to the saddle point rather to the local optima, which is not a problem.
+* Plateaus can make learning slow:
+  * Plateau is a region where the derivative is close to zero for a long time.
+  * This is where algorithms like momentum, RMSprop or Adam can help.
+
 
 ### Hyperparameter tuning
 
+#### Tuning process
+#### Using an appropriate scale to pick hyperparameter
+#### Hyperparameters tuning practice: Pandas vs. Caviar
+
+
 ### Batch Normalization
 
+#### Normalizing activations in a network
+#### Fitting Batch Norm into neural network
+#### Why does Batch Norm Work
+#### Batch Norm at test time
+
 ### Multiclass classification
+
+#### Softmax Regression
+#### Training a Softmax classifier
+
+### Introduction to programming Frameworks
