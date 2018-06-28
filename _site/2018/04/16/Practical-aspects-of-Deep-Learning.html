@@ -127,7 +127,7 @@ Author: Ray-Eldath
     </div>
     
     <div class="filter"></div>
-      <div class="post-cover" style="background: url('https://i2.wp.com/philosophyofbrains.com/wp-content/uploads/2016/05/Problem-Mental-Causation-Pic.jpg?resize=1280%2C585') center no-repeat; background-size: cover;"></div>
+      <div class="post-cover" style="background: url('http://www.di.univr.it/documenti/Seminario/immagine/immagine240319.jpg') center no-repeat; background-size: cover;"></div>
     
   </header>
 
@@ -559,8 +559,8 @@ So lets say when we initialize W’s like this (better to use with tanh activati
 </figure>
 
 <p><code class="highlighter-rouge">NOTE:</code> Gradient checking approximates the gradients and is very helpful for finding the errors in your backpropagation implementation but it’s slower than gradient descent (so use only for debugging).</p>
-<h5 id="gradient-checking">Gradient checking</h5>
 
+<h5 id="gradient-checking">Gradient checking</h5>
 <figure>
   <div style="text-align:center">
     <img src="/assets/img/practical-aspect/gradient-check.png" alt="vanishing" />
@@ -576,12 +576,13 @@ So lets say when we initialize W’s like this (better to use with tanh activati
  <span class="n">d_theta_approx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">J</span><span class="p">(</span><span class="n">theta1</span><span class="p">,</span><span class="o">...</span><span class="p">,</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span> <span class="o">-</span> <span class="n">J</span><span class="p">(</span><span class="n">theta1</span><span class="p">,</span><span class="o">...</span><span class="p">,</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">eps</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span><span class="o">*</span><span class="n">eps</span>
 </code></pre>
 </div>
+
 <ul>
   <li>Finally check <code class="highlighter-rouge">(||d_theta_approx - d_theta||) / (||d_theta_approx||+||d_theta||)</code>
     <ul>
       <li>if it is &lt; 10^-7 - great, very likely the backpropagation implementation is correct</li>
       <li>if around 10^-5 - can be OK, but need to inspect if there are no particularly big values in <code class="highlighter-rouge">d_theta_approx - d_theta vector</code></li>
-      <li>if it is &gt;= 10^-3 - bad, probably there is a bug in backpropagation implementation</li>
+      <li>if it is &gt;= 10^-3 - bad, probably there is a bug in back propagation implementation</li>
     </ul>
   </li>
 </ul>
@@ -602,13 +603,234 @@ So lets say when we initialize W’s like this (better to use with tanh activati
 </ul>
 
 <h3 id="different-optimization-algorithms">Different Optimization algorithms</h3>
+<p>Today, Deep learning is showing better performance because of availability of big data. But, training on huge data makes learning process much slower. So, In order to speed up  efficiency of learning models we use fast optimization algorithms like mini-batch gradient descent, stochastic gradient descent, Adagrad, momentum, RMSprop, and Adam.</p>
+
 <h4 id="mini-batch-gradient-descent">Mini-batch gradient descent</h4>
+<p>Suppose we have <code class="highlighter-rouge">m = 50 million</code>, to train this data it will take a huge processing time for one step. And also, 50 million won’t fit in the memory at once, so we need other processing to make such a thing.</p>
+
+<p>In <code class="highlighter-rouge">Batch</code> gradient descent we run the gradient descent on the whole dataset. whereas, in <code class="highlighter-rouge">Mini-Batch</code> gradient descent we run the gradient descent on the mini datasets.</p>
+
+<p>Some confusing terms:</p>
+<blockquote>
+  <p>Batch Size: Total number of training examples present in a single batch i.e. entire datasets</p>
+</blockquote>
+
+<blockquote>
+  <p>Mini-batch: Small portion of training example taken from whole dataset. for example: 5 subset of 1 universal set.</p>
+</blockquote>
+
+<blockquote>
+  <p>EPOCH : One Epoch is when an ENTIRE dataset is passed forward and backward through the neural network only ONCE.</p>
+</blockquote>
+
+<blockquote>
+  <p>Iterations is the number of batches needed to complete one epoch.</p>
+</blockquote>
+
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/practical-aspect/mini-batch.png" alt="mini-batch" />
+  </div>
+</figure>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c"># Suppose we have split 5,000,000 training set to</span>
+mini batches of size 1000.
+    X<span class="o">{</span>1<span class="o">}</span> <span class="o">=</span> 0 ... 1000
+    X<span class="o">{</span>2<span class="o">}</span> <span class="o">=</span> 1001 ... 2000
+    ...
+    X<span class="o">{}</span> <span class="o">=</span> ...
+<span class="c"># here, X{1} is  1st mini-batch with 1000 training examples</span>
+with its corresponding Y<span class="o">{</span>1<span class="o">}</span>      
+</code></pre>
+</div>
 <h5 id="understanding-mini-batch-gradient-descent">Understanding mini-batch gradient descent</h5>
+<ul>
+  <li>
+    <p>In mini-batch algorithm, the cost won’t go down with each step as it does in batch algorithm. It could contain some ups and downs but generally it has to go down (unlike the batch gradient descent where cost function descreases on each</p>
+  </li>
+  <li>
+    <p><strong>Cost function in Batch vs Mini-batch gradient descent</strong>.</p>
+  </li>
+</ul>
+
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/practical-aspect/batch-minibatch.png" alt="mini-batch" />
+  </div>
+</figure>
+
+<ul>
+  <li>Mini-batch size:</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="o">(</span>mini-batch size <span class="o">=</span> m<span class="o">)</span> <span class="o">==</span>&gt; Batch gradient descent
+<span class="o">(</span>mini-batch size <span class="o">=</span> 1<span class="o">)</span> <span class="o">==</span>&gt; Stochastic gradient descent <span class="o">(</span>SGD<span class="o">)</span>
+<span class="o">(</span>mini-batch size <span class="o">=</span> between 1 and m<span class="o">)</span> <span class="o">==</span>&gt; Mini-batch gradient descent
+</code></pre>
+</div>
+<ul>
+  <li>Batch gradient descent:
+    <ul>
+      <li>too long per iteration (epoch)</li>
+    </ul>
+  </li>
+  <li>Stochastic gradient descent:
+    <ul>
+      <li>too noisy regarding cost minimization (can be reduced by using smaller learning rate)</li>
+      <li>won’t ever converge (reach the minimum cost)
+lose speedup from vectorization</li>
+    </ul>
+  </li>
+  <li>Mini-batch gradient descent:
+    <ul>
+      <li>faster learning:
+        <ul>
+          <li>you have the vectorization advantage</li>
+          <li>make progress without waiting to process the entire training set</li>
+        </ul>
+      </li>
+      <li>doesn’t always exactly converge (oscelates in a very small region, but you can reduce learning rate)</li>
+    </ul>
+  </li>
+  <li>Guidelines for choosing mini-batch size:
+    <ul>
+      <li>If small training set (&lt; 2000 examples) - use batch gradient descent.</li>
+      <li>It has to be a power of 2 (because of the way computer memory is layed out and accessed, sometimes your code runs faster if your mini-batch size is a power of 2): 64, 128, 256, 512, 1024, …</li>
+      <li>Make sure that mini-batch fits in CPU/GPU memory.</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">Mini-batch</code> size is a <code class="highlighter-rouge">hyperparameter</code>.</li>
+</ul>
+
 <h4 id="exponentially-weighted-averages">Exponentially Weighted averages</h4>
+
+<p>There are few optimization algorithm which are faster than gradient descent, they are all based on <code class="highlighter-rouge">exponentially Weighted averages</code> or exponentially weighted moving averages (in statistics).</p>
+
+<ul>
+  <li>If we have data like the temperature of day through the year it could be like this:</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>t<span class="o">(</span>1<span class="o">)</span> <span class="o">=</span> 40
+t<span class="o">(</span>2<span class="o">)</span> <span class="o">=</span> 49
+t<span class="o">(</span>3<span class="o">)</span> <span class="o">=</span> 45
+...
+t<span class="o">(</span>180<span class="o">)</span> <span class="o">=</span> 60
+...
+
+</code></pre>
+</div>
+<ul>
+  <li>This data is small in winter and big in summer. If we plot this data we will find it some noisy.
+Now lets compute the Exponentially weighted averages:</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>V0 <span class="o">=</span> 0
+V1 <span class="o">=</span> 0.9 <span class="k">*</span> V0 + 0.1 <span class="k">*</span> t<span class="o">(</span>1<span class="o">)</span> <span class="o">=</span> 4		<span class="c"># 0.9 and 0.1 are hyperparameters</span>
+V2 <span class="o">=</span> 0.9 <span class="k">*</span> V1 + 0.1 <span class="k">*</span> t<span class="o">(</span>2<span class="o">)</span> <span class="o">=</span> 8.5
+V3 <span class="o">=</span> 0.9 <span class="k">*</span> V2 + 0.1 <span class="k">*</span> t<span class="o">(</span>3<span class="o">)</span> <span class="o">=</span> 12.15
+...
+</code></pre>
+</div>
+
+<ul>
+  <li>General equation
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code>V<span class="o">(</span>t<span class="o">)</span> <span class="o">=</span> beta <span class="k">*</span> v<span class="o">(</span>t-1<span class="o">)</span> + <span class="o">(</span>1-beta<span class="o">)</span> <span class="k">*</span> theta<span class="o">(</span>t<span class="o">)</span>
+</code></pre>
+    </div>
+  </li>
+  <li>If we plot this it will represent averages over ~ (1 / (1 - beta)) entries:
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code>beta <span class="o">=</span> 0.9 will average last 10 entries
+beta <span class="o">=</span> 0.98 will average last 50 entries
+beta <span class="o">=</span> 0.5 will average last 2 entries
+</code></pre>
+    </div>
+  </li>
+</ul>
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/practical-aspect/weighted-average.png" alt="mini-batch" />
+  </div>
+</figure>
+
+<ul>
+  <li>Best beta average for our case is between 0.9 and 0.98</li>
+</ul>
+
 <h5 id="understanding-weighted-averages">Understanding Weighted averages</h5>
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/practical-aspect/weighted-intuition.png" alt="mini-batch" />
+  </div>
+</figure>
+
+<p>We can implement this algorithm with more accurate results using a moving window. But the code is more efficient and faster using the exponentially weighted averages algorithm.
+Algorithm is very simple:</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>v <span class="o">=</span> 0
+Repeat
+<span class="o">{</span>
+	Get theta<span class="o">(</span>t<span class="o">)</span>
+	v <span class="o">=</span> beta <span class="k">*</span> v + <span class="o">(</span>1-beta<span class="o">)</span> <span class="k">*</span> theta<span class="o">(</span>t<span class="o">)</span>
+<span class="o">}</span>
+
+</code></pre>
+</div>
 <h5 id="bias-correction-in-exponentially-weighted-averages">Bias correction in exponentially weighted averages</h5>
+
+<ul>
+  <li>The bias correction helps make the exponentially weighted averages more accurate.</li>
+  <li>Because v(0) = 0, the bias of the weighted averages is shifted and the accuracy suffers at the start.</li>
+  <li>To solve the bias issue we have to use this equation:
+<code class="highlighter-rouge">v(t) = (beta * v(t-1) + (1-beta) * theta(t)) / (1 - beta^t)</code></li>
+  <li>As t becomes larger the <code class="highlighter-rouge">(1 - beta^t)</code> becomes close to 1</li>
+</ul>
+
 <h4 id="gradient-descent-with-momentum">Gradient Descent with momentum</h4>
-<h4 id="rms-prop">RMS prop</h4>
+<p>Gradient decent with momentum always work faster than gradient descent. <code class="highlighter-rouge">The basic idea is: to compute an exponentially weighted average of your gradients, and then use that gradient to update your weights instead</code>.</p>
+
+<blockquote>
+  <p>Our aim is to speed up learning in horizontal direction and slow down  learning in vertical direction.</p>
+</blockquote>
+
+<p>We want to move learning rate aggressively toward red dot with less oscillations. So implementing Gradient descent with momentum helps in this process.</p>
+
+<figure>
+ <div style="text-align:center">
+   <img src="/assets/img/practical-aspect/lr-momentum.png" alt="mini-batch" />
+ </div>
+</figure>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c"># calculate the exponentially weighted averages for your gradients</span>
+<span class="c"># and then update your weights with the new values.</span>
+vdW <span class="o">=</span> 0, vdb <span class="o">=</span> 0
+on iteration t:
+	<span class="c"># can be mini-batch or batch gradient descent</span>
+	compute dw, db on current mini-batch                
+
+	vdW <span class="o">=</span> beta <span class="k">*</span> vdW + <span class="o">(</span>1 - beta<span class="o">)</span> <span class="k">*</span> dW
+	vdb <span class="o">=</span> beta <span class="k">*</span> vdb + <span class="o">(</span>1 - beta<span class="o">)</span> <span class="k">*</span> db
+	W <span class="o">=</span> W - learning_rate <span class="k">*</span> vdW
+	b <span class="o">=</span> b - learning_rate <span class="k">*</span> vdb
+</code></pre>
+</div>
+<ul>
+  <li><code class="highlighter-rouge">beta</code> is another <code class="highlighter-rouge">hyperparameter</code>. <code class="highlighter-rouge">beta = 0.9</code> is very common and works very well in most cases</li>
+  <li>In practice people don’t bother implementing <code class="highlighter-rouge">bias correction</code>.</li>
+</ul>
+
+<h4 id="rmsprop">RMSprop</h4>
+
+<p>Root mean square prop. (RMSprop) is an algorithm speeds up the gradient descent. RMSprop will make the cost function move slower on the vertical direction and faster on the horizontal direction in the following example:</p>
+
+<figure>
+ <div style="text-align:center">
+   <img src="/assets/img/practical-aspect/RMSprop.png" alt="mini-batch" />
+ </div>
+</figure>
+
+<p><code class="highlighter-rouge">Note:</code> Ensure that sdW is not zero by adding a small value epsilon (e.g. epsilon = 10<sup>-8</sup>) to it:
+<code class="highlighter-rouge">W = W - learning_rate * dW / (sqrt(sdW) + epsilon)</code>.</p>
+
 <h4 id="adam-optimization-algorithm">Adam optimization algorithm</h4>
 <p>RMSprop and Adam optimization algorithms are some algorithm which have shown to work well across a wide range of deep learning architectures. Adam optimization simply puts RMSprop and momentum together. Adam stands for <strong>Adaptive Moment Estimation</strong>.</p>
 
@@ -649,21 +871,10 @@ So lets say when we initialize W’s like this (better to use with tanh activati
 
 <h4 id="learning-rate-decay">Learning rate decay</h4>
 <p>we can speed up learning algorithm by slowly reducing the learning rate over time aka <code class="highlighter-rouge">learning rate decay</code>.</p>
-<blockquote>
-  <p>Batch Size: Total number of training examples present in a single batch</p>
-</blockquote>
 
 <p>For mini-batch gradient decent, if learning rate (alpha) is fixed, then it won’t converge i.e. don’t reach the optimum point instead it will meander around  globlal minima. Like above figure. But by making the learning rate decay (decrease) with iterations it will be much closer to it because the steps (and possible oscillations) near the optimum are smaller.</p>
 
-<blockquote>
-  <p>EPOCH : One Epoch is when an ENTIRE dataset is passed forward and backward through the neural network only ONCE.</p>
-</blockquote>
-
 <p>As mentioned before mini-batch gradient descent won’t reach the optimum point (converge). But by making the learning rate decay with iterations it will be much closer to it because the steps (and possible oscillations) near the optimum are smaller.</p>
-
-<blockquote>
-  <p>Iterations is the number of batches needed to complete one epoch.</p>
-</blockquote>
 
 <p>One technique equations is <code class="highlighter-rouge">learning_rate = (1 / (1 + decay_rate * epoch_num)) * learning_rate_zero</code></p>
 

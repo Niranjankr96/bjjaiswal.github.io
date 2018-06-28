@@ -3,7 +3,7 @@ layout: post
 title: Practical aspects of Deep Learning
 date: 2018-04-16
 categories:  Deep Learning Notes
-cover: 'https://i2.wp.com/philosophyofbrains.com/wp-content/uploads/2016/05/Problem-Mental-Causation-Pic.jpg?resize=1280%2C585'
+cover: 'http://www.di.univr.it/documenti/Seminario/immagine/immagine240319.jpg'
 tags: Deep-Learning
 ---
 
@@ -345,8 +345,8 @@ How to make check the implementation of your Back propagation is correct?
 </figure>
 
 `NOTE:` Gradient checking approximates the gradients and is very helpful for finding the errors in your backpropagation implementation but it's slower than gradient descent (so use only for debugging).
-##### Gradient checking
 
+##### Gradient checking
 <figure>
   <div style="text-align:center">
     <img src="/assets/img/practical-aspect/gradient-check.png" alt="vanishing"/>
@@ -360,10 +360,11 @@ eps = 10^-7   # small number
 for i in len(theta):
  d_theta_approx[i] = (J(theta1,...,theta[i] + eps) - J(theta1,...,theta[i] - eps)) / 2*eps
 ```
+
 * Finally check `(||d_theta_approx - d_theta||) / (||d_theta_approx||+||d_theta||)`
   * if it is < 10^-7 - great, very likely the backpropagation implementation is correct
   * if around 10^-5 - can be OK, but need to inspect if there are no particularly big values in `d_theta_approx - d_theta vector`
-  * if it is >= 10^-3 - bad, probably there is a bug in backpropagation implementation
+  * if it is >= 10^-3 - bad, probably there is a bug in back propagation implementation
 
 ##### Gradient checking implementation notes
 
@@ -375,15 +376,192 @@ for i in len(theta):
   * You can first turn off dropout `(set keep_prob = 1.0)`, run gradient checking and then turn on dropout again.
 * Run gradient checking at random initialization and train the network for a while maybe there's a bug which can be seen when w's and b's become larger (further from 0) and can't be seen on the first iteration (when w's and b's are very small).
 
-
 ### Different Optimization algorithms
+Today, Deep learning is showing better performance because of availability of big data. But, training on huge data makes learning process much slower. So, In order to speed up  efficiency of learning models we use fast optimization algorithms like mini-batch gradient descent, stochastic gradient descent, Adagrad, momentum, RMSprop, and Adam.
+
 #### Mini-batch gradient descent
+Suppose we have `m = 50 million`, to train this data it will take a huge processing time for one step. And also, 50 million won't fit in the memory at once, so we need other processing to make such a thing.
+
+In `Batch` gradient descent we run the gradient descent on the whole dataset. whereas, in `Mini-Batch` gradient descent we run the gradient descent on the mini datasets.
+
+Some confusing terms:
+> Batch Size: Total number of training examples present in a single batch i.e. entire datasets
+
+> Mini-batch: Small portion of training example taken from whole dataset. for example: 5 subset of 1 universal set.
+
+> EPOCH : One Epoch is when an ENTIRE dataset is passed forward and backward through the neural network only ONCE.
+
+> Iterations is the number of batches needed to complete one epoch.
+
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/practical-aspect/mini-batch.png" alt="mini-batch"/>
+  </div>
+</figure>
+
+```shell
+# Suppose we have split 5,000,000 training set to
+mini batches of size 1000.
+    X{1} = 0 ... 1000
+    X{2} = 1001 ... 2000
+    ...
+    X{} = ...
+# here, X{1} is  1st mini-batch with 1000 training examples
+with its corresponding Y{1}      
+```
 ##### Understanding mini-batch gradient descent
+* In mini-batch algorithm, the cost won't go down with each step as it does in batch algorithm. It could contain some ups and downs but generally it has to go down (unlike the batch gradient descent where cost function descreases on each
+
+* **Cost function in Batch vs Mini-batch gradient descent**.
+
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/practical-aspect/batch-minibatch.png" alt="mini-batch"/>
+  </div>
+</figure>
+
+* Mini-batch size:
+
+```shell
+(mini-batch size = m) ==> Batch gradient descent
+(mini-batch size = 1) ==> Stochastic gradient descent (SGD)
+(mini-batch size = between 1 and m) ==> Mini-batch gradient descent
+```
+* Batch gradient descent:
+  * too long per iteration (epoch)
+
+* Stochastic gradient descent:
+  * too noisy regarding cost minimization (can be reduced by using smaller learning rate)
+  * won't ever converge (reach the minimum cost)
+    lose speedup from vectorization
+
+* Mini-batch gradient descent:
+  * faster learning:
+    * you have the vectorization advantage
+    * make progress without waiting to process the entire training set
+  * doesn't always exactly converge (oscelates in a very small region, but you can reduce learning rate)
+
+* Guidelines for choosing mini-batch size:
+  * If small training set (< 2000 examples) - use batch gradient descent.
+  * It has to be a power of 2 (because of the way computer memory is layed out and accessed, sometimes your code runs faster if your mini-batch size is a power of 2): 64, 128, 256, 512, 1024, ...
+  * Make sure that mini-batch fits in CPU/GPU memory.
+
+* `Mini-batch` size is a `hyperparameter`.
+
 #### Exponentially Weighted averages
+
+There are few optimization algorithm which are faster than gradient descent, they are all based on `exponentially Weighted averages` or exponentially weighted moving averages (in statistics).
+
+* If we have data like the temperature of day through the year it could be like this:
+
+```shell
+t(1) = 40
+t(2) = 49
+t(3) = 45
+...
+t(180) = 60
+...
+
+```
+* This data is small in winter and big in summer. If we plot this data we will find it some noisy.
+Now lets compute the Exponentially weighted averages:
+
+```shell
+V0 = 0
+V1 = 0.9 * V0 + 0.1 * t(1) = 4		# 0.9 and 0.1 are hyperparameters
+V2 = 0.9 * V1 + 0.1 * t(2) = 8.5
+V3 = 0.9 * V2 + 0.1 * t(3) = 12.15
+...
+```
+
+* General equation
+```shell
+V(t) = beta * v(t-1) + (1-beta) * theta(t)
+```
+* If we plot this it will represent averages over ~ (1 / (1 - beta)) entries:
+```shell
+beta = 0.9 will average last 10 entries
+beta = 0.98 will average last 50 entries
+beta = 0.5 will average last 2 entries
+```
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/practical-aspect/weighted-average.png" alt="mini-batch"/>
+  </div>
+</figure>
+
+* Best beta average for our case is between 0.9 and 0.98
+
 ##### Understanding Weighted averages
+ <figure>
+  <div style="text-align:center">
+    <img src="/assets/img/practical-aspect/weighted-intuition.png" alt="mini-batch"/>
+  </div>
+</figure>
+
+We can implement this algorithm with more accurate results using a moving window. But the code is more efficient and faster using the exponentially weighted averages algorithm.
+Algorithm is very simple:
+
+```shell
+v = 0
+Repeat
+{
+	Get theta(t)
+	v = beta * v + (1-beta) * theta(t)
+}
+
+```
 ##### Bias correction in exponentially weighted averages
+
+* The bias correction helps make the exponentially weighted averages more accurate.
+* Because v(0) = 0, the bias of the weighted averages is shifted and the accuracy suffers at the start.
+* To solve the bias issue we have to use this equation:
+`v(t) = (beta * v(t-1) + (1-beta) * theta(t)) / (1 - beta^t)`
+* As t becomes larger the `(1 - beta^t)` becomes close to 1
+
+
 #### Gradient Descent with momentum
-#### RMS prop
+Gradient decent with momentum always work faster than gradient descent. `The basic idea is: to compute an exponentially weighted average of your gradients, and then use that gradient to update your weights instead`.
+
+> Our aim is to speed up learning in horizontal direction and slow down  learning in vertical direction.
+
+We want to move learning rate aggressively toward red dot with less oscillations. So implementing Gradient descent with momentum helps in this process.
+
+<figure>
+ <div style="text-align:center">
+   <img src="/assets/img/practical-aspect/lr-momentum.png" alt="mini-batch"/>
+ </div>
+</figure>
+
+```shell
+# calculate the exponentially weighted averages for your gradients
+# and then update your weights with the new values.
+vdW = 0, vdb = 0
+on iteration t:
+	# can be mini-batch or batch gradient descent
+	compute dw, db on current mini-batch                
+
+	vdW = beta * vdW + (1 - beta) * dW
+	vdb = beta * vdb + (1 - beta) * db
+	W = W - learning_rate * vdW
+	b = b - learning_rate * vdb
+```
+* `beta` is another `hyperparameter`. `beta = 0.9` is very common and works very well in most cases
+* In practice people don't bother implementing `bias correction`.
+
+#### RMSprop
+
+Root mean square prop. (RMSprop) is an algorithm speeds up the gradient descent. RMSprop will make the cost function move slower on the vertical direction and faster on the horizontal direction in the following example:
+
+<figure>
+ <div style="text-align:center">
+   <img src="/assets/img/practical-aspect/RMSprop.png" alt="mini-batch"/>
+ </div>
+</figure>
+
+`Note:` Ensure that sdW is not zero by adding a small value epsilon (e.g. epsilon = 10<sup>-8</sup>) to it:
+`W = W - learning_rate * dW / (sqrt(sdW) + epsilon)`.
+
 #### Adam optimization algorithm
 RMSprop and Adam optimization algorithms are some algorithm which have shown to work well across a wide range of deep learning architectures. Adam optimization simply puts RMSprop and momentum together. Adam stands for **Adaptive Moment Estimation**.
 
@@ -419,15 +597,15 @@ on iteration t:
 
 #### Learning rate decay
 we can speed up learning algorithm by slowly reducing the learning rate over time aka `learning rate decay`.
-> Batch Size: Total number of training examples present in a single batch
+
 
 For mini-batch gradient decent, if learning rate (alpha) is fixed, then it won't converge i.e. don't reach the optimum point instead it will meander around  globlal minima. Like above figure. But by making the learning rate decay (decrease) with iterations it will be much closer to it because the steps (and possible oscillations) near the optimum are smaller.
 
-> EPOCH : One Epoch is when an ENTIRE dataset is passed forward and backward through the neural network only ONCE.
+
 
 As mentioned before mini-batch gradient descent won't reach the optimum point (converge). But by making the learning rate decay with iterations it will be much closer to it because the steps (and possible oscillations) near the optimum are smaller.
 
-> Iterations is the number of batches needed to complete one epoch.
+
 
 One technique equations is `learning_rate = (1 / (1 + decay_rate * epoch_num)) * learning_rate_zero`
 

@@ -5,8 +5,8 @@
     <description>You have the capacity to learn from your mistakes, and you will learn a lot today.</description>
     <link>http://bikash-jaiswal.github.io/</link>
     <atom:link href="http://bikash-jaiswal.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 27 Jun 2018 21:44:38 +0530</pubDate>
-    <lastBuildDate>Wed, 27 Jun 2018 21:44:38 +0530</lastBuildDate>
+    <pubDate>Thu, 28 Jun 2018 20:53:36 +0530</pubDate>
+    <lastBuildDate>Thu, 28 Jun 2018 20:53:36 +0530</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -756,8 +756,8 @@ So lets say when we initialize W’s like this (better to use with tanh activati
 &lt;/figure&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NOTE:&lt;/code&gt; Gradient checking approximates the gradients and is very helpful for finding the errors in your backpropagation implementation but it’s slower than gradient descent (so use only for debugging).&lt;/p&gt;
-&lt;h5 id=&quot;gradient-checking&quot;&gt;Gradient checking&lt;/h5&gt;
 
+&lt;h5 id=&quot;gradient-checking&quot;&gt;Gradient checking&lt;/h5&gt;
 &lt;figure&gt;
   &lt;div style=&quot;text-align:center&quot;&gt;
     &lt;img src=&quot;/assets/img/practical-aspect/gradient-check.png&quot; alt=&quot;vanishing&quot; /&gt;
@@ -773,12 +773,13 @@ So lets say when we initialize W’s like this (better to use with tanh activati
  &lt;span class=&quot;n&quot;&gt;d_theta_approx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;J&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;J&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eps&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;ul&gt;
   &lt;li&gt;Finally check &lt;code class=&quot;highlighter-rouge&quot;&gt;(||d_theta_approx - d_theta||) / (||d_theta_approx||+||d_theta||)&lt;/code&gt;
     &lt;ul&gt;
       &lt;li&gt;if it is &amp;lt; 10^-7 - great, very likely the backpropagation implementation is correct&lt;/li&gt;
       &lt;li&gt;if around 10^-5 - can be OK, but need to inspect if there are no particularly big values in &lt;code class=&quot;highlighter-rouge&quot;&gt;d_theta_approx - d_theta vector&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;if it is &amp;gt;= 10^-3 - bad, probably there is a bug in backpropagation implementation&lt;/li&gt;
+      &lt;li&gt;if it is &amp;gt;= 10^-3 - bad, probably there is a bug in back propagation implementation&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -799,13 +800,234 @@ So lets say when we initialize W’s like this (better to use with tanh activati
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;different-optimization-algorithms&quot;&gt;Different Optimization algorithms&lt;/h3&gt;
+&lt;p&gt;Today, Deep learning is showing better performance because of availability of big data. But, training on huge data makes learning process much slower. So, In order to speed up  efficiency of learning models we use fast optimization algorithms like mini-batch gradient descent, stochastic gradient descent, Adagrad, momentum, RMSprop, and Adam.&lt;/p&gt;
+
 &lt;h4 id=&quot;mini-batch-gradient-descent&quot;&gt;Mini-batch gradient descent&lt;/h4&gt;
+&lt;p&gt;Suppose we have &lt;code class=&quot;highlighter-rouge&quot;&gt;m = 50 million&lt;/code&gt;, to train this data it will take a huge processing time for one step. And also, 50 million won’t fit in the memory at once, so we need other processing to make such a thing.&lt;/p&gt;
+
+&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;Batch&lt;/code&gt; gradient descent we run the gradient descent on the whole dataset. whereas, in &lt;code class=&quot;highlighter-rouge&quot;&gt;Mini-Batch&lt;/code&gt; gradient descent we run the gradient descent on the mini datasets.&lt;/p&gt;
+
+&lt;p&gt;Some confusing terms:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Batch Size: Total number of training examples present in a single batch i.e. entire datasets&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Mini-batch: Small portion of training example taken from whole dataset. for example: 5 subset of 1 universal set.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;EPOCH : One Epoch is when an ENTIRE dataset is passed forward and backward through the neural network only ONCE.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Iterations is the number of batches needed to complete one epoch.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;figure&gt;
+  &lt;div style=&quot;text-align:center&quot;&gt;
+    &lt;img src=&quot;/assets/img/practical-aspect/mini-batch.png&quot; alt=&quot;mini-batch&quot; /&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Suppose we have split 5,000,000 training set to&lt;/span&gt;
+mini batches of size 1000.
+    X&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;1&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0 ... 1000
+    X&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;2&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1001 ... 2000
+    ...
+    X&lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; ...
+&lt;span class=&quot;c&quot;&gt;# here, X{1} is  1st mini-batch with 1000 training examples&lt;/span&gt;
+with its corresponding Y&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;1&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;      
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;h5 id=&quot;understanding-mini-batch-gradient-descent&quot;&gt;Understanding mini-batch gradient descent&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;In mini-batch algorithm, the cost won’t go down with each step as it does in batch algorithm. It could contain some ups and downs but generally it has to go down (unlike the batch gradient descent where cost function descreases on each&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Cost function in Batch vs Mini-batch gradient descent&lt;/strong&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure&gt;
+  &lt;div style=&quot;text-align:center&quot;&gt;
+    &lt;img src=&quot;/assets/img/practical-aspect/batch-minibatch.png&quot; alt=&quot;mini-batch&quot; /&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Mini-batch size:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mini-batch size &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; m&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&amp;gt; Batch gradient descent
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mini-batch size &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&amp;gt; Stochastic gradient descent &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;SGD&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mini-batch size &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; between 1 and m&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&amp;gt; Mini-batch gradient descent
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;Batch gradient descent:
+    &lt;ul&gt;
+      &lt;li&gt;too long per iteration (epoch)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Stochastic gradient descent:
+    &lt;ul&gt;
+      &lt;li&gt;too noisy regarding cost minimization (can be reduced by using smaller learning rate)&lt;/li&gt;
+      &lt;li&gt;won’t ever converge (reach the minimum cost)
+lose speedup from vectorization&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Mini-batch gradient descent:
+    &lt;ul&gt;
+      &lt;li&gt;faster learning:
+        &lt;ul&gt;
+          &lt;li&gt;you have the vectorization advantage&lt;/li&gt;
+          &lt;li&gt;make progress without waiting to process the entire training set&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;doesn’t always exactly converge (oscelates in a very small region, but you can reduce learning rate)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Guidelines for choosing mini-batch size:
+    &lt;ul&gt;
+      &lt;li&gt;If small training set (&amp;lt; 2000 examples) - use batch gradient descent.&lt;/li&gt;
+      &lt;li&gt;It has to be a power of 2 (because of the way computer memory is layed out and accessed, sometimes your code runs faster if your mini-batch size is a power of 2): 64, 128, 256, 512, 1024, …&lt;/li&gt;
+      &lt;li&gt;Make sure that mini-batch fits in CPU/GPU memory.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Mini-batch&lt;/code&gt; size is a &lt;code class=&quot;highlighter-rouge&quot;&gt;hyperparameter&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h4 id=&quot;exponentially-weighted-averages&quot;&gt;Exponentially Weighted averages&lt;/h4&gt;
+
+&lt;p&gt;There are few optimization algorithm which are faster than gradient descent, they are all based on &lt;code class=&quot;highlighter-rouge&quot;&gt;exponentially Weighted averages&lt;/code&gt; or exponentially weighted moving averages (in statistics).&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;If we have data like the temperature of day through the year it could be like this:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;t&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 40
+t&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 49
+t&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 45
+...
+t&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;180&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 60
+...
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;This data is small in winter and big in summer. If we plot this data we will find it some noisy.
+Now lets compute the Exponentially weighted averages:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;V0 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0
+V1 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0.9 &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; V0 + 0.1 &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; t&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 4		&lt;span class=&quot;c&quot;&gt;# 0.9 and 0.1 are hyperparameters&lt;/span&gt;
+V2 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0.9 &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; V1 + 0.1 &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; t&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 8.5
+V3 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0.9 &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; V2 + 0.1 &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; t&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 12.15
+...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;General equation
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;V&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; beta &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; v&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;t-1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; + &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1-beta&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; theta&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;If we plot this it will represent averages over ~ (1 / (1 - beta)) entries:
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;beta &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0.9 will average last 10 entries
+beta &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0.98 will average last 50 entries
+beta &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0.5 will average last 2 entries
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure&gt;
+  &lt;div style=&quot;text-align:center&quot;&gt;
+    &lt;img src=&quot;/assets/img/practical-aspect/weighted-average.png&quot; alt=&quot;mini-batch&quot; /&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Best beta average for our case is between 0.9 and 0.98&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h5 id=&quot;understanding-weighted-averages&quot;&gt;Understanding Weighted averages&lt;/h5&gt;
+&lt;figure&gt;
+  &lt;div style=&quot;text-align:center&quot;&gt;
+    &lt;img src=&quot;/assets/img/practical-aspect/weighted-intuition.png&quot; alt=&quot;mini-batch&quot; /&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;We can implement this algorithm with more accurate results using a moving window. But the code is more efficient and faster using the exponentially weighted averages algorithm.
+Algorithm is very simple:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;v &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0
+Repeat
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	Get theta&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	v &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; beta &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; v + &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1-beta&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; theta&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;h5 id=&quot;bias-correction-in-exponentially-weighted-averages&quot;&gt;Bias correction in exponentially weighted averages&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The bias correction helps make the exponentially weighted averages more accurate.&lt;/li&gt;
+  &lt;li&gt;Because v(0) = 0, the bias of the weighted averages is shifted and the accuracy suffers at the start.&lt;/li&gt;
+  &lt;li&gt;To solve the bias issue we have to use this equation:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;v(t) = (beta * v(t-1) + (1-beta) * theta(t)) / (1 - beta^t)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;As t becomes larger the &lt;code class=&quot;highlighter-rouge&quot;&gt;(1 - beta^t)&lt;/code&gt; becomes close to 1&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h4 id=&quot;gradient-descent-with-momentum&quot;&gt;Gradient Descent with momentum&lt;/h4&gt;
-&lt;h4 id=&quot;rms-prop&quot;&gt;RMS prop&lt;/h4&gt;
+&lt;p&gt;Gradient decent with momentum always work faster than gradient descent. &lt;code class=&quot;highlighter-rouge&quot;&gt;The basic idea is: to compute an exponentially weighted average of your gradients, and then use that gradient to update your weights instead&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Our aim is to speed up learning in horizontal direction and slow down  learning in vertical direction.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We want to move learning rate aggressively toward red dot with less oscillations. So implementing Gradient descent with momentum helps in this process.&lt;/p&gt;
+
+&lt;figure&gt;
+ &lt;div style=&quot;text-align:center&quot;&gt;
+   &lt;img src=&quot;/assets/img/practical-aspect/lr-momentum.png&quot; alt=&quot;mini-batch&quot; /&gt;
+ &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# calculate the exponentially weighted averages for your gradients&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# and then update your weights with the new values.&lt;/span&gt;
+vdW &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0, vdb &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0
+on iteration t:
+	&lt;span class=&quot;c&quot;&gt;# can be mini-batch or batch gradient descent&lt;/span&gt;
+	compute dw, db on current mini-batch                
+
+	vdW &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; beta &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; vdW + &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1 - beta&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; dW
+	vdb &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; beta &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; vdb + &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1 - beta&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; db
+	W &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; W - learning_rate &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; vdW
+	b &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; b - learning_rate &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; vdb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;beta&lt;/code&gt; is another &lt;code class=&quot;highlighter-rouge&quot;&gt;hyperparameter&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;beta = 0.9&lt;/code&gt; is very common and works very well in most cases&lt;/li&gt;
+  &lt;li&gt;In practice people don’t bother implementing &lt;code class=&quot;highlighter-rouge&quot;&gt;bias correction&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;rmsprop&quot;&gt;RMSprop&lt;/h4&gt;
+
+&lt;p&gt;Root mean square prop. (RMSprop) is an algorithm speeds up the gradient descent. RMSprop will make the cost function move slower on the vertical direction and faster on the horizontal direction in the following example:&lt;/p&gt;
+
+&lt;figure&gt;
+ &lt;div style=&quot;text-align:center&quot;&gt;
+   &lt;img src=&quot;/assets/img/practical-aspect/RMSprop.png&quot; alt=&quot;mini-batch&quot; /&gt;
+ &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Note:&lt;/code&gt; Ensure that sdW is not zero by adding a small value epsilon (e.g. epsilon = 10&lt;sup&gt;-8&lt;/sup&gt;) to it:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;W = W - learning_rate * dW / (sqrt(sdW) + epsilon)&lt;/code&gt;.&lt;/p&gt;
+
 &lt;h4 id=&quot;adam-optimization-algorithm&quot;&gt;Adam optimization algorithm&lt;/h4&gt;
 &lt;p&gt;RMSprop and Adam optimization algorithms are some algorithm which have shown to work well across a wide range of deep learning architectures. Adam optimization simply puts RMSprop and momentum together. Adam stands for &lt;strong&gt;Adaptive Moment Estimation&lt;/strong&gt;.&lt;/p&gt;
 
@@ -846,21 +1068,10 @@ So lets say when we initialize W’s like this (better to use with tanh activati
 
 &lt;h4 id=&quot;learning-rate-decay&quot;&gt;Learning rate decay&lt;/h4&gt;
 &lt;p&gt;we can speed up learning algorithm by slowly reducing the learning rate over time aka &lt;code class=&quot;highlighter-rouge&quot;&gt;learning rate decay&lt;/code&gt;.&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;Batch Size: Total number of training examples present in a single batch&lt;/p&gt;
-&lt;/blockquote&gt;
 
 &lt;p&gt;For mini-batch gradient decent, if learning rate (alpha) is fixed, then it won’t converge i.e. don’t reach the optimum point instead it will meander around  globlal minima. Like above figure. But by making the learning rate decay (decrease) with iterations it will be much closer to it because the steps (and possible oscillations) near the optimum are smaller.&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;EPOCH : One Epoch is when an ENTIRE dataset is passed forward and backward through the neural network only ONCE.&lt;/p&gt;
-&lt;/blockquote&gt;
-
 &lt;p&gt;As mentioned before mini-batch gradient descent won’t reach the optimum point (converge). But by making the learning rate decay with iterations it will be much closer to it because the steps (and possible oscillations) near the optimum are smaller.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Iterations is the number of batches needed to complete one epoch.&lt;/p&gt;
-&lt;/blockquote&gt;
 
 &lt;p&gt;One technique equations is &lt;code class=&quot;highlighter-rouge&quot;&gt;learning_rate = (1 / (1 + decay_rate * epoch_num)) * learning_rate_zero&lt;/code&gt;&lt;/p&gt;
 
