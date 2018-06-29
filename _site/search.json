@@ -7,6 +7,12 @@
     } ,
   
     {
+      "title"    : "Sequential Models",
+      "tags"     : "Deep-Learning",
+      "url"      : "/2018/05/30/Sequential-Model.html"
+    } ,
+  
+    {
       "title"    : "How to Structure Machine Learning Projects",
       "tags"     : "Deep-Learning",
       "url"      : "/2018/04/20/Machine-Learning-Strategy-in-Deep-Learning.html"

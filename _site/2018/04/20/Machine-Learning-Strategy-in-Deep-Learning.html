@@ -321,6 +321,193 @@ The problem with this evaluation metric is that it treats pornographic vs non-po
   <li>[x] Change metric and/or dev/test set, if previous choosen  metric + dev/test fails.</li>
 </ul>
 
+<h2 id="comparing-to-human-level-performance">Comparing to human-level performance</h2>
+<p>Today, machine  learning  algorithms can  compete  with human - level  performance  since  they  are  more productive  and  more  feasible  in  a  lot of  application. Also,  the workflow  of  designing  and building  a machine learning system, is much more efficient than before.</p>
+
+<p>Moreover, some of the tasks that humans do are close  to ‘’perfection’’, which is why machine learning tries to mimic human-level performance.</p>
+
+<blockquote>
+  <p>Bayes  optimal  error  is  defined  as  the  best  possible  error.  In  other  words, it  means that  any functions mapping from x to y can’t surpass a certain level of accuracy.</p>
+</blockquote>
+
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/ml-strategies/human vs model.png" alt="misclassification" />
+    <figcaption> Performance
+of humans and machine learning over time.</figcaption>
+  </div>
+</figure>
+
+<p>Machine learning  progresses  slowly  when  it  surpasses human-level  performance.  One  of  the  reason  is that human-level  performance  can  be  close to  Bayes  optimal  error,  especially  for  natural  perception problem.</p>
+
+<p>Also, when  the  performance  of machine  learning  is  worse  than the  performance  of humans,  you  can improve it with different tools. They are harder to use once its surpasses human-level performance.</p>
+
+<p>These tools are:</p>
+<ul>
+  <li>Get labeled data from humans</li>
+  <li>Gain insight from manual error analysis: Why did a person get this right?</li>
+  <li>Better analysis of bias/variance</li>
+</ul>
+
+<h4 id="avoidable-bias">Avoidable bias</h4>
+<p>By knowing what the human-level performance is, it is possible to tell when a training set is performing well or not.</p>
+
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/ml-strategies/avoidable-bias.png" alt="misclassification" />
+  </div>
+</figure>
+
+<p>In this case, the human level error as a proxy for Bayes error since humans are good to identify images.If you want  to  improve  the performance  of  the  training  set  but  you  can’t do better than the Bayes error otherwise the training set is overfitting. By knowing the Bayes error, it is easier to focus on whether bias or variance avoidance tactics will improve the performance of the model.</p>
+
+<p><code class="highlighter-rouge">Scenario A:</code> There is a <code class="highlighter-rouge">7%</code> gap between the performance of the training set and the human
+level error. It means that the algorithm is n’t fitting well with the training set since the target is around 1%. To resolve the issue, we use bias reduction technique such as training a bigger neural network or running the training set longer.</p>
+
+<p><code class="highlighter-rouge">Scenario B:</code> The  training  set  is  doing  good  since  there  is  only a <code class="highlighter-rouge">0.5%</code> difference with the  human  level error.  <code class="highlighter-rouge">The difference between the training set and the human level error is called avoidable bias</code>. The focus here is to reduce the variance since the difference between the training error and the development error is 2%. To resolve the issue, we use variance reduction technique such as regularization or have a bigger training set</p>
+
+<h4 id="understanding-human-level-performance">Understanding human-level performance</h4>
+<p>Human-level error gives an estimate of Bayes error.</p>
+
+<p><strong>Example 1: Medical image classification</strong>
+This is an example of a medical image classification in which the input is a radiology image and the output is a diagnosis classification decision.</p>
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/ml-strategies/scenario-A.png" alt="misclassification" />
+  </div>
+</figure>
+<p>The definition of human-level error depends on the purpose of the analysis, in this case, by definition the Bayes error is lower or equal to 0.5%.</p>
+
+<p><strong>Example 2: Error analysis</strong></p>
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/ml-strategies/error-analysis.png" alt="misclassification" />
+  </div>
+</figure>
+
+<p><code class="highlighter-rouge">Scenario A</code>
+In this case, the choice of human-level performance doesn’t have an impact. The avoidable bias is between 4%-4.5% and the variance is 1%. Therefore, the focus should be on bias reduction technique.</p>
+
+<p><code class="highlighter-rouge">Scenario B</code>
+In this case, the choice of human-level performance doesn’t have an impact. The avoidable bias is between 0%-0.5% and the variance is 4%. Therefore, the focus should be on variance reduction technique.</p>
+
+<p><code class="highlighter-rouge">Scenario C</code>
+In this case, the estimate for Bayes error has to be 0.5% since you can’t go lower than the human-level performance otherwise the training set is overfitting. Also, the avoidable bias is 0.2% and the variance is 0.1%. Therefore, the focus should be on bias reduction technique.</p>
+
+<p>Summary of bias/variance with human-level performance</p>
+
+<ul>
+  <li>
+    <p>Human - level error – proxy for Bayes error</p>
+  </li>
+  <li>
+    <p>If the difference between human-level error and the training error is bigger than the difference between the training error and the development error. The focus should be on bias reduction technique</p>
+  </li>
+  <li>
+    <p>If the difference between training error and the development error is bigger than the difference between the human-level error and the training error. The focus should be on variance reduction technique</p>
+  </li>
+</ul>
+
+<h4 id="surpassing-human-level-performance">Surpassing human-level Performance</h4>
+<p>Example1 : classification task</p>
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/ml-strategies/surpassing.png" alt="misclassification" />
+  </div>
+</figure>
+
+<p><code class="highlighter-rouge">Scenario A:</code>
+In this case, the Bayes error is 0.5%, therefore the available bias is 0.1% et the variance is 0.2%.</p>
+
+<p><code class="highlighter-rouge">Scenario B:</code>
+In this case, there is not enough information to know if bias reduction or variance reduction has to be done on the algorithm. It doesn’t mean that the model cannot be improve, it means that the conventional ways to know if bias reduction or variance reduction are not working in this case.</p>
+
+<p>There are many problems where machine learning significantly surpasses human-level performance, especially with structured data:</p>
+<ul>
+  <li>Online advertising</li>
+  <li>Product recommendations</li>
+  <li>Logistics (predicting transit time)</li>
+  <li>Loan approvals</li>
+</ul>
+
+<h4 id="improving-model-performance">Improving model performance</h4>
+
+<p>There are <code class="highlighter-rouge">2 fundamental assumptions of supervised learning</code>. The first one is to <code class="highlighter-rouge">have a low avoidable bias</code> which means that the training set fits well. The second one is to <code class="highlighter-rouge">have a low or acceptable variance</code> which means that the training set performance generalizes well to the development set and test set.</p>
+
+<p>If the difference between human-level error and the training error is bigger than the difference between the training error and the development error, the focus should be on bias reduction technique which are training a bigger model, training longer or change the neural networks architecture or try various hyperparameters search.</p>
+
+<p>If the difference between training error and the development error is bigger than the difference between the human-level error and the training error, the focus should be on variance reduction technique which are bigger data set, regularization or change the neural networks architecture or try various hyperparameters search.</p>
+
+<h4 id="summary">Summary</h4>
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/ml-strategies/improving.png" alt="misclassification" />
+  </div>
+</figure>
+
+<h3 id="error-analysis">Error analysis</h3>
+
+<p><code class="highlighter-rouge">Error Analysis</code>: The process of manually examining mistakes, when learning algorithms do not give the performance of a human level. It helps in finding insight on what to do next.</p>
+
+<p>For Example:</p>
+
+<ul>
+  <li>In the cat classification example, if you have 10% error on your dev set and you want to decrease the error.</li>
+  <li>You discovered that some of the mislabeled data are dog pictures that look like cats. Should you try to make your cat classifier do better on dogs (this could take some weeks)?
+    <ul>
+      <li><code class="highlighter-rouge">Error analysis approach</code>:
+        <ul>
+          <li>Get 100 mislabeled dev set examples at random.</li>
+          <li>Count up how many are dogs.</li>
+          <li>if 5 of 100 are dogs then training your classifier to do better on dogs will decrease your error up to 9.5% (called ceiling), which can be too little.</li>
+          <li>if 50 of 100 are dogs then you could decrease your error up to 5%, which is reasonable and you should work on that.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Based on the last example, error analysis helps you to analyze the error before taking an action that could take lot of time with no need. Sometimes, you can evaluate multiple error analysis ideas in parallel and choose the best idea. Create a spreadsheet to do that and decide, e.g.:</li>
+</ul>
+
+<figure>
+   <div style="text-align:center">
+     <img src="/assets/img/ml-strategies/table-strategies.png" alt="misclassification" />
+   </div>
+ </figure>
+
+<p>This quick counting procedure, which you can often do in, at most, small numbers of hours can really help you make much better prioritization decisions, and understand how promising different approaches are to work on.</p>
+
+<h4 id="carrying-out-error-analysis">Carrying out error analysis</h4>
+<h4 id="cleaning-up-incorrectly-labeled-data">Cleaning up incorrectly labeled data</h4>
+<h4 id="build-your-first-system-quickly-then-iterate">Build your first system quickly, then iterate</h4>
+
+<h3 id="mismatched-training-and-devtest-sets">Mismatched training and dev/test sets</h3>
+<h4 id="bias-and-variance-with-mismatched-data-distributions">Bias and Variance with Mismatched data distributions.</h4>
+<h4 id="addressing-data-mismatched">Addressing data Mismatched</h4>
+
+<h3 id="learning-from-multiple-tasks">Learning from multiple tasks</h3>
+<h4 id="transfer-learning">Transfer Learning</h4>
+
+<ul>
+  <li>Apply the knowledge you took in a task A and apply it in another task B.</li>
+  <li>For example, you have trained a cat classifier with a lot of data, you can use the part of the trained NN it to solve x-ray classification problem.</li>
+  <li>To do transfer learning, delete the last layer of NN and it’s weights and:</li>
+  <li>Option 1: if you have a small data set - keep all the other weights as a fixed weights. Add a new last layer(-s) and initialize the new layer weights and feed the new data to the NN and learn the new weights.</li>
+  <li>Option 2: if you have enough data you can retrain all the weights.</li>
+  <li>Option 1 and 2 are called <code class="highlighter-rouge">fine-tuning</code> and training on task A called <code class="highlighter-rouge">pretraining</code>.</li>
+  <li>When transfer learning make sense:
+    <ul>
+      <li>Task A and B have the same input X (e.g. image, audio).</li>
+      <li>You have a lot of data for the task A you are transferring from and relatively less data for the task B your transferring to.</li>
+      <li>Low level features from task A could be helpful for learning task B.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="multi-task-learning">Multi-task Learning</h4>
+
+<h3 id="end-to-end-deep-learning">End-to-end deep Learning</h3>
+<h4 id="what-is-end-to-end-deep-learning">What is end-to-end deep learning?</h4>
+<h4 id="wheteher-to-use-end-to-end-deep-learning">Wheteher to use end-to-end deep Learning</h4>
+
     </article>
 
     
@@ -366,14 +553,14 @@ The problem with this evaluation metric is that it treats pornographic vs non-po
     <section class="post-footer-item read-next">
       
       <div class="read-next-item">
-        <a href="/2018/05/30/Introduction-to-Artificial-Intelligence-and-its-branches.html" class="read-next-link"></a>
+        <a href="/2018/05/30/Sequential-Model.html" class="read-next-link"></a>
         <section>
-          <span>How they differ? Artificial Intelligence vs machine Learning vs Deep Learning</span>
-          <p>We have come far beyond Information Technology age. We ar...</p>
+          <span>Sequential Models</span>
+          <p>Recurrent Neural NetworksWhy sequence ModelsRecurrent Neu...</p>
         </section>
         
         <div class="filter"></div>
-        <img src="https://analyticsindiamag.com/wp-content/uploads/2017/08/handwriting-human-head-shape-imagination-technology-innovation-artificial-intelligence-at-chalkboard_h7plpruc_thumbnail-full11.png" alt="">
+        <img src="https://cdn-images-1.medium.com/max/1585/1*sO-SP58T4brE9EHazHSeGA.png" alt="">
         
      </div>
       

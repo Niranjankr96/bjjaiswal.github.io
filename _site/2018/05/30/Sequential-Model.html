@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequential Models - Bikash-Jaiswal Blog</title>
+    <meta name="author"  content="bikash">
+    <meta name="description" content="Sequential Models">
+    <meta name="keywords"  content="Deep-Learning">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Sequential Models - Bikash-Jaiswal Blog">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://bikash-jaiswal.github.io/2018/05/30/Sequential-Model.html">
+    <meta property="og:description" content="You have the capacity to learn from your mistakes, and you will learn a lot today.">
+    <meta property="og:site_name" content="Bikash-Jaiswal Blog">
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_roc50gemkxpw4s4i.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
+    <link rel="stylesheet" href="/assets/css/share.min.css">
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+	
+	<!--
+Author: Ray-Eldath
+refer to:
+ - http://docs.mathjax.org/en/latest/options/index.html
+-->
+
+	<script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+		jax: ["input/TeX", "output/HTML-CSS"],
+		tex2jax: {
+			inlineMath: [ ["$", "$"] ],
+			displayMath: [ ["$$", "$$"] ],
+			skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+		},
+		"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+      });
+    </script>
+
+	
+    <!--
+Author: Ray-Eldath
+-->
+<style>
+    .markdown-body .anchor{
+        float: left;
+        margin-top: -8px;
+        margin-left: -20px;
+        padding-right: 4px;
+        line-height: 1;
+        opacity: 0;
+    }
+    
+    .markdown-body .anchor .anchor-icon{
+        font-size: 15px
+    }
+</style>
+<script>
+    $(document).ready(function() {
+        let nodes = document.querySelector(".markdown-body").querySelectorAll("h1,h2,h3")
+        for(let node of nodes) {
+            var anchor = document.createElement("a")
+            var anchorIcon = document.createElement("i")
+            anchorIcon.setAttribute("class", "fa fa-anchor fa-lg anchor-icon")
+            anchorIcon.setAttribute("aria-hidden", true)
+            anchor.setAttribute("class", "anchor")
+            anchor.setAttribute("href", "#" + node.getAttribute("id"))
+            
+            anchor.onmouseover = function() {
+                this.style.opacity = "0.4"
+            }
+            
+            anchor.onmouseout = function() {
+                this.style.opacity = "0"
+            }
+            
+            anchor.appendChild(anchorIcon)
+            node.appendChild(anchor)
+        }
+    })
+</script>
+</head>
+
+
+<body>
+  <!--[if lt IE 10]>
+<div class="alert-danger" role="alert">你的浏览器实在太太太旧了，放学别走，升级完浏览器再说！<a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+  <input id="nm-switch" type="hidden" value="true"> <header class="g-header">
+    <div class="g-logo">
+      <a href="/"></a>
+    </div>
+    <i id="menu-toggle" class="iconfont icon-menu"></i>
+    <nav class="g-nav">
+        <ul>
+            
+            <li><a href="/">home</a></li>
+            
+            <li><a href="/about.html">about</a></li>
+            
+            <li><a href="/tags.html">tags</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+  <header class="g-banner post-header post-pattern-circuitBoard bgcolor-default " data-theme="default">
+    <div class="post-wrapper">
+      <div class="post-tags">
+        
+          
+            <a href="tags#Deep-Learning" class="post-tag">Deep-Learning</a>
+          
+        
+      </div>
+      <h1>Sequential Models</h1>
+      <div class="post-meta">
+        <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="http://bikash-jaiswal.github.io" target="_blank" rel="author">bikash</a></></span>
+        <time class="post-meta-item" datetime="18-05-30"><i class="iconfont icon-date"></i>30 May 2018</time>
+      </div>
+    </div>
+    
+    <div class="filter"></div>
+      <div class="post-cover" style="background: url('https://cdn-images-1.medium.com/max/1585/1*sO-SP58T4brE9EHazHSeGA.png') center no-repeat; background-size: cover;"></div>
+    
+  </header>
+
+  <div class="post-content visible">
+    
+
+    <article class="markdown-body">
+      <h2 id="recurrent-neural-networks">Recurrent Neural Networks</h2>
+<h3 id="why-sequence-models">Why sequence Models</h3>
+<h3 id="recurrent-neural-network-model">Recurrent Neural Network Model</h3>
+<h3 id="backpropagation-through-time">Backpropagation through time</h3>
+<h3 id="different-types-of-rnns">Different types of RNNs</h3>
+<h3 id="language-model-and-sequence-generation">Language Model and sequence generation</h3>
+<h3 id="sampling-novel-sequences">Sampling novel sequences</h3>
+<h3 id="vanishing-gradients-with-rnns">Vanishing gradients with RNNS</h3>
+<h3 id="gated-recurrent-unit-gru">Gated Recurrent Unit (GRU)</h3>
+<h3 id="bidirectional-rnn">Bidirectional RNN</h3>
+<h3 id="deep-rnns">Deep RNNS</h3>
+
+    </article>
+
+    
+    <div class="social-share-wrapper">
+      <div class="social-share"></div>
+    </div>
+    
+  </div>
+
+  <section class="author-detail">
+    <section class="post-footer-item author-card">
+      <div class="avatar">
+        <img src="/assets/img/profile.png" alt="">
+      </div>
+      <div class="author-name" rel="author">bikash</div>
+      <div class="bio">
+        <p></p>
+      </div>
+      
+      <ul class="sns-links">
+        
+        <li>
+          <a href="https://www.linkedin.com/in/bikashjaiswal" target="_blank">
+                    <i class="iconfont icon-linkedin"></i>
+                </a>
+        </li>
+        
+        <li>
+          <a href="https://www.github.com/bikash-jaiswal" target="_blank">
+                    <i class="iconfont icon-github"></i>
+                </a>
+        </li>
+        
+        <li>
+          <a href="bjjaiswal@gmail.com" target="_blank">
+                    <i class="iconfont icon-email"></i>
+                </a>
+        </li>
+        
+      </ul>
+      
+    </section>
+    <section class="post-footer-item read-next">
+      
+      <div class="read-next-item">
+        <a href="/2018/05/30/Introduction-to-Artificial-Intelligence-and-its-branches.html" class="read-next-link"></a>
+        <section>
+          <span>How they differ? Artificial Intelligence vs machine Learning vs Deep Learning</span>
+          <p>We have come far beyond Information Technology age. We ar...</p>
+        </section>
+        
+        <div class="filter"></div>
+        <img src="https://analyticsindiamag.com/wp-content/uploads/2017/08/handwriting-human-head-shape-imagination-technology-innovation-artificial-intelligence-at-chalkboard_h7plpruc_thumbnail-full11.png" alt="">
+        
+     </div>
+      
+
+      
+      <div class="read-next-item">
+        <a href="/2018/04/20/Machine-Learning-Strategy-in-Deep-Learning.html" class="read-next-link"></a>
+          <section>
+            <span>How to Structure Machine Learning Projects</span>
+            <p>Even after developing a model, We find that prediction ac...</p>
+          </section>
+          
+          <div class="filter"></div>
+          <img src="https://i2.wp.com/philosophyofbrains.com/wp-content/uploads/2016/05/Problem-Mental-Causation-Pic.jpg?resize=1280%2C585" alt="">
+          
+      </div>
+      
+    </section>
+    <section class="post-footer-item comment">
+      <div id="disqus_thread"></div>
+    </section>
+  </section>
+
+  <footer class="g-footer">
+  <section>Bikash-Jaiswal Blog ©
+  
+  
+    2017
+    -
+  
+  2018
+  </section>
+  <section>Powered by <a href="//jekyllrb.com">Jekyll</a> | <a href="https://github.com/kaeyleo/jekyll-theme-H2O">Theme H2O</a></section>
+</footer>
+
+
+
+  
+  <script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document,
+        s = d.createElement('script');
+      s.src = 'https://bikash-jaiswal.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  
+
+  <script src="/assets/js/prism.js"></script>
+  <script src="/assets/js/index.min.js"></script>
+</body>
+
+</html>
