@@ -139,42 +139,97 @@ GFS key components:
     </div>
     </figure>
 
-* `State RBW ----> Replica Being Written to.``
+* `State RBW ----> Replica Being Written to.`
   * RBW is the state of the last block of an open file or a file which was reopened for appending.
   * During this state different data nodes can return to use a different set of bytes. In short, bytes that are acknowledged by the downstream data nodes in a pipeline are visible for a reader of this replica.
   * Data node on disk data and name node meta-information may not match.
-  * In case of any failure data node will try to preserve as many bytes as possible.
+  * `In case of any failure` data node will try to preserve as many bytes as possible.
   * It is a design goal called `data durability`.
 
-* `State ----> Replica Waiting to be Recovered.``
+  <figure>
+    <div style="text-align:center">
+      <img src="/assets/img/Big-data-notes/week1/RWR.png" alt="scale-out"/>
+    </div>
+    </figure>
+
+* `State RWR ----> Replica Waiting to be Recovered.`
   * It is a state of all Being Written replicas after data node failure and recovery. For instance, after a system reboot or after Pacer.sys or BSOD, which are quite likely from a programming point of view.
   * RWR replicas will not be in any data node pipeline and therefore will not receive any new data packets. So they either become outdated and should be discarded, or they will participate in a special recovery process called a `lease recovery` if the client also dies.
   * HDFS client requests a lease from a name node to have an exclusive access to write or append data to a file.
+  * In case of HDFS client lease expiration, replica transition to a RUR state.
 
+> Lease expiration usually happens during the client's site failure.
+
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/Big-data-notes/week1/RUR.png" alt="scale-out"/>
+  </div>
+  </figure>
+
+
+* `State RUR ---> Replica Under under recovery`  
+  * A Hadoop administrator can spawn a process of data re-balancing or a data engineer can request increasing of the replication factor of data for the sake of durability. As data grows and different nodes are added or removed from a cluster, data can become unevenly distributed over the cluster nodes.  
+  <figure>
+    <div style="text-align:center">
+      <img src="/assets/img/Big-data-notes/week1/Temporary.png" alt="scale-out"/>
+    </div>
+    </figure>
+  * In  these cases new generated replicas will be in a state called `temporary`.
+  * It is same state as RBW, however, this data is not visible to user unless finalized.
+  * `In case of failure`, the whole chunk of data is removed without any intermediate recovery state.
+  * In addition to the replica transition table, a name node block has its own collection of states and transitions.
+
+* `Block State Transition`
+   <figure>
+  <div style="text-align:center">
+    <img src="/assets/img/Big-data-notes/week1/Block-state.png" alt="scale-out"/>
+  </div>
+  </figure>
+
+  * Different from data node replica states, a block state is stored in memory, it doesn't persist on any disk.
+
+* `Under Construction State`
+  * a user opens a file for writing or for appending name nodes, name node creates the corresponding block with the `under_construction_state`.
+  * It is always the last block of a file, it's length and generation stamp are mutable.
+  <figure>
+    <div style="text-align:center">
+      <img src="/assets/img/Big-data-notes/week1/under_construction.png" alt="scale-out"/>
+    </div>
+    </figure>
+  * Name node block keeps track of right pipeline. It means that it contains information about all RBW and RWR replicas. It is quite vindictive and watches every step.
+  <figure>
+    <div style="text-align:center">
+      <img src="/assets/img/Big-data-notes/week1/under_recovery.png" alt="scale-out"/>
+    </div>
+    </figure>
+  * Replicas transitions from RWR to recovery RUR state when the client dies. Even more generally it happens when a client's lease expires. Consequently, the corresponding block transitions from `under_construction to under_recovery` state.
+  * The `under construction block` transitions to a committed state when a client successfully requests name node to close a file or to create a new consecutive block of data.
+* `Committed State`  
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/Big-data-notes/week1/recovery.png" alt="scale-out"/>
+  </div>
+  </figure>
+  * The `committed state` means that there are already some finalized replicas but not all of them.
+  * For this reason in order to serve a read request, the committed block needs to keep track of RBW replicas, until all the replicas are transitioned to the finalized state and HDFS client will be able to close the file. It has to retry it's requests.
+* `Final complete state` of a block
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/Big-data-notes/week1/complete.png" alt="scale-out"/>
+  </div>
+  </figure>
+  * It is a state where all the replicas are in the finalized state and therefore they have identical visible length and generation stamps. Only when all the blocks of a file are complete the file can be closed.
+  * `In case of name node restart`, it has to restore the open file state. All the blocks of the un-closed file are loaded as complete except the last block which is loaded as under construction. Then recovery procedures will start to work.
+  * There are several types of Recovery procedures:
+    * replica recovery,
+    * block recovery,
+    * lease recovery, and
+    * pipeline recovery.
 #### What have we learnt till now?
   * what vertical and horizontal scaling is?
   * server roles in HDFS
   * how topology affects replica placement?
   * what chunk / block size is used for?
+  * how HDFS client reads and writes data?
 
 ### HDFS- Block and Replica States, Recovery Process.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  * how HDFS client reads and writes data?
