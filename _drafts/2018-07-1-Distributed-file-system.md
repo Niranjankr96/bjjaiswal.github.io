@@ -80,12 +80,14 @@ GFS key components:
 #### Writing a File in HDFS
 `Redundancy model`
 * When you write a block of data into HDFS, Hadoop distributes replicas over the storage. * The first replica is usually located on the same node if you write data from a DataNode machine.
-  * <figure>
+
+<figure>
     <div style="text-align:center">
       <img src="/assets/img/Big-data-notes/week1/write-files-in-hdfs.png" alt="scale-out"/>
       <figcaption> Replication over distributed system </figcaption>
     </div>
-    </figure>
+</figure>
+
 * Otherwise, the first DataNode to put replica is chosen by random.    
 * The second replica is usually placed in a different rack.
   * You find if this racks goes down, for instance because of power supply problems, then you will still be able to access data from another rack.
@@ -116,4 +118,10 @@ GFS key components:
 
 * If replica is in a finalized state then it means that the content of this replica is frozen. IF not finalized then meta-information for this block on name node is aligned with all the corresponding replica's states and data.
   * For instance you can safely read data from any data node and you will get exactly the same content. This property preserves read consistency.
-*   
+
+#### What have we learnt till now?
+  * what vertical and horizontal scaling is?
+  * server roles in HDFS
+  * how topology affects replica placement?
+  * what chunk / block size is used for?
+  * how HDFS client reads and writes data?
