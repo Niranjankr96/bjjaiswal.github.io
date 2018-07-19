@@ -212,13 +212,13 @@ GFS key components:
   </figure>
   * The `committed state` means that there are already some finalized replicas but not all of them.
   * For this reason in order to serve a read request, the committed block needs to keep track of RBW replicas, until all the replicas are transitioned to the finalized state and HDFS client will be able to close the file. It has to retry it's requests.
-* ` Final complete state` of a block
+*  `Final complete state` of a block
 <figure>
   <div style="text-align:center">
     <img src="/assets/img/Big-data-notes/week1/complete.png" alt="scale-out"/>
   </div>
   </figure>
-  * It is a state where all the replicas are in the finalized state and therefore they have identical visible length and generation stamps. Only when all the blocks of a file are complete the file can be closed.
+  * It is a state where all the replicas are in the finalized state and therefore `they have identical visible length and generation stamps`. Only when all the blocks of a file are complete the file can be closed.
   * ` In case of name node restart`, it has to restore the open file state. All the blocks of the un-closed file are loaded as complete except the last block which is loaded as under construction. Then recovery procedures will start to work.
   * There are several types of Recovery procedures:
      * replica recovery,
