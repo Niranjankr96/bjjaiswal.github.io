@@ -103,25 +103,78 @@ GFS key components:
 
 * `What If something goes wrong`, then if the client closes the datanode pipeline, marks the misbehaving datanode bad and requests a replacement for the bad datanodes from a name node. So a new data node pipeline will be organized, and the process of writing the file to HDFS will continue. Again, all this happens transparently to a user. HDFS hides all this complexity for you.
 
-* <figure>
+<figure>
   <div style="text-align:center">
     <img src="/assets/img/Big-data-notes/week1/failure-flow.png" alt="scale-out"/>
     <figcaption> Replication over distributed system </figcaption>
   </div>
   </figure>
-*  Datanode serves a state machine for each block. Whenever a datanode recovers from its own failure, or failures of other datanodes in a pipeline, you can be sure that all the necessary replicas will be recovered. And unnecessary ones will be removed.
+* Datanode serves a state machine for each block. Whenever a datanode recovers from its own failure, or failures of other datanodes in a pipeline, you can be sure that all the necessary replicas will be recovered. And unnecessary ones will be removed.
 
 ### Block and Replicas Recovery mode
-* Replica is a physical data storage on a data node. There are usually several replicas with the same content on different data nodes.
 
+* Replica is a physical data storage on a data node. There are usually several replicas with the same content on different data nodes.
 * Block is a meta-information storage on a name node and provides information about replica's locations and their states. Both replica and block have their own states.
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/Big-data-notes/week1/finalized.png" alt="scale-out"/>
+  </div>
+  </figure>
 
 * If replica is in a finalized state then it means that the content of this replica is frozen. IF not finalized then meta-information for this block on name node is aligned with all the corresponding replica's states and data.
   * For instance you can safely read data from any data node and you will get exactly the same content. This property preserves read consistency.
+
+  <figure>
+    <div style="text-align:center">
+      <img src="/assets/img/Big-data-notes/week1/GS.png" alt="scale-out"/>
+    </div>
+    </figure>
+
+* Each block of data has a version number called Generation Stamp(GS).
+  * For finalized replicas, all blocks have same GN and icreases over time. It happens during error recovery process or during data appending to a block.
+
+  <figure>
+    <div style="text-align:center">
+      <img src="/assets/img/Big-data-notes/week1/RBW.png" alt="scale-out"/>
+    </div>
+    </figure>
+
+* `State RBW ----> Replica Being Written to.``
+  * RBW is the state of the last block of an open file or a file which was reopened for appending.
+  * During this state different data nodes can return to use a different set of bytes. In short, bytes that are acknowledged by the downstream data nodes in a pipeline are visible for a reader of this replica.
+  * Data node on disk data and name node meta-information may not match.
+  * In case of any failure data node will try to preserve as many bytes as possible.
+  * It is a design goal called `data durability`.
+
+* `State ----> Replica Waiting to be Recovered.``
+  * It is a state of all Being Written replicas after data node failure and recovery. For instance, after a system reboot or after Pacer.sys or BSOD, which are quite likely from a programming point of view.
+  * RWR replicas will not be in any data node pipeline and therefore will not receive any new data packets. So they either become outdated and should be discarded, or they will participate in a special recovery process called a `lease recovery` if the client also dies.
+  * HDFS client requests a lease from a name node to have an exclusive access to write or append data to a file.
 
 #### What have we learnt till now?
   * what vertical and horizontal scaling is?
   * server roles in HDFS
   * how topology affects replica placement?
   * what chunk / block size is used for?
+
+### HDFS- Block and Replica States, Recovery Process.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   * how HDFS client reads and writes data?
