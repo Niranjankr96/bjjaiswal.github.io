@@ -111,7 +111,14 @@ GFS key components:
   </figure>
 * Datanode serves a state machine for each block. Whenever a datanode recovers from its own failure, or failures of other datanodes in a pipeline, you can be sure that all the necessary replicas will be recovered. And unnecessary ones will be removed.
 
-### Block and Replicas Recovery mode
+#### What have we learnt till now?
+  * what vertical and horizontal scaling is?
+  * server roles in HDFS
+  * how topology affects replica placement?
+  * what chunk / block size is used for?
+  * how HDFS client reads and writes data?
+
+### HDFS- Block and Replica States, Recovery Process.
 
 * Replica is a physical data storage on a data node. There are usually several replicas with the same content on different data nodes.
 * Block is a meta-information storage on a name node and provides information about replica's locations and their states. Both replica and block have their own states.
@@ -225,11 +232,17 @@ GFS key components:
      * block recovery,
      * lease recovery, and
      * pipeline recovery.
-#### What have we learnt till now?
-  * what vertical and horizontal scaling is?
-  * server roles in HDFS
-  * how topology affects replica placement?
-  * what chunk / block size is used for?
-  * how HDFS client reads and writes data?
-
-### HDFS- Block and Replica States, Recovery Process.
+     
+#### BLOCK recovery
+<figure>
+  <div style="text-align:center">
+    <img src="/assets/img/Big-data-notes/week1/block-recovery.png" alt="scale-out"/>
+  </div>
+  </figure>
+* NameNode has to ensure that all of the corresponding replicas of a block will transition to a common state logically and physically i.e. all the correspondent replicas should have the same on disk content.
+* To accomplish it, NameNode chooses a primary datanode called PD in a design document.
+* PD should contain a replica for the target block.
+* PD request from a NameNode, a new generation stamp, information and location of other replicas for recovery process.
+PD context each relevant DataNodes to participate in the replica recovery process. Replica recover process includes aborting active clients right into a replica. Aborting the previous replica of block recovery process, and participating in final replica size agreement process. During this phase, all the necessary information or data is propagated through the pipeline.
+1:06
+As the last step, PD notifies NameNode about the result, success or failure. In case of failure, NameNode could retry block recovery process.
