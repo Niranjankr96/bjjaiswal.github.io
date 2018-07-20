@@ -2,22 +2,12 @@
 
 ## Distributed File Systems and why?
 There are two option of storing big data
-1. Have Big capacity node and
-   *  also known as scale up, or vertical scaling.
-   * More data == more storage hard-disk
-   <figure>
-     <div style="text-align:center">
-       <img src="/assets/img/Big-data-notes/week1/scale-in.png" alt="scale-in"/>
-     </div>
-   </figure>
-2. Store data in collective of nodes
-   * Scale Out or horizontal Scale In
-   * more data == more commodity Knowledge
-   * <figure>
-     <div style="text-align:center">
-       <img src="/assets/img/Big-data-notes/week1/scale-out.png" alt="scale-out"/>
-       <figcaption> Artificial brain. </figcaption>
-     </div>
+
+| BIG Capacity Node      | Collection of Nodes           |
+| ------------- |:-------------:|
+| ![](/assets/img/Big-data-notes/week1/scale-in.png)|![](/assets/img/Big-data-notes/week1/scale-out.png)               |
+|  also known as scale up, or vertical scaling.   | Scale Out or horizontal Scale In |
+| More data == more storage hard-disk     |   more data == more commodity Knowledge   |  
 
 * One node will get out of service in three years on average. Thus with a cluster of 1,000 nodes you will get one pillar each day, approximately.
 
@@ -232,7 +222,7 @@ GFS key components:
      * block recovery,
      * lease recovery, and
      * pipeline recovery.
-     
+
 #### BLOCK recovery
 <figure>
   <div style="text-align:center">
@@ -243,6 +233,8 @@ GFS key components:
 * To accomplish it, NameNode chooses a primary datanode called PD in a design document.
 * PD should contain a replica for the target block.
 * PD request from a NameNode, a new generation stamp, information and location of other replicas for recovery process.
-PD context each relevant DataNodes to participate in the replica recovery process. Replica recover process includes aborting active clients right into a replica. Aborting the previous replica of block recovery process, and participating in final replica size agreement process. During this phase, all the necessary information or data is propagated through the pipeline.
-1:06
-As the last step, PD notifies NameNode about the result, success or failure. In case of failure, NameNode could retry block recovery process.
+* PD context each relevant DataNodes to participate in the replica recovery process.
+>Replica recover process includes aborting active clients right into a replica. Aborting the previous replica of block recovery process, and participating in final replica size agreement process.
+
+* During this phase, all the necessary information or data is propagated through the pipeline.
+* At last, PD notifies NameNode about the result, success or failure. In case of failure, NameNode could retry block recovery process.
