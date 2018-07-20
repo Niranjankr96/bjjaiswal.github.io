@@ -43,17 +43,18 @@ GFS key components:
   * No need to write any code in program languages to access data
 *  Available of RPC and option to access data via HTTP protocol.
 
-##### How to read file from HDFS
+### How to read file from HDFS
 <figure>
  <div style="text-align:center">
    <img src="/assets/img/Big-data-notes/week1/read-file-in-hdfs.png" alt="scale-out"/>
    <figcaption> Replication over distributed system </figcaption>
  </div>
  </figure>
+
 * First, you request name node to get information about file blocks' locations.
-  * These blocks are distributed over different machines, but all of this complexity is hidden behind HDFS API.
+   * These blocks are distributed over different machines, but all of this complexity is hidden behind HDFS API.
 * User only sees a continuous stream of data
-  * if at some point a datanode you retrieve data from died you get this data from another replica without bothering users about it
+   * if at some point a datanode you retrieve data from died you get this data from another replica without bothering users about it
 * Get data from the closest machine.
    * Closeness depends on the physical distance and unpredictable system load such as metric overutilization
    *  <figure>
@@ -62,6 +63,7 @@ GFS key components:
       <figcaption> Replication over distributed system </figcaption>
     </div>
     </figure>
+
    * if data is available on the same machine, distance == 0
    * If a datanode is located in the same rack, then the distance is two.
    * If you are going to read data from another rack, then the distance is equal to four.
@@ -96,9 +98,9 @@ GFS key components:
 <figure>
   <div style="text-align:center">
     <img src="/assets/img/Big-data-notes/week1/failure-flow.png" alt="scale-out"/>
-    <figcaption> Replication over distributed system </figcaption>
   </div>
   </figure>
+
 * Datanode serves a state machine for each block. Whenever a datanode recovers from its own failure, or failures of other datanodes in a pipeline, you can be sure that all the necessary replicas will be recovered. And unnecessary ones will be removed.
 
 #### What have we learnt till now?
@@ -107,6 +109,7 @@ GFS key components:
   * how topology affects replica placement?
   * what chunk / block size is used for?
   * how HDFS client reads and writes data?
+
 
 ### HDFS- Block and Replica States, Recovery Process.
 
@@ -238,3 +241,5 @@ GFS key components:
 
 * During this phase, all the necessary information or data is propagated through the pipeline.
 * At last, PD notifies NameNode about the result, success or failure. In case of failure, NameNode could retry block recovery process.
+
+[![Everything Is AWESOME](//img.youtube.com/vi/StTqXEQ2l-Y/0.jpg)](//www.youtube.com/watch?v=StTqXEQ2l-Y "Everything Is AWESOME")
