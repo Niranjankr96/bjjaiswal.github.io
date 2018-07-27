@@ -3,11 +3,11 @@ layout: post
 title: What is Machine Learning? And What are its types?
 date: 2018-05-30
 categories: Machine Learning notes
-tags: Machine Learning
+tags: Machine-Learning
 cover: 'https://d2ufo47lrtsv5s.cloudfront.net/content/sci/358/6370/1530/F1.large.jpg?width=800&height=600&carousel=1'
 ---
 
-Due to growing volumes and varieties of available data, computational processing that is cheaper and more powerful, and affordable data storage, machine learning is changing domains of technology like never changed before. It has now become vital tools for many business enterprises or in education research for finding new patterns or new predictions. Here are a few widely publicized examples of machine learning applications you may be familiar with:
+Due to availability of BIG-Data, High and parallel processing powerful, and with affordable data storage, machine learning is changing domains of technology like never changed before. It has now become vital tools for many business enterprises or in education research for finding new patterns or new predictions. Here are a few widely publicized examples of machine learning applications you may be familiar with:
 
    * The heavily hyped, self-driving Google car? The essence of machine learning.
    * Online recommendation offers such as those from Amazon and Netflix? Machine learning applications for everyday life.
