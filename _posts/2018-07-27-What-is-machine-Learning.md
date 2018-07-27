@@ -1,7 +1,7 @@
 ---
 layout: post
 title: What is Machine Learning? And What are its types?
-date: 2018-05-30
+date: 2018-07-27
 categories: Machine Learning notes
 tags: Machine-Learning
 cover: 'https://d2ufo47lrtsv5s.cloudfront.net/content/sci/358/6370/1530/F1.large.jpg?width=800&height=600&carousel=1'
