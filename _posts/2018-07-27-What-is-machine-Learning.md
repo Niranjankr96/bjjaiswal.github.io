@@ -68,7 +68,7 @@ The goal in such problems may be to discover groups of similar examples within t
 ## Learning Model and Cost Functions.
 A common practice in machine learning to evaluate an algorithm is to split the data at hand into two sets, one that we call the training set on which we learn data properties and one that we call the testing set on which we test these properties.
 
-To describe the supervised learning problem slightly more formally, our goal is, given a training set, to learn a function *h : X → Y* so that **h(x)** is a “good” predictor for the corresponding value of **y**. For historical reasons, this function h is called a **hypothesis**. Seen pictorially, the process is therefore like this:
+To describe the supervised learning problem slightly more formally, our goal is, given a training set, to learn a function *h : X → Y* so that **h(x)** is a “good” predictor for the corresponding value of **y** . For historical reasons, this function h is called a **hypothesis**. Seen pictorially, the process is therefore like this:
 
 ![Model FLow-diagram](/assets/img/ml-notes/week1//model-flowdiagram.png)
 *Credits: Machine Learning course on cousera*
@@ -79,7 +79,7 @@ Our first supervised learning model will be linear regression with one variable.
 Linear regression is a model for modelling the relationship between a numerical variable y and one features as a linear function.
 
 ### Cost Function
-In machine Learning, the cost function is function that maps parameter of a model to a number (the cost). The cost function measures how well or how badly a model fits the dataset and the objective is often to find a model that describes the data well by picking a model that minimizes some cost function. Some common cost function are squared error loss which is used in linear regression or the logistic loss which is used in logistic regression.
+In machine Learning, the cost function is function that maps parameter of a model to a number (the cost). `The cost function measures how well or how badly a model fits the dataset and the objective is often to find a model that describes the data well by picking a model that minimizes some cost function`. Some common cost function are squared error loss which is used in linear regression or the logistic loss which is used in logistic regression.
 
 ![cost Function](/assets/img/ml-notes/week1//cost-function.png)
 ![Cost Function:inituitive I](/assets/img/ml-notes/week1//cost-function-1.png)
@@ -88,7 +88,7 @@ In machine Learning, the cost function is function that maps parameter of a mode
 ### Gradient Descent
 Here, we will talk about an algorithm called gradient descent for minimization of the cost function **J**.
 
-* Gradient descent is an iterative optimization algorithm. I finds a local minimum of a function by repeatedly taking steps proportional to the negative of the gradient of the function at current point. Intuitively we think of this as repeatedly taking steps in the direction of steepest descent.
+* Gradient descent is an iterative optimization algorithm. It finds a local minimum of a function by repeatedly taking steps proportional to the negative of the gradient of the function at current point. Intuitively we think of this as repeatedly taking steps in the direction of steepest descent.
 
 * Gradient ascent: If one takes steps proportional to the positive of the gradient, one approaches a local maximum of the function, the procedure is then known as gradient ascent.
 
