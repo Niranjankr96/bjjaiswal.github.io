@@ -1,10 +1,10 @@
 ---
-layout: post
 title: How they differ? Artificial Intelligence vs machine Learning vs Deep Learning
 date: 2018-05-30
 categories: AI
 tags: Artificial-Intelligence
-cover: 'https://analyticsindiamag.com/wp-content/uploads/2017/08/handwriting-human-head-shape-imagination-technology-innovation-artificial-intelligence-at-chalkboard_h7plpruc_thumbnail-full11.png'
+feature_image: 'https://analyticsindiamag.com/wp-content/uploads/2017/08/handwriting-human-head-shape-imagination-technology-innovation-artificial-intelligence-at-chalkboard_h7plpruc_thumbnail-full11.png'
+image: "https://analyticsindiamag.com/wp-content/uploads/2017/08/handwriting-human-head-shape-imagination-technology-innovation-artificial-intelligence-at-chalkboard_h7plpruc_thumbnail-full11.png"
 ---
 
 We have come far beyond Information Technology age. We are living in __Intelligent__ era. We are surrounded by ubiquitous intelligent device like smart-phones, smart-watch,etc,. Intelligent has become banal not only in regular life style but also affecting the industries too. Devices which have __Artificial Intelligence__ has started changing the world drastically. As Andrew Ng stated *"Like electricity changed the world a century ago, similarly AI will change the world like never before"*.  Nowadays we look for intelligent software to automate banal labor, understand speech, or images, make diagnosis in medicine and support basic scientific research.

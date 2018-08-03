@@ -1,10 +1,12 @@
 ---
-layout: post
 title: What is Machine Learning? And What are its types?
-date: 2018-07-27
-categories: Machine Learning notes
+category: Machine Learning notes
 tags: Machine-Learning
-cover: 'https://d2ufo47lrtsv5s.cloudfront.net/content/sci/358/6370/1530/F1.large.jpg?width=800&height=600&carousel=1'
+excerpt: |
+  Due to availability of BIG-Data, High and parallel processing powerful, and with affordable data storage, machine learning is changing domains of technology like never changed before.
+feature_image: "https://d2ufo47lrtsv5s.cloudfront.net/content/sci/358/6370/1530/F1.large.jpg?width=800&height=600&carousel=1"
+image: "https://d2ufo47lrtsv5s.cloudfront.net/content/sci/358/6370/1530/F1.large.jpg?width=800&height=600&carousel=1"
+
 ---
 
 Due to availability of BIG-Data, High and parallel processing powerful, and with affordable data storage, machine learning is changing domains of technology like never changed before. It has now become vital tools for many business enterprises or in education research for finding new patterns or new predictions. Here are a few widely publicized examples of machine learning applications you may be familiar with:
@@ -16,15 +18,17 @@ Due to availability of BIG-Data, High and parallel processing powerful, and with
 
 # What is Machine Learning?
 There are various definitions of machine learning found in web. Some notable definitions are listed below:
-1. The oldest and informal definition of machine learning was given by Arthur Samuel which describes as:
-  * Def 1: "Machine Learning is the field of study that gives computers the ability to learn without being explicitly programmed".
-2. The most modern definition was given by Tom Mitchell and he states it as:
-  * Def 2: "A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E."
-* What does Mitchell's definition actually means?
-  * Let us say a machine is playing checker game the T, P, and E can be well defined by
-    * E = the experience of playing many games of checkers
-    * T = the task of playing checkers.
-    * P = the probability that the program will win the next game.
+ The oldest and informal definition of machine learning was given by Arthur Samuel which describes as:
+  > Def 1: "Machine Learning is the field of study that gives computers the ability to learn without being explicitly programmed".
+
+ The most modern definition was given by Tom Mitchell and he states it as:
+  > Def 2: "A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.""
+
+What does Mitchell's definition actually means?
+ Let us say a machine is playing checker game then T, P, and E can be well defined by
+  * E = the experience of playing many games of checkers
+  * T = the task of playing checkers.
+  * P = the probability that the program will win the next game.
 
 ## Machine learning methods     
 In general, Any Machine Learning problem can be categories in three group.
@@ -51,10 +55,11 @@ In general, Any Machine Learning problem can be categories in three group.
 
 In supervised learning, we are given a data set and already know what our correct output should look like, having the idea that there is a relationship between the input and the output. We can categories supervised learning methods  in a few large categories:      
 
-  1. Classification:
-       * In a classification problem, we are instead trying to predict results in a discrete output. In other words, we are trying to map input variables into discrete categories. Example: Given a patient with a tumor, we have to predict whether the tumor is malignant or benign.  
-  2. Regression:
-       * In a regression problem, we are trying to predict results within a continuous output, meaning that we are trying to map input variables to some continuous function. Example: Given a picture of a person, we have to predict their age on the basis of the given picture.
+1. **Classification**:
+  * In a classification problem, **we are instead trying to predict results in a discrete output**. In other words, we are trying to map input variables into discrete categories. Example: Given a patient with a tumor, we have to predict whether the tumor is malignant or benign.
+
+- **Regression**:
+  * In a regression problem, **we are trying to predict results within a continuous output, meaning that we are trying to map input variables to some continuous function**. Example: Given a picture of a person, we have to predict their age on the basis of the given picture.
 
 ### Unsupervised Learning
 Unsupervised learning allows us to approach problems with little or no idea what our results should look like. We can derive structure from data where we don't necessarily know the effect of the variables. We can derive this structure by clustering the data based on relationships among the variables in the data. With unsupervised learning there is no feedback based on the prediction results.  
@@ -129,3 +134,7 @@ So, this is simply gradient descent on the original cost function J. This method
 
 
 The ellipses shown above are the contours of a quadratic function. Also shown is the trajectory taken by gradient descent, which was initialized at (48,30). The x’s in the figure (joined by straight lines) mark the successive values of θ that gradient descent went through as it converged to its minimum.
+
+For example, this equation $$ E = m\cdot c^2 \label{eq:mc2}$$ will look like the equation below and you can refer to it as \ref{eq:mc2} (which will render to this.
+
+But you can use inline equations too (this is the third thing), with one dollar sign, like this: $ J(x) = \int{L(t, x, \dot{x}) dt} \$

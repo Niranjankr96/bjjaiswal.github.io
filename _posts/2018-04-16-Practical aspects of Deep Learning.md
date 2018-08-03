@@ -1,20 +1,19 @@
 ---
-layout: post
 title: Practical aspects of Deep Learning
 date: 2018-04-16
-categories:  Deep Learning Notes
-cover: 'http://www.di.univr.it/documenti/Seminario/immagine/immagine240319.jpg'
+category:  Deep Learning Notes
 tags: Deep-Learning
+excerpt: |
+  After implementation of a neural network, we have gained enough vim to better understand the black box of Deep Learning and to learn all the practical aspects of making our neural network work even better. We are going to learn various tricks or technique like:
+feature_image: 'http://www.di.univr.it/documenti/Seminario/immagine/immagine240319.jpg'
+image: 'http://www.di.univr.it/documenti/Seminario/immagine/immagine240319.jpg'
 ---
-
-
 
 After implementation of a neural network, we have gained enough vim to better understand the black box of Deep Learning and to learn all the practical aspects of making our neural network work even better. We are going to learn various tricks or technique like:
 1. Hyperparameter tuning
 2. Setting the datasets
 3. Optimization algorithm- makes learning algorithm to learn in a reasonable time
 
-## Practical aspects of Deep Learning
 When we start to solve a new problem in using deep learning, we can never decide earlier what to choose like - what learning rate? how many hidden layers? which activation functions to choose and for which layers? To find the answer we have to follow iterative process of ``Idea ---> code ---> Experiment``. Even seasoned deep learning expert find it almost impossible to correctly guess the best choice of hyperparameters the very first time.  
 
 
@@ -27,7 +26,7 @@ Your data will be split into three parts:
 
 <figure>
   <div style="text-align:center">
-  <img src="/assets/img/ml-strategies/new-dist.png" alt="my alt text"/>
+  <img src="/assets/img/ml-strategies/new-dist.png" alt="new distribution"/>
       <figcaption> Strategy of distribution in Deep Learning </figcaption>
     </div>
   </figure>
