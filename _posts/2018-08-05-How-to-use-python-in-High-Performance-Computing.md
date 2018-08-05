@@ -3,7 +3,7 @@ title: High Performance Computing in Python
 category: Parallel-Computing
 tags: Parallel-Computing
 excerpt: |
-
+    Python as an interpreted language has been considered too slow for high-performance computing. However, recent development of CUDA based libraries in python has changed the programming paradigms, capable of rapid iterative development of Python with harnessing the power of NVIDIA GPUs. 
 feature_image: "https://d2ufo47lrtsv5s.cloudfront.net/content/sci/358/6370/1530/F1.large.jpg?width=800&height=600&carousel=1"
 image: "https://d2ufo47lrtsv5s.cloudfront.net/content/sci/358/6370/1530/F1.large.jpg?width=800&height=600&carousel=1"
 
