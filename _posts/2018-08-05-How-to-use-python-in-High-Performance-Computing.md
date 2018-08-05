@@ -3,7 +3,7 @@ title: High Performance Computing in Python
 category: Parallel-Computing
 tags: Parallel-Computing
 excerpt: |
-    Python as an interpreted language has been considered too slow for high-performance computing. However, recent development of CUDA based libraries in python has changed the programming paradigms, capable of rapid iterative development of Python with harnessing the power of NVIDIA GPUs. 
+    Python as an interpreted language has been considered too slow for high-performance computing. However, recent development of CUDA based libraries in python has changed the programming paradigms, capable of rapid iterative development of Python with harnessing the power of NVIDIA GPUs.
 feature_image: "https://d2ufo47lrtsv5s.cloudfront.net/content/sci/358/6370/1530/F1.large.jpg?width=800&height=600&carousel=1"
 image: "https://d2ufo47lrtsv5s.cloudfront.net/content/sci/358/6370/1530/F1.large.jpg?width=800&height=600&carousel=1"
 
@@ -19,16 +19,35 @@ Many times such linking is done by Python-C API, when the Python interpreter cal
 
 {% include figure.html image="/assets/img/Python-hpc/Python-C-API.png" caption="Python-C API" %}
 
-The figure shows two scenario where the same computation is performed but through different set of Function calls. Imagine, we are looping thought a container with 10 elements and performing some computation on those elements within the compiled library. The left panel shows how repeated calls from interpreter to compiled library can increase the time computation whereas right panel shows how a bundled set of compiled computations triggered by a single call from the interpreter can improve the run time performance. **Lesson 1** : `This should be kept in mind while implementing HPC's programs or software in python`.
+The figure shows two scenario where the same computation is performed but through different set of Function calls. Imagine, we are looping thought a container with 10 elements and performing some computation on those elements within the compiled library. The left panel shows how repeated calls from interpreter to compiled library can increase the time computation whereas right panel shows how a bundled set of compiled computations triggered by a single call from the interpreter can improve the run time performance. **Lesson 1 : This should be kept in mind while implementing HPC's programs or software in python.**
 
 ### How Python scientific computing ecosystem helps in HPC?
 Libraries of Python scientific computing ecosystem provides greater numerical efficiencies and implementation of variety of useful ecosystem. These libraries are also capable of holding large amounts of data without exhausting RAM.
 
 {% include figure.html image="http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1509622333/scipy-eco_kqi2su.png" caption="Scientific Ecosystem, Credit: Datacamp.org" %}
 
-Numpy is Python's core numerical library. Numpy is implemented in such a way that its underlying has C representation or better say implemented in C or Fortran underneath. Numpy makes use of lower-level libraries such as **[BLAS](http://www.netlib.org/blas/)**, **[LAPACK](http://www.netlib.org/lapack/)** and **[ATLAS](http://math-atlas.sourceforge.net/)**
+#### [Numpy](http://www.numpy.org/)
+Numpy is Python's core numerical library. Numpy is implemented in such a way that its underlying has C representation or better say implemented in C or Fortran underneath. Numpy makes use of lower-level libraries such as **[BLAS](http://www.netlib.org/blas/)**, **[LAPACK](http://www.netlib.org/lapack/)** and **[ATLAS](http://math-atlas.sourceforge.net/)**. Numpy is considered as powerful scientific tool because of power of vectorization and broadcasting.
+
+> Vectorization describes the absence of any explicit looping, indexing, etc., in the code - these things are taking place, of course, just “behind the scenes” in optimized, pre-compiled C code.
+
+Vectorized code has many advantages, among which are:
+*  vectorized code is more concise and easier to read
+*  fewer lines of code generally means fewer bugs
+*  the code more closely resembles standard mathematical notation (making it easier, typically, to correctly code mathematical constructs)
+*  vectorization results in more “Pythonic” code. Without vectorization, our code would be littered with inefficient and difficult to read for loops.
+
+> Broadcasting is the term used to describe the implicit element-by-element behavior of operations; generally speaking, in NumPy all operations, not just arithmetic operations, but logical, bit-wise, functional, etc., behave in this implicit element-by-element fashion, i.e., they broadcast
+
+#### [Scipy](https://www.scipy.org/)
+SciPy comprises modules for linear algebra, optimization, quadrature, interpolation, Fourier analysis, and signal and image processing, as well as ODE solvers, special mathematical functions, and other common tools needed in science and engineering. Many of the SciPy functions are Python wrappers around widely-used, time-tested routines developed over the years within the numerical analysis community, and written in compiled languages such as Fortran and C. **Lesson 2 Rather crafting numerical routines by ourself, we must take advantage of both the expertise of community and a convenient calling interface within the Scipy Wrapper and Numpy.**
+
+There are various other libraries in Python Scientific ecosystem like Pandas, Scikit-Learn, Matplotlib, Seaborn, and others. The best way to install is to use some distribution like [Anaconda](https://www.anaconda.com/distribution/), [Enthought](https://www.enthought.com/product/enthought-python-distribution/), [Active State](https://www.activestate.com/activepython), and [Intel](https://software.intel.com/en-us/distribution-for-python). Many of these distributions link to highly-optimized numerical libraries, such as the Intel MKL (Math Kernel Library). **LESSON 3 In order to build our own ecosystem, we should start with one of these distributions rather than building python and associated libraries from scratch.**
 
 <!--
+### Why Libraries Like BLAS, LAPACK, ATLAS and MKL is important in HPC?
+
+
 > BLAS: Basic Linear Algebra Subroutines
 
 > LAPACK: Linear ALgebra PACKage
