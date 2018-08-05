@@ -26,7 +26,7 @@ Thanks for stopping by, hope you like it here. Please feel free to get in touch 
 
 {% include site-form.html %}
 
-### Video include
+
 
 {% include video.html id="QvyTEx1wyOY" title="Computer Science is Changing EveryThing." %}
 
