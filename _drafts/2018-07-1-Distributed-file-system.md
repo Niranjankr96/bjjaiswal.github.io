@@ -237,9 +237,8 @@ GFS key components:
 * PD should contain a replica for the target block.
 * PD request from a NameNode, a new generation stamp, information and location of other replicas for recovery process.
 * PD context each relevant DataNodes to participate in the replica recovery process.
+
 >Replica recover process includes aborting active clients right into a replica. Aborting the previous replica of block recovery process, and participating in final replica size agreement process.
 
 * During this phase, all the necessary information or data is propagated through the pipeline.
 * At last, PD notifies NameNode about the result, success or failure. In case of failure, NameNode could retry block recovery process.
-
-[![Everything Is AWESOME](//img.youtube.com/vi/StTqXEQ2l-Y/0.jpg)](//www.youtube.com/watch?v=StTqXEQ2l-Y "Everything Is AWESOME")
