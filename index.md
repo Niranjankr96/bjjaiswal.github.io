@@ -2,7 +2,7 @@
 title: Bikash Jaiswal
 feature_text: |
   Bikash@Jaiswal:~$whoami
-feature_image: "https://picsum.photos/2560/600?image=873"
+feature_image: "https://picsum.photos/2560/600?image=8731"
 excerpt: "About me"
 aside: true
 ---
